@@ -6,14 +6,14 @@ namespace ERP.Entities.Lists.Employee
     public class Education: BaseEntity
     {
         
-        public int EmployeeId { get; set; }
+        public int employeeId { get; set; }
         
-        public string Degree { get; set; }
-        public string Major { get; set; }
-        public string School { get; set; }  
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public float GPA { get; set; }
-        public string Description { get; set; }
+        public string? degree { get; set; }
+        public string? major { get; set; }
+        public string? school { get; set; }  
+        public DateTime? startDate { get; set; }
+        public DateTime? endDate { get; set; }
+        public float gpa { get; set; }
+        public string? description { get; set; }
     }
 }

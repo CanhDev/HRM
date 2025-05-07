@@ -60,7 +60,7 @@ namespace ERP.Controllers.Lists
         [HttpPost]
         public async Task<ActionResult<ApiResponse<EmergencyContact>>> Create([FromBody] EmergencyContact EmergencyContact)
         {
-            var response = await _EmergencyContactService.AddAsync(EmergencyContact, x => x.Id == EmergencyContact.Id);
+            var response = await _EmergencyContactService.AddAsync(EmergencyContact);
             if (response.Success == false)
             {
                 return StatusCode(500, new ApiResponse<EmergencyContact>
@@ -76,7 +76,7 @@ namespace ERP.Controllers.Lists
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<EmergencyContact>>> Update(int id, [FromBody] EmergencyContact EmergencyContact)
         {
-            var response = await _EmergencyContactService.UpdateAsync(EmergencyContact, x => x.Id == id);
+            var response = await _EmergencyContactService.UpdateAsync(EmergencyContact);
             if (response.Success == false)
             {
                 return StatusCode(500, new ApiResponse<EmergencyContact>

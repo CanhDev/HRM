@@ -60,7 +60,7 @@ namespace ERP.Controllers.Lists
         [HttpPost]
         public async Task<ActionResult<ApiResponse<WorkExperience>>> Create([FromBody] WorkExperience WorkExperience)
         {
-            var response = await _WorkExperienceService.AddAsync(WorkExperience, x => x.Id == WorkExperience.Id);
+            var response = await _WorkExperienceService.AddAsync(WorkExperience);
             if (response.Success == false)
             {
                 return StatusCode(500, new ApiResponse<WorkExperience>
@@ -76,7 +76,7 @@ namespace ERP.Controllers.Lists
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<WorkExperience>>> Update(int id, [FromBody] WorkExperience WorkExperience)
         {
-            var response = await _WorkExperienceService.UpdateAsync(WorkExperience, x => x.Id == id);
+            var response = await _WorkExperienceService.UpdateAsync(WorkExperience);
             if (response.Success == false)
             {
                 return StatusCode(500, new ApiResponse<WorkExperience>

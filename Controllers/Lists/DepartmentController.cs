@@ -60,7 +60,7 @@ namespace ERP.Controllers.Lists
         [HttpPost]
         public async Task<ActionResult<ApiResponse<Department>>> Create([FromBody] Department Department)
         {
-            var response = await _DepartmentService.AddAsync(Department, x => x.Id == Department.Id);
+            var response = await _DepartmentService.AddAsync(Department);
             if (response.Success == false)
             {
                 return StatusCode(500, new ApiResponse<Department>
@@ -76,7 +76,7 @@ namespace ERP.Controllers.Lists
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<Department>>> Update(int id, [FromBody] Department Department)
         {
-            var response = await _DepartmentService.UpdateAsync(Department, x => x.Id == id);
+            var response = await _DepartmentService.UpdateAsync(Department);
             if (response.Success == false)
             {
                 return StatusCode(500, new ApiResponse<Department>

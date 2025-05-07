@@ -1,20 +1,29 @@
-﻿using ERP.Entities._0_Systems;
+﻿using ERP.APIs.Contracts.Model.Contract;
+using ERP.APIs.Leaves.entity;
+using ERP.Base_sys;
+using ERP.Base_sys.Helpers;
+using ERP.DTO.Lists;
+using ERP.Entities._0_Systems;
+using ERP.Entities._1_Configs;
 using ERP.Entities.Lists.Contract;
 using ERP.Entities.Lists.Employee;
-using ERP.Entities.Lists.Leave;
-using ERP.Entities.Vouchers.Contract;
 using ERP.Entities.Vouchers.Employee;
-using ERP.Entities.Vouchers.Leave;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ERP.Entities
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        private readonly IConfiguration _configuration;
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration configuration) : base(options) {
+            _configuration = configuration;
+        }
 
         //system
         public DbSet<ListOptions> ListOptions { get; set; }
+        public virtual DbSet<RefreshTokenEntity> RefreshTokenEntities { get; set; }
+        public DbSet<sys_dmtt> sys_Dmtts { get; set; }
 
         //lists
         public DbSet<Employee> Employees { get; set; }
@@ -35,11 +44,18 @@ namespace ERP.Entities
         public DbSet <ContractHistory> ContractHistories { get; set; }
         public DbSet <EmployeeLeaveBalance> employeeLeaveBalances { get; set; }
         public DbSet<LeaveBalanceHistory> leaveBalanceHistories { get; set; }
+        //
+        public DbSet<LeaveRequest_details> leaveRequest_Details { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
             modelBuilder.Ignore<BaseVoucherEntity>();
+            modelBuilder.Ignore<Employee_dataset>();
+            modelBuilder.Ignore<FileHelper>();
+            modelBuilder.Ignore<ImageHelper>();
+            modelBuilder.Ignore<ApiRespone_basic>();
+
 
             var entitiesWithId = new Type[]
                  {
@@ -55,17 +71,19 @@ namespace ERP.Entities
             foreach (var entity in entitiesWithId)
             {
                 modelBuilder.Entity(entity)
-                    .Property("Id")
+                    .Property("id")
                     .ValueGeneratedOnAdd();
 
                 modelBuilder.Entity(entity)
-                    .HasIndex("Id")
+                    .HasIndex("id")
                     .IsUnique();
             }
-
-            
-            
-
+            // Cấu hình cho ApplicationUser
+            modelBuilder.Entity<ApplicationUser>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.ToTable("AspNetUsers");
+            });
 
             base.OnModelCreating(modelBuilder);
         }

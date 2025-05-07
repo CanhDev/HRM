@@ -42,6 +42,8 @@ D:\Canh\haui\a_datn\sourcecode\ERP\bin\Debug\net8.0\Microsoft.OpenApi.dll
 D:\Canh\haui\a_datn\sourcecode\ERP\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 D:\Canh\haui\a_datn\sourcecode\ERP\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 D:\Canh\haui\a_datn\sourcecode\ERP\bin\Debug\net8.0\Mono.TextTemplating.dll
+D:\Canh\haui\a_datn\sourcecode\ERP\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\Canh\haui\a_datn\sourcecode\ERP\bin\Debug\net8.0\SixLabors.ImageSharp.dll
 D:\Canh\haui\a_datn\sourcecode\ERP\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Canh\haui\a_datn\sourcecode\ERP\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Canh\haui\a_datn\sourcecode\ERP\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -132,6 +134,7 @@ D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\ERP.AssemblyInfo.cs
 D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\ERP.csproj.CoreCompileInputs.cache
 D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\ERP.MvcApplicationPartsAssemblyInfo.cs
 D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\ERP.MvcApplicationPartsAssemblyInfo.cache
+D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\ERP.sourcelink.json
 D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\staticwebassets.build.json
 D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\staticwebassets.development.json
 D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\staticwebassets\msbuild.ERP.Microsoft.AspNetCore.StaticWebAssets.props
@@ -146,4 +149,3 @@ D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\refint\ERP.dll
 D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\ERP.pdb
 D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\ERP.genruntimeconfig.cache
 D:\Canh\haui\a_datn\sourcecode\ERP\obj\Debug\net8.0\ref\ERP.dll
-D:\Canh\haui\a_datn\sourcecode\ERP\bin\Debug\net8.0\SixLabors.ImageSharp.dll

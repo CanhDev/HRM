@@ -6,12 +6,12 @@ namespace ERP.Entities.Lists.Employee
     public class Position : BaseEntity
     {
         [Required]
-        public string PositionCode { get; set; }
+        public string positionCode { get; set; }
 
         [Required, StringLength(100)]
-        public string PositionName { get; set; }
+        public string positionName { get; set; }
 
         [StringLength(250)]
-        public string Description { get; set; }
+        public string description { get; set; }
     }
 }

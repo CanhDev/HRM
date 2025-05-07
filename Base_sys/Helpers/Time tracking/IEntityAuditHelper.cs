@@ -2,7 +2,7 @@
 {
     public interface IEntityAuditHelper
     {
-        void SetCreatedAuditInfo(object entity, string userId);
-        void SetUpdatedAuditInfo(object entity, string userId);
+        void SetCreatedAuditInfo(object entity);
+        void SetUpdatedAuditInfo(object entity);
     }
 }

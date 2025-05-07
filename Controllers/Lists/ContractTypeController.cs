@@ -60,7 +60,7 @@ namespace ERP.Controllers.Lists
         [HttpPost]
         public async Task<ActionResult<ApiResponse<ContractType>>> Create([FromBody] ContractType ContractType)
         {
-            var response = await _ContractTypeService.AddAsync(ContractType, x => x.Id == ContractType.Id);
+            var response = await _ContractTypeService.AddAsync(ContractType);
             if (response.Success == false)
             {
                 return StatusCode(500, new ApiResponse<ContractType>
@@ -76,7 +76,7 @@ namespace ERP.Controllers.Lists
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<ContractType>>> Update(int id, [FromBody] ContractType ContractType)
         {
-            var response = await _ContractTypeService.UpdateAsync(ContractType, x => x.Id == id);
+            var response = await _ContractTypeService.UpdateAsync(ContractType);
             if (response.Success == false)
             {
                 return StatusCode(500, new ApiResponse<ContractType>

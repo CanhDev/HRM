@@ -6,11 +6,11 @@ namespace ERP.Entities.Lists.Employee
     public class EmergencyContact : BaseEntity
     {
        
-        public int EmployeeId { get; set; }
+        public int employeeId { get; set; }
         
-        public string Relationship { get; set; }
-        public string FullName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Address { get; set; }
+        public string? relationship { get; set; }
+        public string? fullName { get; set; }
+        public string? phoneNumber { get; set; }
+        public string? address { get; set; }
     }
 }

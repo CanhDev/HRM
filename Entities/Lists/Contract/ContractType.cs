@@ -6,13 +6,13 @@ namespace ERP.Entities.Lists.Contract
     public class ContractType : BaseEntity
     {
         [Required]
-        public string ContractTypeCode { get; set; }
+        public string? contractTypeCode { get; set; }
 
         [Required, StringLength(100)]
-        public string ContractTypeName { get; set; }
+        public string? contractTypeName { get; set; }
 
         [StringLength(255)]
-        public string Description { get; set; }
+        public string? description { get; set; }
 
     }
 }
