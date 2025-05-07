@@ -1,0 +1,89 @@
+<!-- components/employee-filter/employee-filter.component.html -->
+<div class="p-3 border bg-white">
+  <h6 class="mb-3 d-flex align-items-center">
+    <i class="bi bi-funnel-fill me-2"></i> Bộ lọc nâng cao
+  </h6>
+
+  <form [formGroup]="filterForm" class="row gx-3 gy-3">
+    <!-- Mã nhân viên -->
+    <div class="col-md-4">
+      <label for="employeeCode" class="form-label small mb-1">Mã nhân viên</label>
+      <div class="position-relative">
+        <i class="bi bi-person-badge position-absolute top-50 start-0 translate-middle-y ms-2 text-muted"></i>
+        <input type="text" id="employeeCode" class="form-control ps-5" formControlName="employeeCode" placeholder="Mã NV">
+      </div>
+    </div>
+
+    <!-- Giới tính -->
+    <div class="col-md-2">
+      <label for="gender" class="form-label small mb-1">Giới tính</label>
+      <select id="gender" class="form-select" formControlName="gender">
+        <option value="">Tất cả</option>
+        <option value="Nam">Nam</option>
+        <option value="Nữ">Nữ</option>
+        <option value="Khác">Khác</option>
+      </select>
+    </div>
+
+    <!-- Trạng thái -->
+    <div class="col-md-2">
+      <label for="status" class="form-label small mb-1">Trạng thái</label>
+      <select formControlName="status" class="form-select" id="status">
+        <option value="">Tất cả</option>
+        <option *ngFor="let item of statusList$ | async" [value]="item.form_value">{{ item.form_name }}</option>
+      </select>
+    </div>
+
+    <!-- Phòng ban -->
+    <div class="col-md-2">
+      <label for="departmentId" class="form-label small mb-1">Phòng ban</label>
+      <select formControlName="departmentId" class="form-select" id="departmentId">
+        <option value="">Tất cả</option>
+        <option *ngFor="let department of departments$ | async" [value]="department.form_value">{{ department.form_name }}</option>
+      </select>
+    </div>
+
+    <!-- Chức vụ -->
+    <div class="col-md-2">
+      <label for="positionId" class="form-label small mb-1">Chức vụ</label>
+      <select formControlName="positionId" class="form-select" id="positionId">
+        <option value="">Tất cả</option>
+        <option *ngFor="let item of positions$ | async" [value]="item.form_value">{{ item.form_name }}</option>
+      </select>
+    </div>
+
+    <!-- Ngày sinh từ -->
+    <div class="col-md-3">
+      <label for="dobFrom" class="form-label small mb-1">Ngày sinh từ</label>
+      <input type="date" class="form-control" formControlName="dobFrom">
+    </div>
+
+    <!-- Ngày sinh đến -->
+    <div class="col-md-3">
+      <label for="dobTo" class="form-label small mb-1">Ngày sinh đến</label>
+      <input type="date" class="form-control" formControlName="dobTo">
+    </div>
+
+    <!-- Ngày vào làm từ -->
+    <div class="col-md-3">
+      <label for="joinDateFrom" class="form-label small mb-1">Vào làm từ</label>
+      <input type="date" class="form-control" formControlName="joinDateFrom">
+    </div>
+
+    <!-- Ngày vào làm đến -->
+    <div class="col-md-3">
+      <label for="joinDateTo" class="form-label small mb-1">Vào làm đến</label>
+      <input type="date" class="form-control" formControlName="joinDateTo">
+    </div>
+
+    <!-- Buttons -->
+    <div class="col-12 d-flex justify-content-end gap-2 mt-3">
+      <button type="button" class="btn btn-sm btn-secondary" (click)="resetFilters()">
+        <i class="bi bi-x-circle"></i> Xóa
+      </button>
+      <button type="button" class="btn btn-sm btn-primary" (click)="applyFilters()">
+        <i class="bi bi-funnel"></i> Lọc
+      </button>
+    </div>
+  </form>
+</div>

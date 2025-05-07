@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\entities\\lists\\employee\\workexperience.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:entities\\lists\\employee\\workexperience.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\entities\\vouchers\\employee\\employeedocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:entities\\vouchers\\employee\\employeedocument.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\apis\\contracts\\model\\entity\\employmentcontract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:apis\\contracts\\model\\entity\\employmentcontract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\entities\\lists\\employee\\education.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:entities\\lists\\employee\\education.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\entities\\lists\\employee\\emergencycontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:entities\\lists\\employee\\emergencycontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\entities\\lists\\employee\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:entities\\lists\\employee\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -54,11 +74,72 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 2,
+              "Title": "EmploymentContract.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Contracts\\Model\\Entity\\EmploymentContract.cs",
+              "RelativeDocumentMoniker": "APIs\\Contracts\\Model\\Entity\\EmploymentContract.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Contracts\\Model\\Entity\\EmploymentContract.cs",
+              "RelativeToolTip": "APIs\\Contracts\\Model\\Entity\\EmploymentContract.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T06:17:53.935Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WorkExperience.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\Lists\\Employee\\WorkExperience.cs",
+              "RelativeDocumentMoniker": "Entities\\Lists\\Employee\\WorkExperience.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\Lists\\Employee\\WorkExperience.cs",
+              "RelativeToolTip": "Entities\\Lists\\Employee\\WorkExperience.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T05:59:39.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Education.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\Lists\\Employee\\Education.cs",
+              "RelativeDocumentMoniker": "Entities\\Lists\\Employee\\Education.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\Lists\\Employee\\Education.cs",
+              "RelativeToolTip": "Entities\\Lists\\Employee\\Education.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T05:57:09.245Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EmergencyContact.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\Lists\\Employee\\EmergencyContact.cs",
+              "RelativeDocumentMoniker": "Entities\\Lists\\Employee\\EmergencyContact.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\Lists\\Employee\\EmergencyContact.cs",
+              "RelativeToolTip": "Entities\\Lists\\Employee\\EmergencyContact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T05:54:43.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmployeeDocument.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\Vouchers\\Employee\\EmployeeDocument.cs",
+              "RelativeDocumentMoniker": "Entities\\Vouchers\\Employee\\EmployeeDocument.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\Vouchers\\Employee\\EmployeeDocument.cs",
+              "RelativeToolTip": "Entities\\Vouchers\\Employee\\EmployeeDocument.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T05:44:32.269Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "20250506193351_7_5.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Migrations\\20250506193351_7_5.cs",
               "RelativeDocumentMoniker": "Migrations\\20250506193351_7_5.cs",
@@ -70,7 +151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "Employee_DataRes.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Data_res\\Lists\\Employee_DataRes.cs",
               "RelativeDocumentMoniker": "Data_res\\Lists\\Employee_DataRes.cs",
@@ -82,7 +163,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "Employee.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\Lists\\Employee\\Employee.cs",
               "RelativeDocumentMoniker": "Entities\\Lists\\Employee\\Employee.cs",
@@ -90,12 +171,11 @@
               "RelativeToolTip": "Entities\\Lists\\Employee\\Employee.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAA9wBsAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T19:32:50.853Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-06T19:32:50.853Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "UserService.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Base_sys\\User\\Service\\UserService.cs",
               "RelativeDocumentMoniker": "Base_sys\\User\\Service\\UserService.cs",
@@ -107,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "EmployeeService.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Services\\Lists\\EmployeeService.cs",
               "RelativeDocumentMoniker": "Services\\Lists\\EmployeeService.cs",
@@ -119,7 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -131,7 +211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "EmployeeController.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Controllers\\Lists\\EmployeeController.cs",
               "RelativeDocumentMoniker": "Controllers\\Lists\\EmployeeController.cs",
@@ -143,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Employee_dataset.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\DTO\\Lists\\Employee_dataset.cs",
               "RelativeDocumentMoniker": "DTO\\Lists\\Employee_dataset.cs",
@@ -155,7 +235,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "PagedResult.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Base_sys\\PagedResult.cs",
               "RelativeDocumentMoniker": "Base_sys\\PagedResult.cs",
@@ -167,7 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "ApiResponse.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Base_sys\\ApiResponse.cs",
               "RelativeDocumentMoniker": "Base_sys\\ApiResponse.cs",
@@ -179,7 +259,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "ApiRespone_basic.cs",
               "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Base_sys\\ApiRespone_basic.cs",
               "RelativeDocumentMoniker": "Base_sys\\ApiRespone_basic.cs",
