@@ -1,7 +1,11 @@
-﻿using ERP.Base_sys.Repos;
+﻿using AutoMapper;
+using ERP.Base_sys.Helpers;
+using ERP.Base_sys.Repos;
+using ERP.DTO;
 using ERP.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace ERP.Base_sys.Services
 {
@@ -9,11 +13,13 @@ namespace ERP.Base_sys.Services
     {
         protected readonly IBaseRepository<T> _repository;
         protected readonly ApplicationDbContext _context;
+        protected readonly IMapper _mapper;
 
-        public BaseService(IBaseRepository<T> repository, ApplicationDbContext context)
+        public BaseService(IBaseRepository<T> repository, IMapper mapper, ApplicationDbContext context)
         {
             _repository = repository;
             _context = context;
+            _mapper = mapper;
         }
         public async Task<bool> IsDuplicateAsync(Expression<Func<T, bool>> filter)
         {
@@ -26,9 +32,9 @@ namespace ERP.Base_sys.Services
             return entity != null ? ApiResponse<T?>.SuccessResponse(entity) : ApiResponse<T?>.ErrorResponse("Not found");
         }
 
-        public virtual async Task<ApiResponse<List<T>>> GetAllAsync()
+        public virtual async Task<ApiResponse<List<T>>> GetAllAsync(Expression<Func<T, bool>>? predicate = null)
         {
-            var entities = await _repository.GetAllAsync();
+            var entities = await _repository.GetAllAsync(predicate);
             return ApiResponse<List<T>>.SuccessResponse(entities);
         }
 
@@ -39,22 +45,14 @@ namespace ERP.Base_sys.Services
             return ApiResponse<PagedResult<T>>.SuccessResponse(result);
         }
 
-        public virtual async Task<ApiResponse<T>> AddAsync(T entity, Expression<Func<T, bool>> duplicateCheckFilter)
+        public virtual async Task<ApiResponse<T>> AddAsync(T entity)
         {
-            if (await IsDuplicateAsync(duplicateCheckFilter))
-            {
-                throw new InvalidOperationException("Entity already exists.");
-            }
             var result = await _repository.AddAsync(entity);
             return ApiResponse<T>.SuccessResponse(result);
         }
 
-        public virtual async Task<ApiResponse<T>> UpdateAsync(T entity, Expression<Func<T, bool>> duplicateCheckFilter)
+        public virtual async Task<ApiResponse<T>> UpdateAsync(T entity)
         {
-            if (await IsDuplicateAsync(duplicateCheckFilter) == false)
-            {
-                throw new InvalidOperationException("Entity does not exists.");
-            }
             var result = await _repository.UpdateAsync(entity);
             return ApiResponse<T>.SuccessResponse(result);
         }
@@ -62,9 +60,15 @@ namespace ERP.Base_sys.Services
         public virtual async Task<ApiResponse<T>> DeleteAsync(int id)
         {
             var entity = await _repository.GetByIdAsync(id);
+            
             if (entity == null) return ApiResponse<T>.ErrorResponse("Not found");
             var res =  await _repository.DeleteAsync(entity);
             return ApiResponse<T>.SuccessResponse(res);
+        }
+
+        public async Task<bool> DeleteWhereAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _repository.DeleteWhereAsync(predicate);
         }
 
         public virtual async Task<ApiResponse<string>> AddTwoEntitiesAsync<T1, T2>(T1 entity1, T2 entity2)
@@ -201,6 +205,95 @@ namespace ERP.Base_sys.Services
                 await transaction.RollbackAsync();
                 return ApiResponse<string>.ErrorResponse($"Related entities update transaction failed: {ex.Message}");
             }
+        }
+        public virtual  ApiRespone_basic LoadComboBox(string? state)
+        {
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Message = "nothing"
+            };
+        }
+
+        public virtual async Task<bool> DeleteRangeAsync(IEnumerable<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                throw new ArgumentException("Danh sách ID không được để trống.");
+
+            try
+            {
+                var result = await _repository.DeleteRangeAsync(ids);
+                return result;
+            }
+            catch (KeyNotFoundException knfEx)
+            {
+                // Có thể log riêng nếu muốn
+                throw new Exception("Không tìm thấy một số bản ghi để xóa", knfEx);
+            }
+            catch (Exception ex)
+            {
+                // Ghi log nếu cần
+                throw new Exception("Lỗi trong quá trình xóa nhiều bản ghi", ex);
+            }
+        }
+
+        public virtual async Task<bool> DeleteAllAsync()
+        {
+            return await _repository.DeleteAllAsync();
+        }
+        public async Task<ApiRespone_basic> AddRangeAsync(IEnumerable<T> entities)
+        {
+            try
+            {
+                
+                var res = await _repository.AddRangeAsync(entities);
+                return new ApiRespone_basic
+                {
+                    Success = true,
+                    Data = res
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Service: Lỗi khi thêm nhiều đối tượng. " + ex.Message);
+            }
+        }
+        public async Task<ApiRespone_basic> UpdateRangeAsync(IEnumerable<T> entities)
+        {
+            try
+            {
+                
+                var res =  await _repository.UpdateRangeAsync(entities);
+                return new ApiRespone_basic
+                {
+                    Success = true,
+                    Data = res
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Service: Lỗi khi cập nhật nhiều đối tượng. " + ex.Message);
+            }
+        }
+        public async Task ProcessActionTypeListAsync<TDto>(List<TDto> dtos) where TDto : class, IActionDto
+        {
+            var toAdd = dtos.Where(x => x.actionType == "A")
+                            .Select(x => _mapper.Map<T>(x)).ToList();
+
+            var toUpdate = dtos.Where(x => x.actionType == "E")
+                               .Select(x => _mapper.Map<T>(x)).ToList();
+
+            var toDelete = dtos.Where(x => x.actionType == "D")
+                               .Select(x => x.id).ToList();
+
+            if (toAdd.Any())
+                await AddRangeAsync(toAdd);
+
+            if (toUpdate.Any())
+                await UpdateRangeAsync(toUpdate);
+
+            if (toDelete.Any())
+                await DeleteRangeAsync(toDelete);
         }
     }
 }

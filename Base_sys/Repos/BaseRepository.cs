@@ -3,6 +3,8 @@ using System.Linq.Expressions;
 using System.Linq;
 using System.Reflection;
 using ERP.Entities;
+using System.ComponentModel.DataAnnotations;
+using ERP.Base_sys.Helpers;
 
 namespace ERP.Base_sys.Repos
 {
@@ -10,15 +12,28 @@ namespace ERP.Base_sys.Repos
     {
         protected readonly ApplicationDbContext _context;
         protected readonly DbSet<T> _dbSet;
+        private readonly IEntityAuditHelper _auditHelper;
 
-        public BaseRepository(ApplicationDbContext context)
+        public BaseRepository(ApplicationDbContext context, IEntityAuditHelper auditHelper)
         {
             _context = context;
             _dbSet = context.Set<T>();
+            _auditHelper = auditHelper;
         }
 
         public async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
-        public async Task<List<T>> GetAllAsync() => await _dbSet.ToListAsync();
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? predicate = null)
+        {
+            IQueryable<T> query = _context.Set<T>();
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            return await query.ToListAsync();
+        }
+
 
         public async Task<PagedResult<T>> GetPagedListAsync(SearchRequest<T> searchRequest,
                                          params Expression<Func<T, object>>[] includes)
@@ -32,7 +47,7 @@ namespace ERP.Base_sys.Repos
             }
 
             // Xử lý tìm kiếm toàn cục
-            if (!string.IsNullOrEmpty(searchRequest.GlobalSearch))
+            if (!string.IsNullOrEmpty(searchRequest.globalSearch))
             {
                 var parameter = Expression.Parameter(typeof(T), "x");
                 Expression? combinedExpression = null;
@@ -55,7 +70,7 @@ namespace ERP.Base_sys.Repos
                         if (property.PropertyType == typeof(string))
                         {
                             var containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) });
-                            var valueExpression = Expression.Constant(searchRequest.GlobalSearch);
+                            var valueExpression = Expression.Constant(searchRequest.globalSearch);
 
                             // Xử lý trường hợp thuộc tính có thể null
                             var notNullCheck = Expression.NotEqual(member, Expression.Constant(null));
@@ -69,7 +84,7 @@ namespace ERP.Base_sys.Repos
                         // Xử lý các kiểu dữ liệu số nguyên
                         else if (property.PropertyType == typeof(int) || property.PropertyType == typeof(int?))
                         {
-                            if (int.TryParse(searchRequest.GlobalSearch, out var intValue))
+                            if (int.TryParse(searchRequest.globalSearch, out var intValue))
                             {
                                 Expression predicate;
                                 if (property.PropertyType == typeof(int?))
@@ -92,7 +107,7 @@ namespace ERP.Base_sys.Repos
                         else if (property.PropertyType == typeof(decimal) || property.PropertyType == typeof(decimal?) ||
                                  property.PropertyType == typeof(double) || property.PropertyType == typeof(double?))
                         {
-                            if (decimal.TryParse(searchRequest.GlobalSearch, out var decimalValue))
+                            if (decimal.TryParse(searchRequest.globalSearch, out var decimalValue))
                             {
                                 Expression predicate;
 
@@ -125,7 +140,7 @@ namespace ERP.Base_sys.Repos
                         // Xử lý kiểu dữ liệu ngày tháng
                         else if (property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?))
                         {
-                            if (DateTime.TryParse(searchRequest.GlobalSearch, out var dateValue))
+                            if (DateTime.TryParse(searchRequest.globalSearch, out var dateValue))
                             {
                                 Expression predicate;
 
@@ -162,9 +177,9 @@ namespace ERP.Base_sys.Repos
             }
 
             // Xử lý các bộ lọc ngày
-            if (searchRequest.DateFilters != null && searchRequest.DateFilters.Any())
+            if (searchRequest.dateFilters != null && searchRequest.dateFilters.Any())
             {
-                foreach (var filter in searchRequest.DateFilters)
+                foreach (var filter in searchRequest.dateFilters)
                 {
                     var property = typeof(T).GetProperty(filter.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
                     if (property != null && (property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?)))
@@ -175,17 +190,17 @@ namespace ERP.Base_sys.Repos
                         Expression? datePredicate = null;
 
                         // Kiểm tra ngày bắt đầu
-                        if (filter.Value.From.HasValue)
+                        if (filter.Value.from.HasValue)
                         {
                             Expression greaterThanOrEqual;
                             if (property.PropertyType == typeof(DateTime))
                             {
-                                var fromConstant = Expression.Constant(filter.Value.From.Value);
+                                var fromConstant = Expression.Constant(filter.Value.from.Value);
                                 greaterThanOrEqual = Expression.GreaterThanOrEqual(member, fromConstant);
                             }
                             else // DateTime?
                             {
-                                var fromConstant = Expression.Constant(filter.Value.From.Value, typeof(DateTime?));
+                                var fromConstant = Expression.Constant(filter.Value.from.Value, typeof(DateTime?));
                                 var notNullCheck = Expression.NotEqual(member, Expression.Constant(null, typeof(DateTime?)));
                                 var comparison = Expression.GreaterThanOrEqual(member, fromConstant);
                                 greaterThanOrEqual = Expression.AndAlso(notNullCheck, comparison);
@@ -195,17 +210,17 @@ namespace ERP.Base_sys.Repos
                         }
 
                         // Kiểm tra ngày kết thúc
-                        if (filter.Value.To.HasValue)
+                        if (filter.Value.to.HasValue)
                         {
                             Expression lessThanOrEqual;
                             if (property.PropertyType == typeof(DateTime))
                             {
-                                var toConstant = Expression.Constant(filter.Value.To.Value);
+                                var toConstant = Expression.Constant(filter.Value.to.Value);
                                 lessThanOrEqual = Expression.LessThanOrEqual(member, toConstant);
                             }
                             else // DateTime?
                             {
-                                var toConstant = Expression.Constant(filter.Value.To.Value, typeof(DateTime?));
+                                var toConstant = Expression.Constant(filter.Value.to.Value, typeof(DateTime?));
                                 var notNullCheck = Expression.NotEqual(member, Expression.Constant(null, typeof(DateTime?)));
                                 var comparison = Expression.LessThanOrEqual(member, toConstant);
                                 lessThanOrEqual = Expression.AndAlso(notNullCheck, comparison);
@@ -226,9 +241,9 @@ namespace ERP.Base_sys.Repos
             }
 
             // Xử lý các bộ lọc cột
-            if (searchRequest.ColumnFilters != null && searchRequest.ColumnFilters.Any())
+            if (searchRequest.columnFilters != null && searchRequest.columnFilters.Any())
             {
-                foreach (var filter in searchRequest.ColumnFilters)
+                foreach (var filter in searchRequest.columnFilters)
                 {
                     var property = typeof(T).GetProperty(filter.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
                     if (property != null)
@@ -363,9 +378,9 @@ namespace ERP.Base_sys.Repos
             }
 
             // Xử lý sắp xếp - Cải thiện phần này để tránh lỗi
-            if (!string.IsNullOrEmpty(searchRequest.SortBy))
+            if (!string.IsNullOrEmpty(searchRequest.sortBy))
             {
-                var property = typeof(T).GetProperty(searchRequest.SortBy, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+                var property = typeof(T).GetProperty(searchRequest.sortBy, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
                 if (property != null)
                 {
                     var parameter = Expression.Parameter(typeof(T), "e");
@@ -376,7 +391,7 @@ namespace ERP.Base_sys.Repos
                     var lambda = Expression.Lambda(lambdaType, propertyAccess, parameter);
 
                     // Xác định phương thức OrderBy hoặc OrderByDescending
-                    string methodName = searchRequest.SortOrder.ToLower() == "desc" ? "OrderByDescending" : "OrderBy";
+                    string methodName = searchRequest.sortOrder.ToLower() == "desc" ? "OrderByDescending" : "OrderBy";
 
                     // Tạo biểu thức gọi phương thức
                     var methodCall = Expression.Call(
@@ -398,7 +413,7 @@ namespace ERP.Base_sys.Repos
                         var idProperty = typeof(T).GetProperty("Id");
                         if (idProperty != null)
                         {
-                            query = searchRequest.SortOrder.ToLower() == "desc"
+                            query = searchRequest.sortOrder.ToLower() == "desc"
                                 ? query.OrderByDescending(e => EF.Property<object>(e, "Id"))
                                 : query.OrderBy(e => EF.Property<object>(e, "Id"));
                         }
@@ -414,8 +429,8 @@ namespace ERP.Base_sys.Repos
             int totalRecords = await query.CountAsync();
 
             // Áp dụng phân trang
-            var pageNumber = searchRequest.Page > 0 ? searchRequest.Page : 1;
-            var pageSize = searchRequest.PageSize > 0 ? searchRequest.PageSize : 10;
+            var pageNumber = searchRequest.page > 0 ? searchRequest.page : 1;
+            var pageSize = searchRequest.pageSize > 0 ? searchRequest.pageSize : 10;
 
             query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
 
@@ -425,32 +440,55 @@ namespace ERP.Base_sys.Repos
             // Trả về kết quả phân trang
             return new PagedResult<T>
             {
-                Items = items,
-                TotalCount = totalRecords,
-                Page = pageNumber,
-                PageSize = pageSize
+                items = items,
+                totalCount = totalRecords,
+                page = pageNumber,
+                pageSize = pageSize
             };
         }
 
-
         public async Task<T> AddAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
-            return entity;
+            try
+            {
+                _auditHelper.SetCreatedAuditInfo(entity);
+                await _dbSet.AddAsync(entity);
+                await _context.SaveChangesAsync();
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                var error = ex.InnerException?.Message ?? ex.Message;
+                throw new Exception($"Lỗi khi thêm dữ liệu: {error}", ex);
+            }
         }
 
         public async Task<T> UpdateAsync(T entity)
         {
-            _dbSet.Update(entity);
-            await _context.SaveChangesAsync();
-            return entity;
+            try
+            {
+                _auditHelper.SetUpdatedAuditInfo(entity);
+                _dbSet.Update(entity);
+                await _context.SaveChangesAsync();
+                return entity;
+            }catch(Exception ex)
+            {
+                var error = ex.InnerException?.Message ?? ex.Message;
+                throw new Exception($"Lỗi khi sửa dữ liệu: {error}", ex);
+            }
+            
         }
 
         public async Task<T> DeleteAsync(T entity)
         {
-            _dbSet.Remove(entity);
-            await _context.SaveChangesAsync();
+            _auditHelper.SetUpdatedAuditInfo(entity);
+            var property = typeof(T).GetProperty("status");
+            if (property != null && property.CanWrite)
+            {
+                property.SetValue(entity, -1);
+                _dbSet.Update(entity);
+                await _context.SaveChangesAsync();
+            }
             return entity;
         }
 
@@ -458,5 +496,162 @@ namespace ERP.Base_sys.Repos
         {
             return await _dbSet.AnyAsync(filter);
         }
+        public async Task<bool> DeleteRangeAsync(IEnumerable<int> ids)
+        {
+            if (ids == null || !ids.Any())
+                throw new ArgumentException("Danh sách ID không được rỗng");
+
+            try
+            {
+                var param = Expression.Parameter(typeof(T), "x");
+                var prop = Expression.Property(param, "Id");
+                var containsMethod = typeof(Enumerable).GetMethods()
+                    .First(m => m.Name == "Contains" && m.GetParameters().Length == 2)
+                    .MakeGenericMethod(typeof(int));
+
+                var values = Expression.Constant(ids);
+                var body = Expression.Call(containsMethod, values, prop);
+                var lambda = Expression.Lambda<Func<T, bool>>(body, param);
+
+                var entitiesToDelete = await _dbSet.Where(lambda).ToListAsync();
+
+                if (!entitiesToDelete.Any())
+                    throw new KeyNotFoundException("Không tìm thấy bản ghi nào khớp với danh sách ID");
+
+                // Gán status = -1 cho mỗi entity
+                var statusProp = typeof(T).GetProperty("status");
+                if (statusProp != null && statusProp.CanWrite)
+                {
+                    foreach (var entity in entitiesToDelete)
+                    {
+                        _auditHelper.SetUpdatedAuditInfo(entity);
+                        statusProp.SetValue(entity, -1);
+                    }
+
+                    _dbSet.UpdateRange(entitiesToDelete);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+
+                throw new InvalidOperationException("Không tìm thấy thuộc tính 'status' trong entity");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi cập nhật trạng thái xóa cho danh sách bản ghi", ex);
+            }
+        }
+
+        public async Task<bool> DeleteAllAsync()
+        {
+            try
+            {
+                var allEntities = await _dbSet.ToListAsync();
+                if (!allEntities.Any()) return true;
+
+                var statusProp = typeof(T).GetProperty("status");
+                if (statusProp != null && statusProp.CanWrite)
+                {
+                    foreach (var entity in allEntities)
+                    {
+                        _auditHelper.SetUpdatedAuditInfo(entity);
+                        statusProp.SetValue(entity, -1);
+                    }
+
+                    _dbSet.UpdateRange(allEntities);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+
+                throw new InvalidOperationException("Không tìm thấy thuộc tính 'status' trong entity");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi cập nhật trạng thái xóa cho tất cả bản ghi", ex);
+            }
+        }
+
+        public async Task<bool> DeleteWhereAsync(Expression<Func<T, bool>> predicate)
+        {
+            var entities = await _context.Set<T>().Where(predicate).ToListAsync();
+            if (!entities.Any()) return true;
+
+            var statusProp = typeof(T).GetProperty("status");
+            if (statusProp != null && statusProp.CanWrite)
+            {
+                foreach (var entity in entities)
+                {
+                    _auditHelper.SetUpdatedAuditInfo(entity);
+                    statusProp.SetValue(entity, -1);
+                }
+
+                _context.Set<T>().UpdateRange(entities);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            throw new InvalidOperationException("Không tìm thấy thuộc tính 'status' trong entity");
+        }
+
+        public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities)
+        {
+            try
+            {
+                if (entities == null || !entities.Any())
+                    throw new ArgumentException("Danh sách thực thể không được để trống.");
+               
+                foreach (var entity in entities) {
+                    _auditHelper.SetCreatedAuditInfo(entity);
+                }
+                await _context.Set<T>().AddRangeAsync(entities);
+                await _context.SaveChangesAsync();
+
+                return entities;
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new Exception("Lỗi xung đột dữ liệu khi lưu vào cơ sở dữ liệu. Vui lòng thử lại.", ex);
+            }
+            catch (DbUpdateException ex)
+            {
+                var entries = ex.Entries.Select(e => e.Entity.GetType().Name).ToList();
+                var entityNames = string.Join(", ", entries);
+                throw new Exception($"Lỗi khi thêm danh sách dữ liệu vào database. Các thực thể bị lỗi: {entityNames}. Chi tiết: {ex.InnerException?.Message ?? ex.Message}", ex);
+            }
+            catch (ValidationException ex)
+            {
+                throw new Exception($"Lỗi validate dữ liệu: {ex.Message}", ex);
+            }
+            catch (ArgumentException ex)
+            {
+                throw new Exception($"Dữ liệu không hợp lệ: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Đã xảy ra lỗi không xác định khi thêm danh sách dữ liệu: " + ex.Message, ex);
+            }
+        }
+
+        public async Task<IEnumerable<T>> UpdateRangeAsync(IEnumerable<T> entities)
+        {
+            try
+            {
+                foreach (var entity in entities)
+                {
+                    _auditHelper.SetUpdatedAuditInfo(entity);
+                }
+                _context.Set<T>().UpdateRange(entities);
+                await _context.SaveChangesAsync();
+                return entities;
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new Exception("Lỗi xung đột khi cập nhật danh sách dữ liệu: " + ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi không xác định khi cập nhật danh sách dữ liệu: " + ex.Message, ex);
+            }
+        }
+
     }
 }

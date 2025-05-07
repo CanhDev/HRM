@@ -1,5 +1,278 @@
 [
   {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "GetAll",
+    "RelativePath": "api/Contract",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[ERP.APIs.Contracts.Model.Contract.EmploymentContract, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "Create",
+    "RelativePath": "api/Contract",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "contractDTO.employeeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.departmentId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.positionId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.contractCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.contractTypeId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.salary",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.notes",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.startDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.endDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.signedDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.workingTime",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.jobDescription",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.benefits",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.filePath",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.terms",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractDTO.status",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "contractAddendumDTOs",
+        "Type": "System.Collections.Generic.List\u00601[[ERP.APIs.Contracts.Model.ContractAddendumDTO, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "GetById",
+    "RelativePath": "api/Contract/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "Update",
+    "RelativePath": "api/Contract/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "data",
+        "Type": "ERP.APIs.Contracts.Model.Contract_dataset",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "Delete",
+    "RelativePath": "api/Contract/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.APIs.Contracts.Model.Contract.EmploymentContract, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "DeleteAllAsync",
+    "RelativePath": "api/Contract/DeleteAll{ids}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "DeleteRange",
+    "RelativePath": "api/Contract/DeleteRange{ids}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "ids",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "GetData",
+    "RelativePath": "api/Contract/getData",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERP.Base_sys.SearchRequest\u00601[[ERP.APIs.Contracts.Model.Contract.EmploymentContract, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Base_sys.PagedResult\u00601[[ERP.APIs.Contracts.Model.Contract.EmploymentContract, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "GetNew",
+    "RelativePath": "api/Contract/GetNew",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "Reject",
+    "RelativePath": "api/Contract/Reject/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "data",
+        "Type": "ERP.APIs.Contracts.Model.RejectModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ERP.Controllers.Lists.ContractTypeController",
     "Method": "GetAll",
     "RelativePath": "api/ContractType",
@@ -648,22 +921,137 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Employee",
-        "Type": "ERP.Entities.Lists.Employee.Employee",
-        "IsRequired": true
+        "Name": "employeeDTO.employeeCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.fullName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.dob",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.idCardNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.idCardIssueDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.idCardIssuePlace",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.taxCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.bankAccountNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.bankName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.bankBranch",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.joinDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.netSalary",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.departmentId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.positionId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.contractTypeId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.imageUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.imageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "emergencyContactsJson",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "educationListJson",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "workExperienceListJson",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "imageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Entities.Lists.Employee.Employee, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ERP.Controllers.Lists.EmployeeController",
@@ -705,22 +1093,137 @@
         "IsRequired": true
       },
       {
-        "Name": "Employee",
-        "Type": "ERP.Entities.Lists.Employee.Employee",
-        "IsRequired": true
+        "Name": "employeeDTO.employeeCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.fullName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.dob",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.idCardNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.idCardIssueDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.idCardIssuePlace",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.taxCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.bankAccountNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.bankName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.bankBranch",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.joinDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.netSalary",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.departmentId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.positionId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.contractTypeId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.imageUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.imageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeDTO.status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "emergencyContactsJson",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "educationListJson",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "workExperienceListJson",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "imageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Entities.Lists.Employee.Employee, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ERP.Controllers.Lists.EmployeeController",
@@ -775,7 +1278,576 @@
     ]
   },
   {
-    "ContainingType": "ERP.Controllers.Lists.LeaveTypeController",
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "GetAll",
+    "RelativePath": "api/EmployeeDocument",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "Create",
+    "RelativePath": "api/EmployeeDocument",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "documents",
+        "Type": "System.Collections.Generic.List\u00601[[ERP.DTO.Lists.EmployeeDocumentDTO, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "Update",
+    "RelativePath": "api/EmployeeDocument",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "documents",
+        "Type": "System.Collections.Generic.List\u00601[[ERP.DTO.Lists.EmployeeDocumentDTO, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "GetById",
+    "RelativePath": "api/EmployeeDocument/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "Delete",
+    "RelativePath": "api/EmployeeDocument/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "DeleteAllAsync",
+    "RelativePath": "api/EmployeeDocument/DeleteAll",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "DeleteRange",
+    "RelativePath": "api/EmployeeDocument/DeleteRange",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "GetAllByEmployee",
+    "RelativePath": "api/EmployeeDocument/GetbyEmployee{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "GetData",
+    "RelativePath": "api/EmployeeDocument/getData",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERP.Base_sys.SearchRequest\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Base_sys.PagedResult\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.EmployeeLeaveBalanceController",
+    "Method": "GetAll",
+    "RelativePath": "api/EmployeeLeaveBalance",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[ERP.APIs.Leaves.entity.EmployeeLeaveBalance, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.EmployeeLeaveBalanceController",
+    "Method": "Create",
+    "RelativePath": "api/EmployeeLeaveBalance",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EmployeeLeaveBalance",
+        "Type": "ERP.APIs.Leaves.entity.EmployeeLeaveBalance",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.APIs.Leaves.entity.EmployeeLeaveBalance, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.EmployeeLeaveBalanceController",
+    "Method": "GetById",
+    "RelativePath": "api/EmployeeLeaveBalance/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.APIs.Leaves.entity.EmployeeLeaveBalance, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.EmployeeLeaveBalanceController",
+    "Method": "Update",
+    "RelativePath": "api/EmployeeLeaveBalance/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "EmployeeLeaveBalance",
+        "Type": "ERP.APIs.Leaves.entity.EmployeeLeaveBalance",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.APIs.Leaves.entity.EmployeeLeaveBalance, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.EmployeeLeaveBalanceController",
+    "Method": "Delete",
+    "RelativePath": "api/EmployeeLeaveBalance/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.APIs.Leaves.entity.EmployeeLeaveBalance, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.EmployeeLeaveBalanceController",
+    "Method": "DeleteAllAsync",
+    "RelativePath": "api/EmployeeLeaveBalance/DeleteAll{ids}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.EmployeeLeaveBalanceController",
+    "Method": "DeleteRange",
+    "RelativePath": "api/EmployeeLeaveBalance/DeleteRange{ids}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "ids",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.EmployeeLeaveBalanceController",
+    "Method": "GetData",
+    "RelativePath": "api/EmployeeLeaveBalance/getData",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERP.Base_sys.SearchRequest\u00601[[ERP.APIs.Leaves.entity.EmployeeLeaveBalance, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Base_sys.PagedResult\u00601[[ERP.APIs.Leaves.entity.EmployeeLeaveBalance, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "GetById",
+    "RelativePath": "api/Leave/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "Approve",
+    "RelativePath": "api/Leave/Approve/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "approverId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "Create",
+    "RelativePath": "api/Leave/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERP.APIs.Leaves.DTOs.Dataset_Leave",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "Delete",
+    "RelativePath": "api/Leave/Delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "DeleteAllAsync",
+    "RelativePath": "api/Leave/DeleteAll{ids}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "DeleteRange",
+    "RelativePath": "api/Leave/DeleteRange{ids}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "ids",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "Edit",
+    "RelativePath": "api/Leave/Edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "ERP.APIs.Leaves.DTOs.Dataset_Leave",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "GetAll",
+    "RelativePath": "api/Leave/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "GetNew",
+    "RelativePath": "api/Leave/GetNew/{employeeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "GetPagedList",
+    "RelativePath": "api/Leave/GetPagedList",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERP.Base_sys.SearchRequest\u00601[[ERP.APIs.Leaves.entity.LeaveRequest, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "Reject",
+    "RelativePath": "api/Leave/Reject/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "approverId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "reason",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.LeaveTypeController",
     "Method": "GetAll",
     "RelativePath": "api/LeaveType",
     "HttpMethod": "GET",
@@ -784,7 +1856,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[ERP.Entities.Lists.Leave.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[ERP.APIs.Leaves.entity.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -795,7 +1867,7 @@
     ]
   },
   {
-    "ContainingType": "ERP.Controllers.Lists.LeaveTypeController",
+    "ContainingType": "ERP.APIs.Leaves.API.LeaveTypeController",
     "Method": "Create",
     "RelativePath": "api/LeaveType",
     "HttpMethod": "POST",
@@ -804,13 +1876,13 @@
     "Parameters": [
       {
         "Name": "LeaveType",
-        "Type": "ERP.Entities.Lists.Leave.LeaveType",
+        "Type": "ERP.APIs.Leaves.entity.LeaveType",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Entities.Lists.Leave.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.APIs.Leaves.entity.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -821,7 +1893,7 @@
     ]
   },
   {
-    "ContainingType": "ERP.Controllers.Lists.LeaveTypeController",
+    "ContainingType": "ERP.APIs.Leaves.API.LeaveTypeController",
     "Method": "GetById",
     "RelativePath": "api/LeaveType/{id}",
     "HttpMethod": "GET",
@@ -836,7 +1908,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Entities.Lists.Leave.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.APIs.Leaves.entity.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -847,7 +1919,7 @@
     ]
   },
   {
-    "ContainingType": "ERP.Controllers.Lists.LeaveTypeController",
+    "ContainingType": "ERP.APIs.Leaves.API.LeaveTypeController",
     "Method": "Update",
     "RelativePath": "api/LeaveType/{id}",
     "HttpMethod": "PUT",
@@ -861,13 +1933,13 @@
       },
       {
         "Name": "LeaveType",
-        "Type": "ERP.Entities.Lists.Leave.LeaveType",
+        "Type": "ERP.APIs.Leaves.entity.LeaveType",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Entities.Lists.Leave.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.APIs.Leaves.entity.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -878,7 +1950,7 @@
     ]
   },
   {
-    "ContainingType": "ERP.Controllers.Lists.LeaveTypeController",
+    "ContainingType": "ERP.APIs.Leaves.API.LeaveTypeController",
     "Method": "Delete",
     "RelativePath": "api/LeaveType/{id}",
     "HttpMethod": "DELETE",
@@ -893,7 +1965,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Entities.Lists.Leave.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.APIs.Leaves.entity.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -904,7 +1976,44 @@
     ]
   },
   {
-    "ContainingType": "ERP.Controllers.Lists.LeaveTypeController",
+    "ContainingType": "ERP.APIs.Leaves.API.LeaveTypeController",
+    "Method": "DeleteAllAsync",
+    "RelativePath": "api/LeaveType/DeleteAll{ids}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.LeaveTypeController",
+    "Method": "DeleteRange",
+    "RelativePath": "api/LeaveType/DeleteRange{ids}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "ids",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.API.LeaveTypeController",
     "Method": "GetData",
     "RelativePath": "api/LeaveType/getData",
     "HttpMethod": "POST",
@@ -913,13 +2022,13 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "ERP.Base_sys.SearchRequest\u00601[[ERP.Entities.Lists.Leave.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "ERP.Base_sys.SearchRequest\u00601[[ERP.APIs.Leaves.entity.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Base_sys.PagedResult\u00601[[ERP.Entities.Lists.Leave.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Base_sys.PagedResult\u00601[[ERP.APIs.Leaves.entity.LeaveType, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -928,6 +2037,141 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ERP.Base_sys.Login.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/Login/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "ERP.Base_sys.Login.model.LoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.Login.LoginController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/Login/RefreshToken",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "OldToken",
+        "Type": "ERP.Base_sys.jwtService.TokenModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.Login.LoginController",
+    "Method": "SignUp",
+    "RelativePath": "api/Login/SignUp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "ERP.Base_sys.Login.model.SignUpModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Lookups.LookUpController",
+    "Method": "GetContractTypes",
+    "RelativePath": "api/LookUp/contract-types",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Lookups.LookUpController",
+    "Method": "Departments",
+    "RelativePath": "api/LookUp/departments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Lookups.LookUpController",
+    "Method": "Employees",
+    "RelativePath": "api/LookUp/employees",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Lookups.LookUpController",
+    "Method": "GetLeaveTypes",
+    "RelativePath": "api/LookUp/leave-types",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Lookups.LookUpController",
+    "Method": "Positions",
+    "RelativePath": "api/LookUp/positions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Lookups.LookUpController",
+    "Method": "Sys_dmtt",
+    "RelativePath": "api/LookUp/sys_dmtt",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ma_ct",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Lookups.LookUpController",
+    "Method": "Sys_listoptions",
+    "RelativePath": "api/LookUp/sys_listoptions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "form",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "form_type",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ERP.Controllers.Lists.PositionController",
@@ -1083,6 +2327,275 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ERP.Base_sys.User.UserController",
+    "Method": "GetAll",
+    "RelativePath": "api/User",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.User.UserController",
+    "Method": "Delete",
+    "RelativePath": "api/User/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.User.UserController",
+    "Method": "Add",
+    "RelativePath": "api/User/add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "EmployeeCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FullName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DepartmentID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PositionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "RoleName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "avatarUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "imageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.User.UserController",
+    "Method": "AssignRole",
+    "RelativePath": "api/User/assign-role",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "roleName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.User.UserController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/User/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "ERP.Base_sys.User.models.ChangePasswordModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.User.UserController",
+    "Method": "Edit",
+    "RelativePath": "api/User/edit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "EmployeeCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FullName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DepartmentID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PositionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "RoleName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "avatarUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "imageFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.User.UserController",
+    "Method": "GetPagedList",
+    "RelativePath": "api/User/get-paged",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERP.Base_sys.SearchRequest\u00601[[ERP.Entities._1_Configs.ApplicationUser, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.User.UserController",
+    "Method": "GetById",
+    "RelativePath": "api/User/GetByEmployeeCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EmployeeCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.User.UserController",
+    "Method": "RemoveRole",
+    "RelativePath": "api/User/remove-role",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "roleName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Base_sys.User.UserController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/User/reset-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "ERP.Base_sys.User.models.ResetPasswordModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ERP.Controllers.Lists.WorkExperienceController",

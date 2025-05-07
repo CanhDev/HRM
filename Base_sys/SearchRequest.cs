@@ -2,17 +2,18 @@
 {
     public class SearchRequest<T>
     {
-        public string? GlobalSearch { get; set; }
-        public Dictionary<string, string>? ColumnFilters { get; set; }
-        public Dictionary<string, DateRange>? DateFilters { get; set; }
-        public string SortBy { get; set; } = "Id";
-        public string SortOrder { get; set; } = "asc";
-        public int Page { get; set; } = 1;
-        public int PageSize { get; set; } = 50;
+        public string? globalSearch { get; set; }
+        public Dictionary<string, string>? columnFilters { get; set; }
+        public Dictionary<string, DateRange>? dateFilters { get; set; }
+        public string sortBy { get; set; } = "Id";
+        public string sortOrder { get; set; } = "asc";
+        public int page { get; set; } = 1;
+        public int pageSize { get; set; } = 50;
     }
+
     public class DateRange
     {
-        public DateTime? From { get; set; }
-        public DateTime? To { get; set; }
+        public DateTime? from { get; set; }
+        public DateTime? to { get; set; }
     }
 }

@@ -5,21 +5,22 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using ERP.Entities.Lists.Employee;
 using ERP.Entities;
+using AutoMapper;
 
 namespace ERP.Services.Lists
 {
     public class DepartmentService : BaseService<Department>
     {
         private readonly ILogger<DepartmentService> _logger;
-        public DepartmentService(IBaseRepository<Department> repository, ApplicationDbContext context, ILogger<DepartmentService> logger) : base(repository, context)
+        public DepartmentService(IBaseRepository<Department> repository, IMapper mapper, ApplicationDbContext context, ILogger<DepartmentService> logger) : base(repository, mapper, context)
         {
             _logger = logger;
         }
 
 
-        public override async Task<ApiResponse<List<Department>>> GetAllAsync()
+        public override async Task<ApiResponse<List<Department>>> GetAllAsync(Expression<Func<Department, bool>>? predicate = null)
         {
-            return await base.GetAllAsync();
+            return await base.GetAllAsync(predicate);
         }
 
         public override async Task<ApiResponse<Department?>> GetByIdAsync(int id)
@@ -32,14 +33,14 @@ namespace ERP.Services.Lists
             var response = await base.GetPagedListAsync(searchRequest, includes);
             return response;
         }
-        public override async Task<ApiResponse<Department>> AddAsync(Department entity, Expression<Func<Department, bool>> duplicateCheckFilter)
+        public override async Task<ApiResponse<Department>> AddAsync(Department entity)
         {
-            var res = await base.AddAsync(entity, duplicateCheckFilter);
+            var res = await base.AddAsync(entity);
             return res;
         }
-        public override async Task<ApiResponse<Department>> UpdateAsync(Department entity, Expression<Func<Department, bool>> duplicateCheckFilter)
+        public override async Task<ApiResponse<Department>> UpdateAsync(Department entity)
         {
-            var res = await base.UpdateAsync(entity, duplicateCheckFilter);
+            var res = await base.UpdateAsync(entity);
             return res;
         }
         public override async Task<ApiResponse<Department>> DeleteAsync(int id)

@@ -6,11 +6,11 @@ namespace ERP.Entities.Lists.Employee
     public class WorkExperience : BaseEntity
     {
         
-        public int EmployeeId { get; set; }
-        public string CompanyName { get; set; }
-        public string Position { get; set; }
-        public string StartDate { get; set; }
-        public string EndDate { get; set; }
-        public string Description { get; set; }
+        public int employeeId { get; set; }
+        public string? companyName { get; set; }
+        public string? position { get; set; }
+        public DateTime? startDate { get; set; }
+        public DateTime? endDate { get; set; }
+        public string? description { get; set; }
     }
 }

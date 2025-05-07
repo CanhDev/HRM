@@ -1,8 +1,13 @@
 ﻿using ERP.Base_sys;
+using ERP.Base_sys.jwtService;
+using ERP.DTO.Lists;
 using ERP.Entities.Lists.Employee;
 using ERP.Services.Lists;
+using ERP.Services.Lists.interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace ERP.Controllers.Lists
 {
@@ -11,23 +16,28 @@ namespace ERP.Controllers.Lists
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly EmployeeService _EmployeeService;
 
-        public EmployeeController(EmployeeService EmployeeService)
+        private readonly IEmployeeService _EmployeeService;
+
+        public EmployeeController(IEmployeeService EmployeeService)
         {
             _EmployeeService = EmployeeService;
         }
+
+
         [HttpGet]
         public async Task<ActionResult<ApiResponse<List<Employee>>>> GetAll()
         {
             return await _EmployeeService.GetAllAsync();
         }
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<ApiResponse<Employee>>> GetById(int id)
         {
             try
             {
-                var res = await _EmployeeService.GetByIdAsync(id);
+                var res = await _EmployeeService.GetAllById(id);
                 if (res.Data == null)
                 {
                     return NotFound(new ApiResponse<Employee>
@@ -58,34 +68,128 @@ namespace ERP.Controllers.Lists
         }
 
         [HttpPost]
-        public async Task<ActionResult<ApiResponse<Employee>>> Create([FromBody] Employee Employee)
+        public async Task<IActionResult> Create([FromForm] EmployeeCreateRequest request)
         {
-            var response = await _EmployeeService.AddAsync(Employee, x => x.Id == Employee.Id);
-            if (response.Success == false)
+            try
+            {
+                if (request.imageFile != null)
+                {
+                    request.employeeDTO.imageFile = request.imageFile;
+                }
+
+                var employeeData = new Employee_dataset
+                {
+                    employeeDTO = request.employeeDTO
+                };
+
+                if (!string.IsNullOrEmpty(request.emergencyContactsJson))
+                {
+                    employeeData.emergencyContactList = JsonSerializer.Deserialize<List<EmergencyContactDTO>>(
+                        request.emergencyContactsJson,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                    );
+                }
+
+                if (!string.IsNullOrEmpty(request.educationListJson))
+                {
+                    employeeData.educationList = JsonSerializer.Deserialize<List<EducationDTO>>(
+                        request.educationListJson,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                    );
+                }
+
+                if (!string.IsNullOrEmpty(request.workExperienceListJson))
+                {
+                    employeeData.workExperienceList = JsonSerializer.Deserialize<List<WorkExperienceDTO>>(
+                        request.workExperienceListJson,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                    );
+                }
+
+                var response = await _EmployeeService.AddAsync_full(employeeData);
+                if (!response.Success)
+                {
+                    return StatusCode(500, new ApiResponse<Employee>
+                    {
+                        Success = false,
+                        Data = null,
+                        Message = response.Message
+                    });
+                }
+                return Ok(response);
+            }
+            catch (Exception ex)
             {
                 return StatusCode(500, new ApiResponse<Employee>
                 {
                     Success = false,
-                    Data = null
+                    Data = null,
+                    Message = ex.Message
                 });
             }
-            return Ok(response);
         }
 
         // PUT: api/Employee
         [HttpPut("{id}")]
-        public async Task<ActionResult<ApiResponse<Employee>>> Update(int id, [FromBody] Employee Employee)
+        public async Task<IActionResult> Update(int id, [FromForm] EmployeeCreateRequest request)
         {
-            var response = await _EmployeeService.UpdateAsync(Employee, x => x.Id == id);
-            if (response.Success == false)
+            try
+            {
+                if (request.imageFile != null)
+                {
+                    request.employeeDTO.imageFile = request.imageFile;
+                }
+
+                var employeeData = new Employee_dataset
+                {
+                    employeeDTO = request.employeeDTO
+                };
+
+                if (!string.IsNullOrEmpty(request.emergencyContactsJson))
+                {
+                    employeeData.emergencyContactList = JsonSerializer.Deserialize<List<EmergencyContactDTO>>(
+                        request.emergencyContactsJson,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                    );
+                }
+
+                if (!string.IsNullOrEmpty(request.educationListJson))
+                {
+                    employeeData.educationList = JsonSerializer.Deserialize<List<EducationDTO>>(
+                        request.educationListJson,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                    );
+                }
+
+                if (!string.IsNullOrEmpty(request.workExperienceListJson))
+                {
+                    employeeData.workExperienceList = JsonSerializer.Deserialize<List<WorkExperienceDTO>>(
+                        request.workExperienceListJson,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                    );
+                }
+
+                var response = await _EmployeeService.EditAsync_full(id, employeeData);
+                if (!response.Success)
+                {
+                    return StatusCode(500, new ApiResponse<Employee>
+                    {
+                        Success = false,
+                        Data = null,
+                        Message = response.Message
+                    });
+                }
+                return Ok(response);
+            }
+            catch (Exception ex)
             {
                 return StatusCode(500, new ApiResponse<Employee>
                 {
                     Success = false,
-                    Data = null
+                    Data = null,
+                    Message = ex.Message
                 });
             }
-            return Ok(response);
         }
 
         // DELETE: api/Employee/{id}

@@ -8,11 +8,11 @@ namespace ERP.Entities
         [Key]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public DateTime createdAt { get; set; }
-        public DateTime updateAt { get; set; }
-        public string createBy { get; set; }
-        public string updateBy { get; set; }
-        public short status { get; set; }
+        public int id { get; set; }
+        public DateTime? createdAt { get; set; }
+        public DateTime? updateAt { get; set; }
+        public string? createBy { get; set; }
+        public string? updateBy { get; set; }
+        public int status { get; set; } = 1;
     }
 }

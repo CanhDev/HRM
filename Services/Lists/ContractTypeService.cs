@@ -4,6 +4,7 @@ using ERP.Base_sys;
 using ERP.Entities;
 using System.Linq.Expressions;
 using ERP.Entities.Lists.Contract;
+using AutoMapper;
 
 namespace ERP.Services.Lists
 {
@@ -11,15 +12,16 @@ namespace ERP.Services.Lists
     public class ContractTypeService : BaseService<ContractType>
     {
         private readonly ILogger<ContractTypeService> _logger;
-        public ContractTypeService(IBaseRepository<ContractType> repository, ApplicationDbContext context, ILogger<ContractTypeService> logger) : base(repository, context)
+        public ContractTypeService(IBaseRepository<ContractType> repository, IMapper mapper,
+            ApplicationDbContext context, ILogger<ContractTypeService> logger) : base(repository , mapper, context)
         {
             _logger = logger;
         }
 
 
-        public override async Task<ApiResponse<List<ContractType>>> GetAllAsync()
+        public override async Task<ApiResponse<List<ContractType>>> GetAllAsync(Expression<Func<ContractType, bool>>? predicate = null)
         {
-            return await base.GetAllAsync();
+            return await base.GetAllAsync(predicate);
         }
 
         public override async Task<ApiResponse<ContractType?>> GetByIdAsync(int id)
@@ -32,14 +34,14 @@ namespace ERP.Services.Lists
             var response = await base.GetPagedListAsync(searchRequest, includes);
             return response;
         }
-        public override async Task<ApiResponse<ContractType>> AddAsync(ContractType entity, Expression<Func<ContractType, bool>> duplicateCheckFilter)
+        public override async Task<ApiResponse<ContractType>> AddAsync(ContractType entity)
         {
-            var res = await base.AddAsync(entity, duplicateCheckFilter);
+            var res = await base.AddAsync(entity);
             return res;
         }
-        public override async Task<ApiResponse<ContractType>> UpdateAsync(ContractType entity, Expression<Func<ContractType, bool>> duplicateCheckFilter)
+        public override async Task<ApiResponse<ContractType>> UpdateAsync(ContractType entity)
         {
-            var res = await base.UpdateAsync(entity, duplicateCheckFilter);
+            var res = await base.UpdateAsync(entity);
             return res;
         }
         public override async Task<ApiResponse<ContractType>> DeleteAsync(int id)
@@ -48,9 +50,4 @@ namespace ERP.Services.Lists
             return res;
         }
     }
-
-
-
-
-
 }

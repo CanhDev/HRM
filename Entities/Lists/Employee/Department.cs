@@ -6,12 +6,12 @@ namespace ERP.Entities.Lists.Employee
     public class Department : BaseEntity
     {
         [Required]
-        public string DepartmentCode { get; set; }
+        public string departmentCode { get; set; }
 
         [Required, StringLength(100)]
-        public string DepartmentName { get; set; }
+        public string departmentName { get; set; }
 
-        public int? ManagerID { get; set; }
+        public int? managerID { get; set; }
 
     }
 }
