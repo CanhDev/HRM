@@ -1,0 +1,111 @@
+<h1 class="page-title">Tổng quan nhân sự</h1>
+        
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-title">
+                    <span>Tổng số nhân viên</span>
+                    <i class="fas fa-users" style="color: var(--primary-color);"></i>
+                </div>
+                <div class="card-value">245</div>
+                <div class="card-description">
+                    <i class="fas fa-arrow-up trend-up"></i>
+                    <span>Tăng 12 nhân viên từ tháng trước</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <span>Tuyển dụng mới</span>
+                    <i class="fas fa-user-plus" style="color: var(--accent-color);"></i>
+                </div>
+                <div class="card-value">18</div>
+                <div class="card-description">
+                    <i class="fas fa-arrow-up trend-up"></i>
+                    <span>Tăng 5 từ tháng trước</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <span>Nghỉ việc</span>
+                    <i class="fas fa-user-minus" style="color: var(--error);"></i>
+                </div>
+                <div class="card-value">6</div>
+                <div class="card-description">
+                    <i class="fas fa-arrow-down trend-down"></i>
+                    <span>Giảm 2 từ tháng trước</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <span>Đang nghỉ phép</span>
+                    <i class="fas fa-umbrella-beach" style="color: var(--warning);"></i>
+                </div>
+                <div class="card-value">12</div>
+                <div class="card-description">
+                    <span>4 đang chờ phê duyệt</span>
+                </div>
+            </div>
+        </div>
+        
+       
+        
+        <div class="widgets-container">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-title">Biểu đồ phân bổ nhân sự</div>
+                    <div class="chart-filters">
+                        <div class="filter-chip active">Phòng ban</div>
+                        <div class="filter-chip">Vị trí</div>
+                        <div class="filter-chip">Độ tuổi</div>
+                    </div>
+                </div>
+                <div style="padding: 5px;" class="chart-placeholder">
+                            <canvas #departmentChart></canvas>
+                </div>
+            </div>
+            
+            
+            
+        </div>
+        <div style="margin-top: 20px;" class="data-table-container">
+            <div class="table-header">
+                <div class="table-title">Nhân viên mới thêm gần đây</div>
+                
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nhân viên</th>
+                        <th>ID</th>
+                        <th>Phòng ban</th>
+                        <th>Vị trí</th>
+                        <th>Ngày vào làm</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="employee-info">
+                                <div class="employee-avatar">PT</div>
+                                <div>Phan Thanh Tùng</div>
+                            </div>
+                        </td>
+                        <td>NV0101</td>
+                        <td>Kế toán</td>
+                        <td>Kế toán viên</td>
+                        <td>15/01/2023</td>
+                        <td><span class="status-indicator status-inactive">Nghỉ việc</span></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="pagination">
+                <div class="pagination-info">Thời gian từ ? ngày trước</div>
+            </div>
+        </div>
+        

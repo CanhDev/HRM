@@ -1,0 +1,67 @@
+.menu-item {
+    transition: background-color 0.2s linear;
+  }
+  
+  .menu-item a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 15px;
+  }
+  
+  .menu-item:hover {
+    background-color: #f0f4f8;
+  }
+  
+  
+  
+  .menu-item.active {
+    background-color: #e3f2fd;
+    font-weight: bold;
+  }
+  
+  .submenu {
+    list-style: none;
+    padding-left: 16px;
+    margin-top: 6px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s linear;
+  }
+  
+  .submenu.open {
+    max-height: 500px; 
+    padding-top: 5px;
+    padding-bottom: 5px;
+    transition: all 0.3s linear;
+  }
+  
+  .submenu-item {
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s linear;
+  }
+  
+  .submenu-item a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    display: block;
+    padding: 6px 8px;
+    transition: all 0.3s linear;
+  }
+  
+  .submenu-item a:hover {
+    background-color: #e9f5ff;
+  }
+  
+  .submenu-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+  }
+  .submenu-arrow.rotated {
+    transform: rotate(180deg); /* Xoay mũi tên khi submenu mở */
+  }

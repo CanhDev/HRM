@@ -1,0 +1,165 @@
+<div class="header-custom">
+    <div class="logo">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background - Transparent -->
+            <rect width="400" height="300" fill="transparent" rx="20" ry="20" />
+            
+            <!-- Main Circle -->
+            <circle cx="200" cy="140" r="100" fill="#0056b3" />
+            
+            <!-- HRM Text -->
+            <text x="200" y="150" font-family="Arial, sans-serif" font-size="70" font-weight="bold" text-anchor="middle" fill="white">HRM</text>
+            
+            <!-- Human Icons -->
+            <circle cx="130" cy="140" r="15" fill="white" opacity="0.8" />
+            <path d="M130,170 L130,220" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M110,190 L150,190" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M115,215 L130,200" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M145,215 L130,200" stroke="white" stroke-width="8" stroke-linecap="round" />
+            
+            <circle cx="270" cy="140" r="15" fill="white" opacity="0.8" />
+            <path d="M270,170 L270,220" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M250,190 L290,190" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M255,215 L270,200" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M285,215 L270,200" stroke="white" stroke-width="8" stroke-linecap="round" />
+            
+            <!-- Signature -->
+            <path d="M180,240 C190,235 195,245 200,242 C205,239 210,235 215,238 C220,241 225,245 230,242 C235,239 240,232 245,235" stroke="#0056b3" stroke-width="2" fill="none" />
+            <text x="250" y="245" font-family="Brush Script MT, cursive" font-size="20" text-anchor="middle" fill="#0056b3">Cảnh</text>
+            
+            <!-- Abstract HR Element -->
+            <path d="M75,90 L325,90" stroke="#0077e6" stroke-width="5" stroke-linecap="round" />
+            <circle cx="75" cy="90" r="10" fill="#0077e6" />
+            <circle cx="325" cy="90" r="10" fill="#0077e6" />
+        </svg>
+        <h1>HR Management</h1>
+    </div>
+    <div class="header-actions">
+        
+        <div class="user-profile">
+            <div class="user-avatar">NT</div>
+            <div class="user-info">
+                <div class="user-name">Nguyễn Thanh</div>
+                <div class="user-role">Quản lý nhân sự</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container_custom">
+  <div class="sidebar_custom">
+    <!-- Tổng quan -->
+    <div class="menu-section">
+      <div class="menu-title">Tổng quan</div>
+      <ul class="menu-items">
+        <li class="menu-item" routerLink="/">
+          <i class="fas fa-th-large"></i> <span>Dashboard</span>
+        </li>
+        <li class="menu-item" routerLink="/profile">
+          <i class="fas fa-calendar-alt"></i> <span>Tài khoản cá nhân</span>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Quản lý nhân sự -->
+    <div class="menu-section">
+      <div class="menu-title">Quản lý nhân sự</div>
+      <ul class="menu-items">
+        <li class="menu-item" routerLink="/employees">
+          <i class="fas fa-users"></i> <span>Hồ sơ nhân viên</span>
+        </li>
+        <li class="menu-item" routerLink="/documents">
+          <i class="fas fa-id-card"></i> <span>Danh sách tài liệu</span>
+        </li>
+        <li class="menu-item" routerLink="/departments">
+          <i class="fas fa-briefcase"></i> <span>Phòng ban</span>
+        </li>
+        <li class="menu-item" routerLink="/positions">
+          <i class="fas fa-user-check"></i> <span>Chức vụ</span>
+        </li>
+  
+        <!-- Báo cáo -->
+        <li class="menu-item has-submenu" (click)="toggleSubMenu('reportHR')">
+          <i class="fas fa-chart-line"></i> <span>Báo cáo</span>
+          <i class="fas fa-chevron-down submenu-arrow" [ngClass]="{'rotated': openSubMenu === 'reportHR'}"></i>
+        </li>
+        <ul class="submenu" [class.open]="openSubMenu === 'reportHR'">
+          <li class="submenu-item" routerLink="/report/employees-by-department">Báo cáo nhân viên theo phòng</li>
+          <li class="submenu-item" routerLink="/report/experience">Báo cáo thâm niên</li>
+          <li class="submenu-item" routerLink="/report/missing-documents">Báo cáo hồ sơ thiếu</li>
+        </ul>
+      </ul>
+    </div>
+  
+    <!-- Quản lý hợp đồng -->
+    <div class="menu-section">
+      <div class="menu-title">Quản lý hợp đồng</div>
+      <ul class="menu-items">
+        <li class="menu-item" routerLink="/contract-types">
+          <i class="fas fa-calendar-check"></i> <span>Danh mục loại hợp đồng</span>
+        </li>
+        <li class="menu-item" routerLink="/employee-contracts">
+          <i class="fas fa-clipboard-list"></i> <span>Hợp đồng nhân viên</span>
+        </li>
+  
+        <!-- Báo cáo -->
+        <li class="menu-item has-submenu" (click)="toggleSubMenu('reportContract')">
+          <i class="fas fa-chart-line"></i> <span>Báo cáo</span>
+          <i class="fas fa-chevron-down submenu-arrow" [ngClass]="{'rotated': openSubMenu === 'reportContract'}"></i>
+        </li>
+        <ul class="submenu" [class.open]="openSubMenu === 'reportContract'">
+          <li class="submenu-item" routerLink="/report/expiring-contracts">Báo cáo hợp đồng sắp hết hạn</li>
+          <li class="submenu-item" routerLink="/report/contract-types">Báo cáo loại hợp đồng</li>
+        </ul>
+      </ul>
+    </div>
+  
+    <!-- Quản lý nghỉ phép -->
+    <div class="menu-section">
+      <div class="menu-title">Quản lý nghỉ phép</div>
+      <ul class="menu-items">
+        <li class="menu-item" routerLink="/leave-types">
+          <i class="fas fa-calendar-check"></i> <span>Danh mục loại nghỉ phép</span>
+        </li>
+        <li class="menu-item" routerLink="/leave-days">
+          <i class="fas fa-clipboard-list"></i> <span>Quản lý ngày nghỉ phép</span>
+        </li>
+        <li class="menu-item" routerLink="/leave-requests">
+          <i class="fas fa-clipboard-list"></i> <span>Danh sách phiếu đăng ký nghỉ phép</span>
+        </li>
+        <li class="menu-item" routerLink="/register-leave">
+          <i class="fas fa-clipboard-list"></i> <span>Đăng ký nghỉ phép</span>
+        </li>
+  
+        <!-- Báo cáo -->
+        <li class="menu-item has-submenu" (click)="toggleSubMenu('reportLeave')">
+          <i class="fas fa-chart-line"></i> <span>Báo cáo</span>
+          <i class="fas fa-chevron-down submenu-arrow" [ngClass]="{'rotated': openSubMenu === 'reportLeave'}"></i>
+        </li>
+        <ul class="submenu" [class.open]="openSubMenu === 'reportLeave'">
+          <li class="submenu-item" routerLink="/report/leave-days">Báo cáo số ngày nghỉ</li>
+          <li class="submenu-item" routerLink="/report/leave-types">Báo cáo theo loại nghỉ phép</li>
+        </ul>
+      </ul>
+    </div>
+  
+    <!-- Cài đặt -->
+    <div class="menu-section">
+      <div class="menu-title">Cài đặt</div>
+      <ul class="menu-items">
+        <li class="menu-item" routerLink="/settings">
+          <i class="fas fa-cog"></i> <span>Thiết lập hệ thống</span>
+        </li>
+        <li class="menu-item" routerLink="/permissions">
+          <i class="fas fa-user-cog"></i> <span>Phân quyền</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+      
+      
+    
+    <div class="main-content">
+        <router-outlet ></router-outlet>
+    </div>
+</div>

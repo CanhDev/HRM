@@ -1,0 +1,299 @@
+<!-- Header -->
+<div class="d-flex justify-content-between align-items-center header-bar p-2 bg-light border-bottom">
+  <div class="d-flex align-items-center">
+    <span style="font-size: 18px;" class="fw-bold text-uppercase text-primary font-color">
+      Danh sách nhân viên
+    </span>
+    <span class="font-color text-muted ms-2 ">({{ (listResponse$ | async)?.totalCount || 0 }})</span>
+    <span class="font-color text-primary ms-2" *ngIf="selectedEmployees.length > 0">
+      ({{ selectedEmployees.length }} được chọn)
+    </span>
+  </div>
+  <div class="action-icons d-flex align-items-center gap-4">
+    <i class="bi bi-arrow-clockwise clickable" title="Làm mới" (click)="refresh()"></i>
+    <i class="bi bi-plus clickable text-success" title="Thêm mới" (click)="createEmployee()"></i>
+    <i class="bi bi-pencil clickable text-warning" title="Sửa" (click)="editSelected()" 
+       [ngClass]="{'disabled': selectedEmployees.length !== 1}"></i>
+    <i class="bi bi-trash clickable text-danger" title="Xoá" (click)="deleteSelected()"
+       [ngClass]="{'disabled': selectedEmployees.length === 0}"></i>
+  </div>
+</div>
+
+<!-- Search Bar -->
+<div class="d-flex align-items-center p-2 border-bottom search-container">
+  <input 
+    type="text" 
+    class="form-control form-control-sm search-input flex-grow-1" 
+    placeholder="Nhập từ khóa tìm kiếm" 
+    #globalSearchInput
+    (keyup.enter)="onSearch(globalSearchInput.value)"
+  >
+  <button class="btn btn-secondary ms-2" (click)="toggleAdvancedFilters()">
+    <i class="bi" [ngClass]="{ 'bi-chevron-down': !showAdvancedFilters, 'bi-chevron-up': showAdvancedFilters }"></i>
+  </button>
+</div>
+
+<!-- Advanced Filters Section -->
+<div [@expandCollapse]="showAdvancedFilters ? 'expanded' : 'collapsed'" 
+     ([@expandCollapse].done)="onAnimationDone($event)"
+     class="filter-section">
+  <app-employee-filter 
+    *ngIf="showFilterContent" 
+    (filterChange)="onFilterChange($event)">
+  </app-employee-filter>
+</div>
+
+<!-- Main Content -->
+<div class="content-section">
+  <!-- Loading indicator -->
+  <div *ngIf="loading$ | async" class="loading-overlay">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Đang tải...</span>
+    </div>
+  </div>
+
+  <!-- Error message -->
+  <div *ngIf="error$ | async as error" class="alert alert-danger">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    <span>{{ error.message || 'Có lỗi xảy ra khi tải dữ liệu' }}</span>
+  </div>
+
+  <!-- Employee table -->
+  <div class="table-container">
+    <table class="table employee-table">
+      <thead>
+        <tr>
+          <th style="min-width: 10px !important;" class="checkbox-column">
+            <div class="form-check">
+              <input 
+                class="form-check-input" 
+                type="checkbox" 
+                [checked]="isAllSelected()" 
+                (change)="toggleSelectAll()"
+                id="selectAllCheckbox"
+              >
+            </div>
+          </th>
+          <th style="min-width: 10px !important;" class="sortable-column">
+            <div class="column-header">
+              <span>STT</span>
+            </div>
+          </th>
+          <th class="sortable-column">
+            <div class="column-header">
+              <span>Ảnh đại diện</span>
+            </div>
+          </th>
+          <th (click)="onSort('employeeCode')" class="sortable-column">
+            <div class="column-header">
+              <span>Mã nhân viên</span>
+              <i *ngIf="(searchRequest$ | async)?.sortBy === 'employeeCode'" 
+                class="bi" [ngClass]="{'bi-sort-up': (searchRequest$ | async)?.sortOrder === 'asc', 'bi-sort-down': (searchRequest$ | async)?.sortOrder === 'desc'}"></i>
+              <i *ngIf="(searchRequest$ | async)?.sortBy !== 'employeeCode'" class="bi bi-filter sort-icon"></i>
+            </div>
+          </th>
+          <th (click)="onSort('fullName')" class="sortable-column">
+            <div class="column-header">
+              <span>Họ và tên</span>
+              <i *ngIf="(searchRequest$ | async)?.sortBy === 'fullName'" 
+                class="bi" [ngClass]="{'bi-sort-up': (searchRequest$ | async)?.sortOrder === 'asc', 'bi-sort-down': (searchRequest$ | async)?.sortOrder === 'desc'}"></i>
+              <i *ngIf="(searchRequest$ | async)?.sortBy !== 'fullName'" class="bi bi-filter sort-icon"></i>
+            </div>
+          </th>
+          <th (click)="onSort('dob')" class="sortable-column">
+            <div class="column-header">
+              <span>Ngày sinh</span>
+              <i *ngIf="(searchRequest$ | async)?.sortBy === 'dob'" 
+                class="bi" [ngClass]="{'bi-sort-up': (searchRequest$ | async)?.sortOrder === 'asc', 'bi-sort-down': (searchRequest$ | async)?.sortOrder === 'desc'}"></i>
+              <i *ngIf="(searchRequest$ | async)?.sortBy !== 'dob'" class="bi bi-filter sort-icon"></i>
+            </div>
+          </th>
+          <th (click)="onSort('gender')" class="sortable-column">
+            <div class="column-header">
+              <span>Giới tính</span>
+              <i *ngIf="(searchRequest$ | async)?.sortBy === 'gender'" 
+                class="bi" [ngClass]="{'bi-sort-up': (searchRequest$ | async)?.sortOrder === 'asc', 'bi-sort-down': (searchRequest$ | async)?.sortOrder === 'desc'}"></i>
+              <i *ngIf="(searchRequest$ | async)?.sortBy !== 'gender'" class="bi bi-filter sort-icon"></i>
+            </div>
+          </th>
+          <th (click)="onSort('departmentID')" class="sortable-column">
+            <div class="column-header">
+              <span>Phòng ban</span>
+              <i *ngIf="(searchRequest$ | async)?.sortBy === 'departmentID'" 
+                class="bi" [ngClass]="{'bi-sort-up': (searchRequest$ | async)?.sortOrder === 'asc', 'bi-sort-down': (searchRequest$ | async)?.sortOrder === 'desc'}"></i>
+              <i *ngIf="(searchRequest$ | async)?.sortBy !== 'departmentID'" class="bi bi-filter sort-icon"></i>
+            </div>
+          </th>
+          <th (click)="onSort('positionID')" class="sortable-column">
+            <div class="column-header">
+              <span>Chức vụ</span>
+              <i *ngIf="(searchRequest$ | async)?.sortBy === 'positionID'" 
+                class="bi" [ngClass]="{'bi-sort-up': (searchRequest$ | async)?.sortOrder === 'asc', 'bi-sort-down': (searchRequest$ | async)?.sortOrder === 'desc'}"></i>
+              <i *ngIf="(searchRequest$ | async)?.sortBy !== 'positionID'" class="bi bi-filter sort-icon"></i>
+            </div>
+          </th>
+          <th (click)="onSort('phone')" class="sortable-column">
+            <div class="column-header">
+              <span>Điện thoại</span>
+              <i *ngIf="(searchRequest$ | async)?.sortBy === 'phone'" 
+                class="bi" [ngClass]="{'bi-sort-up': (searchRequest$ | async)?.sortOrder === 'asc', 'bi-sort-down': (searchRequest$ | async)?.sortOrder === 'desc'}"></i>
+              <i *ngIf="(searchRequest$ | async)?.sortBy !== 'phone'" class="bi bi-filter sort-icon"></i>
+            </div>
+          </th>
+          <th (click)="onSort('email')" class="sortable-column">
+            <div class="column-header">
+              <span>Email</span>
+              <i *ngIf="(searchRequest$ | async)?.sortBy === 'email'" 
+                class="bi" [ngClass]="{'bi-sort-up': (searchRequest$ | async)?.sortOrder === 'asc', 'bi-sort-down': (searchRequest$ | async)?.sortOrder === 'desc'}"></i>
+              <i *ngIf="(searchRequest$ | async)?.sortBy !== 'email'" class="bi bi-filter sort-icon"></i>
+            </div>
+          </th>
+          <th (click)="onSort('joinDate')" class="sortable-column">
+            <div class="column-header">
+              <span>Ngày vào làm</span>
+              <i *ngIf="(searchRequest$ | async)?.sortBy === 'joinDate'" 
+                class="bi" [ngClass]="{'bi-sort-up': (searchRequest$ | async)?.sortOrder === 'asc', 'bi-sort-down': (searchRequest$ | async)?.sortOrder === 'desc'}"></i>
+              <i *ngIf="(searchRequest$ | async)?.sortBy !== 'joinDate'" class="bi bi-filter sort-icon"></i>
+            </div>
+          </th>
+          <th class="action-column">Trạng thái</th>
+          <th class="action-column">Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employeesWithNames$ | async;let i = index" class="employee-row" [ngClass]="{'selected': isSelected(employee.id)}" (dblclick)="viewEmployeeDetails(employee.id)">
+          <td class="checkbox-cell" (click)="$event.stopPropagation()">
+            <div class="form-check">
+              <input 
+              style="min-width: 10px !important; margin-left: -13px;"
+                class="form-check-input" 
+                type="checkbox" 
+                [checked]="isSelected(employee.id)" 
+                (change)="toggleSelect(employee.id)"
+                [id]="'checkbox-' + employee.id"
+              >
+            </div>
+          </td>
+          <td style="min-width: 10px !important;">{{ i + 1 }}</td>
+          <td>
+            <img [src]="employee.imageUrl" alt="Ảnh nhân viên" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover;" />
+          </td>
+          <td class="employee-code">{{ employee.employeeCode }}</td>
+          <td class="employee-name">{{ employee.fullName }}</td>
+          <td>{{ employee.dob | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <span class="gender-badge" [ngClass]="{
+              'male': employee.gender === 'Nam',
+              'female': employee.gender === 'Nữ',
+              'other': employee.gender === 'Khác'
+            }">{{ employee.gender }}</span>
+          </td>
+          <td>{{ employee.departmentName }}</td>
+          <td>{{ employee.positionName }}</td>
+          <td>{{ employee.phone }}</td>
+          <td class="email-cell">{{ employee.email }}</td>
+          <td>{{ employee.joinDate | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ employee.statusName }}</td>
+          <td class="action-cell">
+            <div class="action-buttons" (click)="$event.stopPropagation()">
+              <button class="btn btn-icon btn-light" (click)="editEmployee(employee.id, $event)">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn btn-icon btn-danger"
+              [ngStyle]="employee.status === -1 ? {
+                'opacity': '0',
+                'pointer-events': 'none',
+                'cursor': 'default'
+              } : {}"
+                (click)="deleteEmployee(employee.id, $event)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="(employeesWithNames$ | async)?.length === 0">
+          <td colspan="14" class="empty-state">
+            <div class="no-data">
+              <i class="bi bi-inbox"></i>
+              <p>Không tìm thấy dữ liệu</p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-section" *ngIf="(listResponse$ | async) as listResponse">
+    <div class="page-info">
+      <div class="page-size-selector">
+        <label for="pageSize">Hiển thị:</label>
+        <select 
+          id="pageSize"
+          class="form-select"
+          #pageSizeSelect 
+          [value]="(searchRequest$ | async)?.pageSize"
+          (change)="onPageSizeChange(+pageSizeSelect.value)"
+        >
+          <option [value]="10">10</option>
+          <option [value]="20">20</option>
+          <option [value]="50">50</option>
+          <option [value]="100">100</option>
+        </select>
+      </div>
+    </div>
+
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="listResponse.page === 1">
+          <a class="page-link" (click)="onPageChange(1)" *ngIf="listResponse.page !== 1" aria-label="First">
+            <i class="bi bi-chevron-double-left"></i>
+          </a>
+          <span class="page-link" *ngIf="listResponse.page === 1">
+            <i class="bi bi-chevron-double-left"></i>
+          </span>
+        </li>
+        <li class="page-item" [class.disabled]="listResponse.page === 1">
+          <a class="page-link" (click)="onPageChange(listResponse.page - 1)" *ngIf="listResponse.page !== 1" aria-label="Previous">
+            <i class="bi bi-chevron-left"></i>
+          </a>
+          <span class="page-link" *ngIf="listResponse.page === 1">
+            <i class="bi bi-chevron-left"></i>
+          </span>
+        </li>
+
+        <ng-container *ngFor="let page of getPageNumbers(listResponse?.page ?? 1, listResponse?.totalPages ?? 1)">
+          <li class="page-item" [class.active]="listResponse?.page === page" *ngIf="page !== 0">
+            <a class="page-link" (click)="onPageChange(page ?? 1)">{{ page }}</a>
+          </li>
+          <li class="page-item disabled" *ngIf="page === 0">
+            <span class="page-link">...</span>
+          </li>
+        </ng-container>
+
+        <li class="page-item" [class.disabled]="listResponse?.page === listResponse?.totalPages">
+          <a class="page-link" 
+             (click)="onPageChange((listResponse?.page ?? 1) + 1)" 
+             *ngIf="listResponse?.page !== listResponse?.totalPages"
+             aria-label="Next">
+            <i class="bi bi-chevron-right"></i>
+          </a>
+          <span class="page-link" *ngIf="listResponse?.page === listResponse?.totalPages">
+            <i class="bi bi-chevron-right"></i>
+          </span>
+        </li>
+        <li class="page-item" [class.disabled]="listResponse?.page === listResponse?.totalPages">
+          <a class="page-link" 
+             (click)="onPageChange(listResponse?.totalPages ?? 1)" 
+             *ngIf="listResponse?.page !== listResponse?.totalPages"
+             aria-label="Last">
+            <i class="bi bi-chevron-double-right"></i>
+          </a>
+          <span class="page-link" *ngIf="listResponse?.page === listResponse?.totalPages">
+            <i class="bi bi-chevron-double-right"></i>
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
