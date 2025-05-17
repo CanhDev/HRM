@@ -94,9 +94,9 @@ namespace ERP.APIs.Contracts.Services
             }
             var data = new Contract_datares
             {
-                ContractRes = _mapper.Map<ContractRes>(ContractE),
-                ContractAddendumRes = _mapper.Map<List<ContractAddendumRes>>(ContractAddendumE),
-                ContractHistoryRes = _mapper.Map<List<ContractHistoryRes>>(ContractHistoryE)
+                contractRes = _mapper.Map<ContractRes>(ContractE),
+                contractAddendumRes = _mapper.Map<List<ContractAddendumRes>>(ContractAddendumE),
+                contractHistoryRes = _mapper.Map<List<ContractHistoryRes>>(ContractHistoryE)
             };
             return new ApiRespone_basic
             {
@@ -410,7 +410,7 @@ namespace ERP.APIs.Contracts.Services
         {
             throw new NotImplementedException();
         }
-        public async Task<string> GenerateContractCodeByTypeAsync(int? contractTypeId = 1)
+        public async Task<string> GenerateContractCodeByTypeAsync(int? contractTypeId = 4)
         {
             var yearSuffix = DateTime.Now.Year.ToString().Substring(2); 
             var contractType = await _context.ContractTypes
@@ -452,13 +452,26 @@ namespace ERP.APIs.Contracts.Services
 
         public async Task<ApiRespone_basic> GetNew()
         {
-            var default_phCode = await GenerateContractCodeByTypeAsync(1);
+            var default_phCode = await GenerateContractCodeByTypeAsync();
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = default_phCode
+            };
+        }
+        public  ApiRespone_basic isApproved(int id)
+        {
+            int statusApproved = _context.sys_Dmtts
+                .Where(x => x.isApproved == true && x.ma_ct == "CONTRACT")
+                .Select(x => (int?)x.status_code)
+                .Max() ?? 2;
+            bool res = id == statusApproved ? true : false;
             return new ApiRespone_basic
             {
                 Success = true,
                 Data = new
                 {
-                    default_phCode
+                    res
                 }
             };
         }

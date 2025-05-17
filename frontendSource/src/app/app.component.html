@@ -62,7 +62,7 @@
   
     <!-- Quản lý nhân sự -->
     <div class="menu-section">
-      <div class="menu-title">Quản lý nhân sự</div>
+      <div class="menu-title">Hồ sơ</div>
       <ul class="menu-items">
         <li class="menu-item" routerLink="/employees">
           <i class="fas fa-users"></i> <span>Hồ sơ nhân viên</span>
@@ -92,7 +92,7 @@
   
     <!-- Quản lý hợp đồng -->
     <div class="menu-section">
-      <div class="menu-title">Quản lý hợp đồng</div>
+      <div class="menu-title">Hợp đồng</div>
       <ul class="menu-items">
         <li class="menu-item" routerLink="/contract-types">
           <i class="fas fa-calendar-check"></i> <span>Danh mục loại hợp đồng</span>
@@ -115,7 +115,7 @@
   
     <!-- Quản lý nghỉ phép -->
     <div class="menu-section">
-      <div class="menu-title">Quản lý nghỉ phép</div>
+      <div class="menu-title">Nghỉ phép</div>
       <ul class="menu-items">
         <li class="menu-item" routerLink="/leave-types">
           <i class="fas fa-calendar-check"></i> <span>Danh mục loại nghỉ phép</span>
@@ -125,9 +125,6 @@
         </li>
         <li class="menu-item" routerLink="/leave-requests">
           <i class="fas fa-clipboard-list"></i> <span>Danh sách phiếu đăng ký nghỉ phép</span>
-        </li>
-        <li class="menu-item" routerLink="/register-leave">
-          <i class="fas fa-clipboard-list"></i> <span>Đăng ký nghỉ phép</span>
         </li>
   
         <!-- Báo cáo -->
@@ -160,6 +157,7 @@
       
     
     <div class="main-content">
+      <p-toast></p-toast>
         <router-outlet ></router-outlet>
     </div>
 </div>

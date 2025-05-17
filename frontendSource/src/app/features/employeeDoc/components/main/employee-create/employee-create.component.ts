@@ -280,7 +280,7 @@ export class EmployeeCreateComponent implements OnInit, OnDestroy {
       fullName: contact.get('fullName')?.value,
       phoneNumber: contact.get('phoneNumber')?.value,
       address: contact.get('address')?.value,
-      actionType: 'U',  // U for Update
+      actionType: 'E',  // U for Update
       status: contact.get('status')?.value || 1
     });
     
@@ -347,7 +347,7 @@ export class EmployeeCreateComponent implements OnInit, OnDestroy {
       endDate: education.get('endDate')?.value,
       gpa: education.get('gpa')?.value,
       description: education.get('description')?.value,
-      actionType: 'U',  // U for Update
+      actionType: 'E',  
       status: education.get('status')?.value || 1
     });
     
@@ -400,7 +400,7 @@ export class EmployeeCreateComponent implements OnInit, OnDestroy {
       startDate: experience.get('startDate')?.value,
       endDate: experience.get('endDate')?.value,
       description: experience.get('description')?.value,
-      actionType: 'U',  // U for Update
+      actionType: 'E',  // U for Update
       status: experience.get('status')?.value || 1
     });
     

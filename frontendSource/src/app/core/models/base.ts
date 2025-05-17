@@ -41,3 +41,19 @@ export interface ApiResponseBasic {
     id: number;
     actionType: string;  // A, E, D
   }
+  export interface BaseVoucherEntity{
+    id: number;
+    createdAt?: string;    // ISO date string
+    updateAt?: string;     // ISO date string
+    createBy?: string;
+    updateBy?: string;
+    voucher_date : Date;
+    voucher_code: string;
+    detail_note : string;
+    approvalStatus : number;
+    departmentID: number;
+    approvalUser: number;
+    cancelReason: string;
+    rejectReason: string;
+  }
+  

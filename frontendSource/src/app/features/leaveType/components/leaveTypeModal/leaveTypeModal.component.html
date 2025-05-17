@@ -1,0 +1,58 @@
+<h2 mat-dialog-title>Chi tiết loại nghỉ phép</h2>
+
+<mat-dialog-content class="no-top-padding">
+
+  <div class="form-wrapper" [formGroup]="leaveTypeForm">
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Mã Loại loại nghỉ phép</mat-label>
+      <input matInput formControlName="leaveTypeCode" />
+      <mat-error *ngIf="leaveTypeForm.get('leaveTypeCode')?.hasError('required')">
+        Mã Loại loại nghỉ phép là bắt buộc
+      </mat-error>
+    </mat-form-field>
+
+    
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Tên Loại loại nghỉ phép</mat-label>
+      <input matInput formControlName="leaveTypeName" />
+      <mat-error *ngIf="leaveTypeForm.get('leaveTypeName')?.hasError('required')">
+        Tên Loại loại nghỉ phép là bắt buộc
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-120" appearance="outline">
+  <mat-label>Có hưởng lương</mat-label>
+      <mat-select formControlName="isPaid">
+        <mat-option [value]="1">Có</mat-option>
+        <mat-option [value]="0">Không</mat-option>
+      </mat-select>
+      <mat-error *ngIf="leaveTypeForm.get('isPaid')?.hasError('required')">
+        Trường này là bắt buộc
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Số ngày nghỉ tối đa trong năm</mat-label>
+      <input matInput formControlName="maxDaysAllowed" />
+    </mat-form-field>
+      <div class="form-group">
+        <label for="status">Mô tả</label>
+        <textarea formControlName="description" rows="3" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+    <label for="status">Trạng thái</label>
+    <select class="form-select" id="status" formControlName="status">
+      <option *ngFor="let status of statusList" [value]="status.form_value">
+        {{ status.form_name }}
+      </option>
+    </select>
+  </div>
+    
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Hủy</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="leaveTypeForm.invalid">
+    Lưu
+  </button>
+</mat-dialog-actions>

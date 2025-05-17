@@ -8,6 +8,7 @@ namespace ERP.APIs.Contracts.Interfaces
     public interface IContract : IBaseService<EmploymentContract>
     {
         Task<ApiRespone_basic> GetNew();
+        ApiRespone_basic isApproved(int id);
         Task<ApiRespone_basic> GetById_custom(int id);
         Task<ApiRespone_basic> AddAsync_custom(Contract_dataset req);
         Task<ApiRespone_basic> EditAsync_custom(int id, Contract_dataset req);

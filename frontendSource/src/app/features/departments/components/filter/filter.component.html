@@ -1,0 +1,34 @@
+<!-- components/employee-filter/employee-filter.component.html -->
+<div class="p-3 border bg-white">
+  <h6 class="mb-3 d-flex align-items-center">
+    <i class="bi bi-funnel-fill me-2"></i> Bộ lọc nâng cao
+  </h6>
+
+  <form [formGroup]="filterForm" class="row gx-3 gy-3">
+    <!-- Mã phòng ban -->
+    <div class="col-md-4">
+      <label for="departmentCode" class="form-label small mb-1">Mã phòng ban</label>
+      <div class="position-relative">
+        <i class="bi bi-person-badge position-absolute top-50 start-0 translate-middle-y ms-2 text-muted"></i>
+        <input type="text" id="departmentCode" class="form-control ps-5" formControlName="departmentCode" placeholder="Mã phòng ban">
+      </div>
+    </div>
+    <!-- Trạng thái -->
+    <div class="col-md-2">
+      <label for="status" class="form-label small mb-1">Trạng thái</label>
+      <select formControlName="status" class="form-select" id="status">
+        <option value="">Tất cả</option>
+        <option *ngFor="let item of statusList" [value]="item.form_value">{{ item.form_name }}</option>
+      </select>
+    </div>
+    <!-- Buttons -->
+    <div class="col-12 d-flex justify-content-end gap-2 mt-3">
+      <button type="button" class="btn btn-sm btn-secondary" (click)="resetFilters()">
+        <i class="bi bi-x-circle"></i> Xóa
+      </button>
+      <button type="button" class="btn btn-sm btn-primary" (click)="applyFilters()">
+        <i class="bi bi-funnel"></i> Lọc
+      </button>
+    </div>
+  </form>
+</div>

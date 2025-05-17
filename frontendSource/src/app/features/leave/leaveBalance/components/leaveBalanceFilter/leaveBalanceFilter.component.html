@@ -1,0 +1,48 @@
+<!-- components/employee-filter/employee-filter.component.html -->
+<div class="p-3 border bg-white">
+  <h6 class="mb-3 d-flex align-items-center">
+    <i class="bi bi-funnel-fill me-2"></i> Bộ lọc nâng cao
+  </h6>
+
+  <form [formGroup]="filterForm" class="row gx-3 gy-3">
+    <!-- Mã loại hợp đồng -->
+    <div class="col-md-4">
+  <label for="employeeId" class="form-label small mb-1">Nhân viên</label>
+
+  <mat-form-field appearance="fill" class="w-100 input-uniform-height">
+    <input
+      type="text"
+      matInput
+      placeholder="Tìm nhân viên"
+      formControlName="employeeId"
+      
+      [matAutocomplete]="auto" />
+
+    <mat-autocomplete [displayWith]="displayFn" #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let emp of employeeList"
+        [value]="emp.id">
+        {{ emp.form_value }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+    <!-- Trạng thái -->
+    <div class="col-md-2">
+      <label for="status" class="form-label small mb-1">Trạng thái</label>
+      <select formControlName="status" class="form-select" id="status">
+        <option value="">Tất cả</option>
+        <option *ngFor="let item of statusList" [value]="item.form_value">{{ item.form_name }}</option>
+      </select>
+    </div>
+    <!-- Buttons -->
+    <div class="col-12 d-flex justify-content-end gap-2 mt-3">
+      <button type="button" class="btn btn-sm btn-secondary" (click)="resetFilters()">
+        <i class="bi bi-x-circle"></i> Xóa
+      </button>
+      <button type="button" class="btn btn-sm btn-primary" (click)="applyFilters()">
+        <i class="bi bi-funnel"></i> Lọc
+      </button>
+    </div>
+  </form>
+</div>

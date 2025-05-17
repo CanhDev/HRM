@@ -47,8 +47,6 @@ namespace ERP.Base_sys.Helpers
             //leave
             CreateMap<LeaveRequest, LeaveRequestDto>().ReverseMap();
             CreateMap<LeaveRequest, LeaveRequestRes>().ReverseMap();
-            CreateMap<EmployeeLeaveBalance, LeaveBalanceRes>().ReverseMap();
-            CreateMap<EmployeeLeaveBalance, LeaveBalanceResSub>().ReverseMap();
             CreateMap<LeaveRequest_details, LeaveRequestDetaislDto>().ReverseMap();
             CreateMap<LeaveRequest_details, LeaveRequestDetailsRes>().ReverseMap();
         }

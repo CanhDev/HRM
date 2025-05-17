@@ -15,19 +15,15 @@ namespace ERP.APIs.Leaves.DTOs_Res
     {
         public int employeeId { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime startDate { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime endDate { get; set; }
+       public DateTime? createDate { get; set; }
 
         public double totalDays { get; set; }
     }
 
     public class LeaveBalanceResSub
     {
+        public int departmentId { get; set; }   
+        public int employeeId { get; set; }
         public double usedDaysMonth { get; set; }
         public double remainingDaysMonth { get; set; }
         public double maxDayMonth { get; set; }
@@ -50,7 +46,7 @@ namespace ERP.APIs.Leaves.DTOs_Res
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
         public double totalDays { get; set; }
-        public int leaveType { get; set; }
+        public string? leaveType { get; set; }
         public string reason { get; set; }
         public short status { get; set; }
         public int id { get; set; }

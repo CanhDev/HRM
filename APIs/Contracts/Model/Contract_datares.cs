@@ -5,47 +5,44 @@ namespace ERP.APIs.Contracts.Model
 {
     public class Contract_datares
     {
-        public ContractRes ContractRes { get; set; }
-        public List<ContractAddendumRes>? ContractAddendumRes { get; set; }
-        public List<ContractHistoryRes>? ContractHistoryRes { get; set; }
+        public ContractRes contractRes { get; set; }
+        public List<ContractAddendumRes>? contractAddendumRes { get; set; }
+        public List<ContractHistoryRes>? contractHistoryRes { get; set; }
     }
     public class ContractRes : BaseEntity
     {
-        public int EmployeeID { get; set; }
-        public int? DepartmentID { get; set; }
+        public int employeeId { get; set; }
+        public int? departmentId { get; set; }
 
-        public int? PositionID { get; set; }
+        public int? positionId { get; set; }
+        public int contractTypeId { get; set; }
 
-        public string? ContractCode { get; set; }
-        public int? ContractTypeID { get; set; }
-        public decimal Salary { get; set; }
+        public string? contractCode { get; set; }
+        public decimal salary { get; set; }
         [StringLength(250)]
-        public string? Notes { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public DateTime SignedDate { get; set; }
-        public string? WorkingTime { get; set; }
-        public string? JobDescription { get; set; }
-        public string? Benefits { get; set; }
-        public string? FilePath { get; set; }
-        public string? Terms { get; set; }
+        public string? notes { get; set; }
+
+        public DateTime? startDate { get; set; }
+        public DateTime? endDate { get; set; }
+        public DateTime? signedDate { get; set; }
+        public string? workingTime { get; set; }
+        public string? jobDescription { get; set; }
+        public string? benefits { get; set; }
+        public string? filePath { get; set; }
+        public string? terms { get; set; }
     }
     public class ContractAddendumRes : BaseEntity
     {
-        public int ContractId { get; set; }
-        public string? Title { get; set; }
-        public string? ChangeField { get; set; }
-        public DateTime EffectiveDate { get; set; }
-        public string? AddendumContent { get; set; }
+        public int contractId { get; set; }
+        public string? title { get; set; }
+        public string? changeField { get; set; }
+        public DateTime effectiveDate { get; set; }
+        public string? addendumContent { get; set; }
     }
     public class ContractHistoryRes : BaseEntity
     {
-        public int ContractId { get; set; }
-
-        public DateTime ChangeDate { get; set; }
-        public int ChangeBy { get; set; }
-
-        public string? OldValue { get; set; }
-        public string? NewValue { get; set; }
+        public int contractId { get; set; }
+        public string? oldValue { get; set; }
+        public string? newValue { get; set; }
     }
 }

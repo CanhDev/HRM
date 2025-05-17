@@ -103,8 +103,8 @@ namespace ERP.APIs.Leaves.API
             }
             return Ok(response);
         }
-        [HttpDelete("DeleteRange{ids}")]
-        public async Task<IActionResult> DeleteRange(List<int> ids)
+        [HttpDelete("DeleteRange")]
+        public async Task<IActionResult> DeleteRange([FromBody]List<int> ids)
         {
             var response = await _LeaveTypeService.DeleteRangeAsync(ids);
             if (response == false)
@@ -121,23 +121,6 @@ namespace ERP.APIs.Leaves.API
                 Success = true
             });
         }
-        [HttpDelete("DeleteAll{ids}")]
-        public async Task<IActionResult> DeleteAllAsync()
-        {
-            var response = await _LeaveTypeService.DeleteAllAsync();
-            if (response == false)
-            {
-                return Ok(new ApiRespone_basic
-                {
-                    Data = null,
-                    Success = false
-                });
-            }
-            return Ok(new ApiRespone_basic
-            {
-                Data = null,
-                Success = true
-            });
-        }
+        
     }
 }

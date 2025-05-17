@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Sửa phòng ban' : 'Thêm phòng ban' }}</h2>
+
+<mat-dialog-content class="no-top-padding">
+
+  <div class="form-wrapper" [formGroup]="departmentForm">
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Mã phòng ban</mat-label>
+      <input matInput formControlName="departmentCode" />
+      <mat-error *ngIf="departmentForm.get('departmentCode')?.hasError('required')">
+        Mã phòng ban là bắt buộc
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Tên phòng ban</mat-label>
+      <input matInput formControlName="departmentName" />
+      <mat-error *ngIf="departmentForm.get('departmentName')?.hasError('required')">
+        Tên phòng ban là bắt buộc
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-group">
+    <label for="status">Trạng thái</label>
+    <select class="form-select" id="status" formControlName="status">
+      <option *ngFor="let status of statusList" [value]="status.form_value">
+        {{ status.form_name }}
+      </option>
+    </select>
+  </div>
+
+
+    
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Hủy</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="departmentForm.invalid">
+    Lưu
+  </button>
+</mat-dialog-actions>

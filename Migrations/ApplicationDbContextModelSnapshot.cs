@@ -366,10 +366,13 @@ namespace ERP.Migrations
                     b.Property<string>("createBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("createDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("departmentID")
+                    b.Property<int?>("departmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("detail_note")
@@ -378,17 +381,8 @@ namespace ERP.Migrations
                     b.Property<int>("employeeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("endDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("rejectReason")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("startDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("status")
-                        .HasColumnType("int");
 
                     b.Property<double>("totalDays")
                         .HasColumnType("float");
@@ -434,8 +428,8 @@ namespace ERP.Migrations
                     b.Property<int>("leaveRequestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("leaveType")
-                        .HasColumnType("int");
+                    b.Property<string>("leaveType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("reason")
                         .IsRequired()
@@ -472,9 +466,6 @@ namespace ERP.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<short>("carryForward")
-                        .HasColumnType("smallint");
-
                     b.Property<string>("createBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -489,13 +480,14 @@ namespace ERP.Migrations
                     b.Property<short>("isPaid")
                         .HasColumnType("smallint");
 
+                    b.Property<string>("leaveTypeCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("leaveTypeName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<short>("maxCarryForwardDays")
-                        .HasColumnType("smallint");
 
                     b.Property<int>("maxDaysAllowed")
                         .HasColumnType("int");
@@ -515,6 +507,25 @@ namespace ERP.Migrations
                         .IsUnique();
 
                     b.ToTable("LeaveTypes");
+                });
+
+            modelBuilder.Entity("ERP.DTO.Lists.DocumentTag", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("documentTags");
                 });
 
             modelBuilder.Entity("ERP.Entities.Lists.Contract.ContractType", b =>
@@ -896,6 +907,9 @@ namespace ERP.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<int?>("EmployeeDocumentFolderid")
+                        .HasColumnType("int");
+
                     b.Property<string>("createBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -908,22 +922,73 @@ namespace ERP.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("documentType")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("documentUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("employeeId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("expiryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("filePath")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int>("folderId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("isCompany")
+                        .HasColumnType("bit");
+
                     b.Property<string>("notes")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("tags")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("updateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("updateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("EmployeeDocumentFolderid");
+
+                    b.ToTable("EmployeeDocuments");
+                });
+
+            modelBuilder.Entity("ERP.Entities.Vouchers.Employee.EmployeeDocumentFolder", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("createBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("createdAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("employeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("folderName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("status")
                         .HasColumnType("int");
@@ -936,7 +1001,7 @@ namespace ERP.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("EmployeeDocuments");
+                    b.ToTable("employeeDocumentFolders");
                 });
 
             modelBuilder.Entity("ERP.Entities._0_Systems.ListOptions", b =>
@@ -1277,6 +1342,13 @@ namespace ERP.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ERP.Entities.Vouchers.Employee.EmployeeDocument", b =>
+                {
+                    b.HasOne("ERP.Entities.Vouchers.Employee.EmployeeDocumentFolder", null)
+                        .WithMany("documents")
+                        .HasForeignKey("EmployeeDocumentFolderid");
+                });
+
             modelBuilder.Entity("ERP.Entities._1_Configs.RefreshTokenEntity", b =>
                 {
                     b.HasOne("ERP.Entities._1_Configs.ApplicationUser", "User")
@@ -1337,6 +1409,11 @@ namespace ERP.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ERP.Entities.Vouchers.Employee.EmployeeDocumentFolder", b =>
+                {
+                    b.Navigation("documents");
                 });
 #pragma warning restore 612, 618
         }

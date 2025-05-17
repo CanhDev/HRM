@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Sửa Loại hợp đồng' : 'Thêm Loại hợp đồng' }}</h2>
+
+<mat-dialog-content class="no-top-padding">
+
+  <div class="form-wrapper" [formGroup]="EmployeeLeaveBalanceForm">
+                <mat-form-field class="w-120" appearance="outline">
+  <mat-label>Nhân viên</mat-label>
+  <input matInput [value]="employeeName" readonly />
+</mat-form-field>
+
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Tổng số ngày nghỉ</mat-label>
+      <input type="number" matInput formControlName="totalDays" />
+      <mat-error *ngIf="EmployeeLeaveBalanceForm.get('totalDays')?.hasError('required')">
+        Trường này bắt buộc nhập
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Số ngày đã nghỉ trong năm</mat-label>
+      <input type="number" matInput formControlName="usedDays" />
+      <mat-error *ngIf="EmployeeLeaveBalanceForm.get('usedDays')?.hasError('required')">
+        Trường này bắt buộc nhập
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Số ngày đã nghỉ trong tháng</mat-label>
+      <input type="number" matInput formControlName="usedDaysMonth" />
+      <mat-error *ngIf="EmployeeLeaveBalanceForm.get('usedDaysMonth')?.hasError('required')">
+        Trường này bắt buộc nhập
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Số ngày nghỉ tối đa trong tháng</mat-label>
+      <input type="number" matInput formControlName="maxDayMonth" />
+      <mat-error *ngIf="EmployeeLeaveBalanceForm.get('maxDayMonth')?.hasError('required')">
+        Trường này bắt buộc nhập
+      </mat-error>
+    </mat-form-field>
+      
+    <div class="form-group">
+    <label for="status">Trạng thái</label>
+    <select class="form-select" id="status" formControlName="status">
+      <option *ngFor="let status of statusList" [value]="status.form_value">
+        {{ status.form_name }}
+      </option>
+    </select>
+  </div>
+    
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Hủy</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="EmployeeLeaveBalanceForm.invalid">
+    Lưu
+  </button>
+</mat-dialog-actions>

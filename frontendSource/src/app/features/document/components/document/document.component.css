@@ -1,0 +1,249 @@
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* === SIDEBAR STYLING === */
+.sidebar {
+  height: 100vh;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  transition: all var(--transition-speed) ease;
+  z-index: 10;
+}
+
+.sidebar h4 {
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.list-group-item {
+  border-radius: 8px;
+  margin-bottom: 5px;
+  transition: all var(--transition-speed) ease;
+  border-left: 3px solid transparent;
+}
+
+.list-group-item:hover {
+  background-color: rgba(var(--primary-color), 0.05);
+}
+
+.list-group-item.active {
+  background-color: rgba(var(--primary-color), 0.1);
+  color: var(--primary-color);
+  font-weight: 500;
+  border-left: 3px solid var(--primary-color);
+}
+
+/* === FOLDER & DOCUMENT CARDS === */
+.folder-card {
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  transition: all var(--transition-speed) ease;
+  overflow: hidden;
+}
+
+.folder-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.folder-icon {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+/* === TAGS STYLING === */
+.badge {
+  font-weight: normal;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: all var(--transition-speed) ease;
+}
+
+.badge-pill {
+  padding-right: 0.8em;
+  padding-left: 0.8em;
+}
+
+.badge-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.badge-light {
+  background-color: #f1f3f5;
+  color: #495057;
+}
+
+.badge-light:hover {
+  background-color: #e9ecef;
+  cursor: pointer;
+}
+
+.badge-primary:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+/* === TABLE STYLING === */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  border-top: none;
+  font-weight: 500;
+  color: #495057;
+  font-size: 14px;
+}
+
+.table td {
+  vertical-align: middle;
+  padding: 0.75rem;
+  border-top: 1px solid #f1f3f5;
+  font-size: 14px;
+  color: black;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(var(--primary-color), 0.02);
+}
+
+/* Custom checkbox styling */
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* === BUTTON STYLING === */
+.btn {
+  border-radius: 6px;
+  transition: all var(--transition-speed) ease;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color);
+  opacity: 0.9;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.7rem;
+  font-size: 0.82rem;
+}
+
+/* === MODAL STYLING === */
+
+/* === FORM STYLING === */
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  padding: 0.6rem 0.8rem;
+  transition: all var(--transition-speed) ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(var(--primary-color), 0.15);
+}
+
+.input-group-text {
+  border-radius: 6px;
+  background-color: #f8f9fa;
+}
+
+.custom-file-input:focus ~ .custom-file-label {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(var(--primary-color), 0.15);
+}
+
+.custom-file-label {
+  border-radius: 6px;
+  background-color: #f8f9fa;
+}
+
+.custom-file-label::after {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 0 5px 5px 0;
+}
+
+/* === EMPTY STATE === */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: #dee2e6;
+  margin-bottom: 1rem;
+}
+
+.empty-state h4 {
+  color: #495057;
+  font-weight: 500;
+}
+
+.empty-state p {
+  color: #868e96;
+  margin-bottom: 1.5rem;
+}
+
+/* === ANIMATION === */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-speed) ease;
+}
+
+/* === RESPONSIVE TWEAKS === */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    width: 80%;
+    z-index: 1050;
+    transition: left var(--transition-speed) ease;
+  }
+  
+  .sidebar.show {
+    left: 0;
+  }
+  
+  .sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: none;
+  }
+  
+  .sidebar-backdrop.show {
+    display: block;
+  }
+}

@@ -180,6 +180,22 @@
   },
   {
     "ContainingType": "ERP.APIs.Contracts.ContractController",
+    "Method": "CheckStatus",
+    "RelativePath": "api/Contract/CheckStatus/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Contracts.ContractController",
     "Method": "DeleteAllAsync",
     "RelativePath": "api/Contract/DeleteAll{ids}",
     "HttpMethod": "DELETE",
@@ -197,7 +213,7 @@
   {
     "ContainingType": "ERP.APIs.Contracts.ContractController",
     "Method": "DeleteRange",
-    "RelativePath": "api/Contract/DeleteRange{ids}",
+    "RelativePath": "api/Contract/DeleteRange",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -205,11 +221,6 @@
       {
         "Name": "ids",
         "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": true
-      },
-      {
-        "Name": "ids",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -403,6 +414,22 @@
   },
   {
     "ContainingType": "ERP.Controllers.Lists.ContractTypeController",
+    "Method": "DeleteRange",
+    "RelativePath": "api/ContractType/DeleteRange",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.ContractTypeController",
     "Method": "GetData",
     "RelativePath": "api/ContractType/getData",
     "HttpMethod": "POST",
@@ -555,6 +582,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.DepartmentController",
+    "Method": "DeleteRange",
+    "RelativePath": "api/Department/DeleteRange",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ERP.Controllers.Lists.DepartmentController",
@@ -1253,6 +1296,22 @@
   },
   {
     "ContainingType": "ERP.Controllers.Lists.EmployeeController",
+    "Method": "DeleteRange",
+    "RelativePath": "api/Employee/DeleteRange",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeController",
     "Method": "GetData",
     "RelativePath": "api/Employee/getData",
     "HttpMethod": "POST",
@@ -1279,35 +1338,80 @@
   },
   {
     "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
-    "Method": "GetAll",
-    "RelativePath": "api/EmployeeDocument",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
-    "Method": "Create",
-    "RelativePath": "api/EmployeeDocument",
+    "Method": "CreateDocument",
+    "RelativePath": "api/EmployeeDocument/document",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "documents",
-        "Type": "System.Collections.Generic.List\u00601[[ERP.DTO.Lists.EmployeeDocumentDTO, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "folderId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "documentName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "documentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "filePath",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "notes",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "tags",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "expiryDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "isCompany",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "documentUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "docfile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "actionType",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -1315,15 +1419,101 @@
   },
   {
     "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
-    "Method": "Update",
-    "RelativePath": "api/EmployeeDocument",
+    "Method": "GetDocumentById",
+    "RelativePath": "api/EmployeeDocument/document/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "UpdateDocument",
+    "RelativePath": "api/EmployeeDocument/document/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "documents",
-        "Type": "System.Collections.Generic.List\u00601[[ERP.DTO.Lists.EmployeeDocumentDTO, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "folderId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "documentName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "documentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "filePath",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "notes",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "tags",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "expiryDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "isCompany",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "documentUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "docfile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "actionType",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -1331,8 +1521,40 @@
   },
   {
     "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
-    "Method": "GetById",
-    "RelativePath": "api/EmployeeDocument/{id}",
+    "Method": "DeleteDocument",
+    "RelativePath": "api/EmployeeDocument/document/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "GetDocumentsByFolderId",
+    "RelativePath": "api/EmployeeDocument/documents/{folderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "folderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "DownloadDocument",
+    "RelativePath": "api/EmployeeDocument/download/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -1343,121 +1565,118 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
-    "Method": "Delete",
-    "RelativePath": "api/EmployeeDocument/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
-    "Method": "DeleteAllAsync",
-    "RelativePath": "api/EmployeeDocument/DeleteAll",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {
     "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
-    "Method": "DeleteRange",
-    "RelativePath": "api/EmployeeDocument/DeleteRange",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ids",
-        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
-    "Method": "GetAllByEmployee",
-    "RelativePath": "api/EmployeeDocument/GetbyEmployee{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[System.Collections.Generic.List\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
-    "Method": "GetData",
-    "RelativePath": "api/EmployeeDocument/getData",
+    "Method": "CreateFolder",
+    "RelativePath": "api/EmployeeDocument/folder",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "ERP.Base_sys.SearchRequest\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "folderDto",
+        "Type": "ERP.DTO.Lists.EmployeeDocumentFolderDTO",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "CreateFolderWithDocuments",
+    "RelativePath": "api/EmployeeDocument/folder-with-documents",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Type": "ERP.Base_sys.ApiResponse\u00601[[ERP.Base_sys.PagedResult\u00601[[ERP.Entities.Vouchers.Employee.EmployeeDocument, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "model",
+        "Type": "ERP.DTO.Lists.EmployeeDocFolderWithDocs",
+        "IsRequired": false
       }
-    ]
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "GetFolderById",
+    "RelativePath": "api/EmployeeDocument/folder/{folderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "folderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "UpdateFolder",
+    "RelativePath": "api/EmployeeDocument/folder/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "folderDto",
+        "Type": "ERP.DTO.Lists.EmployeeDocumentFolderDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "DeleteFolder",
+    "RelativePath": "api/EmployeeDocument/folder/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "GetFoldersByEmployeeId",
+    "RelativePath": "api/EmployeeDocument/folders/{employeeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.Controllers.Lists.EmployeeDocumentController",
+    "Method": "GetAllTags",
+    "RelativePath": "api/EmployeeDocument/tags",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ERP.APIs.Leaves.API.EmployeeLeaveBalanceController",
@@ -1722,24 +1941,8 @@
   },
   {
     "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
-    "Method": "DeleteAllAsync",
-    "RelativePath": "api/Leave/DeleteAll{ids}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ids",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
     "Method": "DeleteRange",
-    "RelativePath": "api/Leave/DeleteRange{ids}",
+    "RelativePath": "api/Leave/DeleteRange",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -1747,11 +1950,6 @@
       {
         "Name": "ids",
         "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": true
-      },
-      {
-        "Name": "ids",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -1790,6 +1988,22 @@
   },
   {
     "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
+    "Method": "GetPagedList",
+    "RelativePath": "api/Leave/GetData",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ERP.Base_sys.SearchRequest\u00601[[ERP.APIs.Leaves.entity.LeaveRequest, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
     "Method": "GetNew",
     "RelativePath": "api/Leave/GetNew/{employeeId}",
     "HttpMethod": "GET",
@@ -1799,22 +2013,6 @@
       {
         "Name": "employeeId",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ERP.APIs.Leaves.Controllers.LeaveController",
-    "Method": "GetPagedList",
-    "RelativePath": "api/Leave/GetPagedList",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "ERP.Base_sys.SearchRequest\u00601[[ERP.APIs.Leaves.entity.LeaveRequest, ERP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": true
       }
     ],
@@ -1977,24 +2175,8 @@
   },
   {
     "ContainingType": "ERP.APIs.Leaves.API.LeaveTypeController",
-    "Method": "DeleteAllAsync",
-    "RelativePath": "api/LeaveType/DeleteAll{ids}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ids",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ERP.APIs.Leaves.API.LeaveTypeController",
     "Method": "DeleteRange",
-    "RelativePath": "api/LeaveType/DeleteRange{ids}",
+    "RelativePath": "api/LeaveType/DeleteRange",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -2002,11 +2184,6 @@
       {
         "Name": "ids",
         "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": true
-      },
-      {
-        "Name": "ids",
-        "Type": "",
         "IsRequired": true
       }
     ],

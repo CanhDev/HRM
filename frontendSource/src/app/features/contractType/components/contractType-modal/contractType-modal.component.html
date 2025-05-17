@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Sửa Loại hợp đồng' : 'Thêm Loại hợp đồng' }}</h2>
+
+<mat-dialog-content class="no-top-padding">
+
+  <div class="form-wrapper" [formGroup]="contractTypeForm">
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Mã Loại hợp đồng</mat-label>
+      <input matInput formControlName="contractTypeCode" />
+      <mat-error *ngIf="contractTypeForm.get('contractTypeCode')?.hasError('required')">
+        Mã Loại hợp đồng là bắt buộc
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-120" appearance="outline">
+      <mat-label>Tên Loại hợp đồng</mat-label>
+      <input matInput formControlName="contractTypeName" />
+      <mat-error *ngIf="contractTypeForm.get('contractTypeName')?.hasError('required')">
+        Tên Loại hợp đồng là bắt buộc
+      </mat-error>
+    </mat-form-field>
+      <div class="form-group">
+        <label for="status">Mô tả</label>
+        <textarea formControlName="description" rows="3" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+    <label for="status">Trạng thái</label>
+    <select class="form-select" id="status" formControlName="status">
+      <option *ngFor="let status of statusList" [value]="status.form_value">
+        {{ status.form_name }}
+      </option>
+    </select>
+  </div>
+    
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Hủy</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="contractTypeForm.invalid">
+    Lưu
+  </button>
+</mat-dialog-actions>

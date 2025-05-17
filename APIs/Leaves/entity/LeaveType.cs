@@ -6,6 +6,8 @@ namespace ERP.APIs.Leaves.entity
 {
     public class LeaveType : BaseEntity
     {
+        [Required]
+        public required string leaveTypeCode { get; set; }
         [Required, StringLength(100)]
         public string leaveTypeName { get; set; }
 
@@ -13,11 +15,6 @@ namespace ERP.APIs.Leaves.entity
         public string description { get; set; }
 
         public short isPaid { get; set; }
-
-        public short carryForward { get; set; }
-
-        public short maxCarryForwardDays { get; set; }
-
         public int maxDaysAllowed { get; set; }
     }
 }

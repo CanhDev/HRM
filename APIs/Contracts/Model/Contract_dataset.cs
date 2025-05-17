@@ -47,6 +47,7 @@ namespace ERP.APIs.Contracts.Model
         public int? departmentId { get; set; }
         public int? positionId { get; set; }
         public DateTime? endDate { get; set; }
+        public int status { get; set; }
         public int id { get; set; }
         public string? actionType { get; set; }
     }
@@ -54,11 +55,8 @@ namespace ERP.APIs.Contracts.Model
     public class ContractHistoryDTO
     {
         public int contractId { get; set; }
-
-        public DateTime changeDate { get; set; }
-        public int changeBy { get; set; }
-
         public string? oldValue { get; set; }
         public string? newValue { get; set; }
+
     }
 }

@@ -1,111 +1,203 @@
-<h1 class="page-title">Tổng quan nhân sự</h1>
-        
-        <div class="dashboard-grid">
-            <div class="card">
-                <div class="card-title">
-                    <span>Tổng số nhân viên</span>
-                    <i class="fas fa-users" style="color: var(--primary-color);"></i>
-                </div>
-                <div class="card-value">245</div>
-                <div class="card-description">
-                    <i class="fas fa-arrow-up trend-up"></i>
-                    <span>Tăng 12 nhân viên từ tháng trước</span>
-                </div>
+<!-- Tiêu đề trang với thiết kế cải tiến -->
+<div class="dashboard-header">
+  <h1 style="border-radius: 5px; padding: 10px 20px;" class="page-title">Tổng quan nhân sự</h1>
+  <div class="date-filter">
+    <span class="date-label">Dữ liệu tháng:</span>
+    <select class="date-select">
+      <option>Tháng 5, 2025</option>
+      <option>Tháng 4, 2025</option>
+      <option>Tháng 3, 2025</option>
+    </select>
+  </div>
+</div>
+
+<!-- Các thẻ thống kê chính -->
+<div class="stats-container">
+  <div class="stat-card">
+    <div class="stat-icon">
+      <i class="fas fa-users"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">245</div>
+      <div class="stat-label">Tổng số nhân viên</div>
+      <div class="stat-trend positive">
+        <i class="fas fa-arrow-up"></i> Tăng 12 từ tháng trước
+      </div>
+    </div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-icon accent">
+      <i class="fas fa-user-plus"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">18</div>
+      <div class="stat-label">Tuyển dụng mới</div>
+      <div class="stat-trend positive">
+        <i class="fas fa-arrow-up"></i> Tăng 5 từ tháng trước
+      </div>
+    </div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-icon warning">
+      <i class="fas fa-user-minus"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">6</div>
+      <div class="stat-label">Nghỉ việc</div>
+      <div class="stat-trend negative">
+        <i class="fas fa-arrow-down"></i> Giảm 2 từ tháng trước
+      </div>
+    </div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-icon info">
+      <i class="fas fa-umbrella-beach"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">12</div>
+      <div class="stat-label">Đang nghỉ phép</div>
+      <div class="stat-trend neutral">
+        4 đang chờ phê duyệt
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Container cho các biểu đồ -->
+<div class="charts-row">
+  <!-- Biểu đồ phân bổ nhân sự -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <h2 class="chart-title">Phân bổ nhân sự theo phòng ban</h2>
+      <div class="chart-actions">
+        <button class="chart-action-btn active">
+          <i class="fas fa-chart-pie"></i>
+        </button>
+      </div>
+    </div>
+    <div class="chart-container">
+      <canvas #departmentChart></canvas>
+    </div>
+  </div>
+  
+  <!-- Biểu đồ cột về nhân sự -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <h2 class="chart-title">Biến động nhân sự theo tháng</h2>
+      <div class="chart-filter">
+        <select class="chart-filter-select">
+          <option>6 tháng qua</option>
+          <option>12 tháng qua</option>
+          <option>24 tháng qua</option>
+        </select>
+      </div>
+    </div>
+    <div class="chart-container">
+      <canvas #employeeBarChart></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Thống kê hiệu suất nhân viên -->
+
+
+<!-- Bảng nhân viên mới -->
+<div class="data-section">
+  <div class="section-header">
+    <h2 class="section-title">Nhân viên mới gần đây</h2>
+    <div class="section-actions">
+      
+    </div>
+  </div>
+  
+  <div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Nhân viên</th>
+          <th>ID</th>
+          <th>Phòng ban</th>
+          <th>Vị trí</th>
+          <th>Ngày vào làm</th>
+          <th>Trạng thái</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="employee-info">
+              <div class="employee-avatar">PT</div>
+              <div class="employee-name">Phan Thanh Tùng</div>
             </div>
-            
-            <div class="card">
-                <div class="card-title">
-                    <span>Tuyển dụng mới</span>
-                    <i class="fas fa-user-plus" style="color: var(--accent-color);"></i>
-                </div>
-                <div class="card-value">18</div>
-                <div class="card-description">
-                    <i class="fas fa-arrow-up trend-up"></i>
-                    <span>Tăng 5 từ tháng trước</span>
-                </div>
+          </td>
+          <td>NV0101</td>
+          <td>Kế toán</td>
+          <td>Kế toán viên</td>
+          <td>15/01/2023</td>
+          <td><span class="status-badge inactive">Nghỉ việc</span></td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn" title="Xem chi tiết">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="action-btn" title="Chỉnh sửa">
+                <i class="fas fa-edit"></i>
+              </button>
             </div>
-            
-            <div class="card">
-                <div class="card-title">
-                    <span>Nghỉ việc</span>
-                    <i class="fas fa-user-minus" style="color: var(--error);"></i>
-                </div>
-                <div class="card-value">6</div>
-                <div class="card-description">
-                    <i class="fas fa-arrow-down trend-down"></i>
-                    <span>Giảm 2 từ tháng trước</span>
-                </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="employee-info">
+              <div class="employee-avatar">NL</div>
+              <div class="employee-name">Nguyễn Thị Lan</div>
             </div>
-            
-            <div class="card">
-                <div class="card-title">
-                    <span>Đang nghỉ phép</span>
-                    <i class="fas fa-umbrella-beach" style="color: var(--warning);"></i>
-                </div>
-                <div class="card-value">12</div>
-                <div class="card-description">
-                    <span>4 đang chờ phê duyệt</span>
-                </div>
+          </td>
+          <td>NV0102</td>
+          <td>Marketing</td>
+          <td>Marketing Specialist</td>
+          <td>10/04/2023</td>
+          <td><span class="status-badge active">Đang làm việc</span></td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn" title="Xem chi tiết">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="action-btn" title="Chỉnh sửa">
+                <i class="fas fa-edit"></i>
+              </button>
             </div>
-        </div>
-        
-       
-        
-        <div class="widgets-container">
-            <div class="chart-container">
-                <div class="chart-header">
-                    <div class="chart-title">Biểu đồ phân bổ nhân sự</div>
-                    <div class="chart-filters">
-                        <div class="filter-chip active">Phòng ban</div>
-                        <div class="filter-chip">Vị trí</div>
-                        <div class="filter-chip">Độ tuổi</div>
-                    </div>
-                </div>
-                <div style="padding: 5px;" class="chart-placeholder">
-                            <canvas #departmentChart></canvas>
-                </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="employee-info">
+              <div class="employee-avatar">HM</div>
+              <div class="employee-name">Hoàng Minh</div>
             </div>
-            
-            
-            
-        </div>
-        <div style="margin-top: 20px;" class="data-table-container">
-            <div class="table-header">
-                <div class="table-title">Nhân viên mới thêm gần đây</div>
-                
+          </td>
+          <td>NV0103</td>
+          <td>IT</td>
+          <td>Developer</td>
+          <td>22/04/2023</td>
+          <td><span class="status-badge active">Đang làm việc</span></td>
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn" title="Xem chi tiết">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="action-btn" title="Chỉnh sửa">
+                <i class="fas fa-edit"></i>
+              </button>
             </div>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nhân viên</th>
-                        <th>ID</th>
-                        <th>Phòng ban</th>
-                        <th>Vị trí</th>
-                        <th>Ngày vào làm</th>
-                        <th>Trạng thái</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="employee-info">
-                                <div class="employee-avatar">PT</div>
-                                <div>Phan Thanh Tùng</div>
-                            </div>
-                        </td>
-                        <td>NV0101</td>
-                        <td>Kế toán</td>
-                        <td>Kế toán viên</td>
-                        <td>15/01/2023</td>
-                        <td><span class="status-indicator status-inactive">Nghỉ việc</span></td>
-                        
-                    </tr>
-                </tbody>
-            </table>
-            
-            <div class="pagination">
-                <div class="pagination-info">Thời gian từ ? ngày trước</div>
-            </div>
-        </div>
-        
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+</div>
