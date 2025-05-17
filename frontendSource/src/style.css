@@ -27,6 +27,7 @@
     --header-height: 55px;
     --sidebar-width: 180px;
     --border-radius: 8px;
+    --transition-speed: 0.2s;
 }
 *, *::before, *::after {
   box-sizing: inherit;
@@ -738,7 +739,7 @@ tr:hover .row-actions {
   .form-control, .form-select {
     border-radius: var(--radius);
     border-color: var(--border-color);
-    padding: 0.625rem 0.75rem;
+    padding: 12px;
     transition: var(--transition);
   }
   
@@ -940,6 +941,7 @@ tr:hover .row-actions {
     border-spacing: 0;
     margin-bottom: 0;
     transition: all linear 0.2s;
+    overflow: hidden !important;
   }
   
   
@@ -947,7 +949,7 @@ tr:hover .row-actions {
     background-color: var(--secondary-color);
     color: var(--text-color);
     font-weight: 600;
-    padding: 0.75rem 1rem;
+    padding: 6px;
     border-bottom: 1px solid var(--border-color);
     vertical-align: middle;
     font-size: 16px;
@@ -968,7 +970,7 @@ tr:hover .row-actions {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    justify-content: space-between;
+    justify-content: center;
   }
   
   .sort-icon {
@@ -978,7 +980,7 @@ tr:hover .row-actions {
   }
   
   .employee-table td {
-    padding: 0.5rem 0.5rem;
+    padding: 12px 5px;
     border-bottom: 1px solid var(--border-color);
     vertical-align: middle;
     text-align: center;
@@ -990,9 +992,7 @@ tr:hover .row-actions {
     cursor: pointer;
   }
   
-  .employee-row:hover {
-    background-color: rgba(37, 99, 235, 0.05);
-  }
+ 
   
   .employee-code {
     font-weight: 500;
@@ -1410,6 +1410,7 @@ border-color: black;
 .employee-row {
   cursor: pointer;
   transition: all ease 0.2s;
+  
 }
 .employee-row:active{
   background-color: #12202e;
@@ -1417,3 +1418,492 @@ border-color: black;
 .employee-row:hover {
   transform: scale(1.01);
 }
+/* Modal Base Styles */
+.modal-dialog {
+  max-width: 500px;
+  margin: 1.75rem auto;
+}
+
+.modal-content {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+  position: relative;
+}
+
+.modal-title {
+  font-size: 14px;
+  font-weight: 600;
+  flex-grow: 1;
+  margin-bottom: 0;
+}
+
+/* Improved Close Button */
+.close {
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
+  background: #f5f5f5;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close:hover {
+  opacity: 1;
+  background: #e9e9e9;
+}
+
+.close span {
+  font-size: 1.5rem;
+  line-height: 0;
+  font-weight: 300;
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 1.75rem;
+}
+
+.form-group {
+  margin-bottom: 6px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-control, .form-select {
+  padding: 8px 6px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: #4a89dc;
+  box-shadow: 0 0 0 3px rgba(74, 137, 220, 0.1);
+  outline: none;
+}
+
+.text-danger {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 1rem 1.75rem 1.5rem;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #555;
+}
+
+.btn-secondary:hover {
+  background-color: #e9e9e9;
+}
+
+.btn-primary {
+  background-color: #4a89dc;
+  border: none;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #3a79cc;
+}
+
+.btn-primary:disabled {
+  background-color: #92b6e9;
+  cursor: not-allowed;
+}
+
+/* Animation and Fade Effect */
+.modal.fade .modal-dialog {
+  transform: translate(0, -25px);
+  transition: transform 0.3s ease-out;
+}
+
+.modal.fade.show .modal-dialog {
+  transform: translate(0, 0);
+}
+
+.modal.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Backdrop Styling */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Loading Spinner */
+.spinner-border {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  .modal-dialog {
+    margin: 0.5rem;
+    max-width: calc(100% - 1rem);
+  }
+  
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 1rem;
+  }
+}
+.modal {
+  transition: opacity var(--transition-speed) ease;
+}
+
+.modal-content {
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #fcfcfc;
+}
+
+.modal-header .modal-title {
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.modal-backdrop {
+  transition: opacity var(--transition-speed) ease;
+}
+
+/* Modal transitions */
+.modal.fade:not(.show) {
+  opacity: 0;
+}
+
+.modal.fade .modal-dialog {
+  transition: transform var(--transition-speed) ease-out;
+  transform: translateY(-20px);
+}
+
+.modal.show .modal-dialog {
+  transform: translateY(0);
+}
+/* components/employee-filter/employee-filter.component.css */
+.filter-form {
+    width: 100%;
+  }
+  
+  .filter-form h5 {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .filter-form h6 {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .filter-form .date-filters {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .filter-form .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  .filter-form label {
+    font-weight: 500;
+    color: #555;
+  }
+  .input-group-text {
+    border-radius: 0 !important;
+  }
+  
+  .form-control,
+  .form-select {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  
+  /* Title của dialog */
+.mat-dialog-title,
+h2[mat-dialog-title] {
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 24px; 
+}
+
+/* Mỗi nhóm input form cách nhau rõ ràng */
+.mat-form-field {
+  margin-bottom: 24px;
+}
+
+/* Label màu chủ đạo */
+.mat-form-field-label {
+  color: var(--primary-color) !important;
+}
+
+/* Đường kẻ dưới input khi focus */
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: var(--primary-color) !important;
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+/* Input chữ đen rõ */
+.mat-input-element {
+  color: #000;
+}
+
+/* Nút dialog cách đều */
+mat-dialog-actions {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+}
+mat-label {
+  line-height: 1.2; /* hoặc thử 1.5 nếu vẫn bị đè */
+}
+.no-top-padding {
+  padding-top: 4px !important; /* nhưng phải cẩn thận nếu dùng mat-form-field */
+}
+/* Giới hạn chiều rộng dropdown */
+.mat-autocomplete-panel {
+  overflow: hidden;
+  background-color: white;
+}
+
+/* Tùy chỉnh từng option */
+.mat-option {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+/* Giảm chiều cao item nếu cần */
+.mat-option-text {
+  line-height: 1;
+}
+/* Chiều cao chuẩn cho các input */
+
+.input-uniform-height {
+  height: 56px !important; /* hoặc 36px nếu bạn muốn thấp hơn */
+  box-sizing: border-box;
+}
+
+/* Điều chỉnh nội bộ của mat-form-field */
+mat-form-field.input-uniform-height .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+
+mat-form-field.input-uniform-height .mat-form-field-flex {
+  align-items: center !important;
+  height: 90% !important;
+}
+
+mat-form-field.input-uniform-height .mat-input-element {
+  height: 90% !important;
+  padding: 0 !important;
+}
+.mat-mdc-form-field .mdc-text-field {
+  align-items: center !important;
+}
+
+.pcolor{
+  color: var(--primary-color) !important;
+}
+card {
+      border: none;
+      border-radius: var(--border-radius);
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+    
+    .card-header {
+      background-color: white;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+      padding: 1rem;
+    }
+    
+    .card-header h3 {
+      margin: 0;
+      color: var(--primary-color);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    
+    .card-body {
+      padding: 1.25rem;
+    }
+    
+    .nav-tabs {
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .nav-tabs .nav-link {
+      color: #6c757d;
+      border: none;
+      padding: 0.5rem 1rem;
+    }
+    
+    .nav-tabs .nav-link:hover {
+      color: var(--primary-color);
+      border-color: transparent;
+    }
+    
+    .nav-tabs .nav-link.active {
+      color: var(--primary-color);
+      background-color: transparent;
+      border-bottom: 2px solid var(--primary-color);
+      font-weight: 500;
+    }
+    
+    .form-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    
+    .form-control, .form-select {
+      padding: 0.375rem 0.75rem !important;
+      font-size: 0.875rem;
+      border-radius: var(--border-radius);
+      border: 1px solid #ced4da;
+      font-size: 14px !important;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(63, 81, 181, 0.25);
+    }
+    .btn-outline-primary {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .btn-outline-primary:hover {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .table {
+      font-size: 0.875rem;
+    }
+    
+    .table th {
+      font-weight: 500;
+      background-color: var(--secondary-color);
+    }
+    
+    .badge {
+      font-weight: 500;
+      padding: 0.25em 0.5em;
+    }
+    
+    .pcolor {
+      color: var(--primary-color);
+    }
+    
+    /* Compact form layout */
+    .mb-3 {
+      margin-bottom: 0.75rem !important;
+    }
+    
+    .form-group-compact label {
+      margin-bottom: 0.15rem;
+    }
+    
+    /* Addendum section */
+    .addendum-header {
+      margin-bottom: 0.5rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    /* Modal styling */
+    .modal-header {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .modal-title {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    
+    .modal-body {
+      padding: 1rem;
+    }
+    
+    .modal-footer {
+      padding: 0.5rem 1rem;
+      border-top: 1px solid #dee2e6;
+    }

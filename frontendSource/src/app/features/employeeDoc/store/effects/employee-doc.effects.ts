@@ -22,8 +22,8 @@ export class EmployeeEffects {
       switchMap(({ searchRequest }) =>
         this.employeeService.getEmployees(searchRequest).pipe(
           tap(response => {
-            console.log('API response:', response);
-            console.log('Dispatching loadEmployeesSuccess with data:', response.data ?? []);
+            // console.log('API response:', response);
+            // console.log('Dispatching loadEmployeesSuccess with data:', response.data ?? []);
           }),
           map(apiResponse => {
             const data = apiResponse.data as any;
@@ -123,6 +123,28 @@ export class EmployeeEffects {
   deleteEmployeeSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmployeeDocActions.deleteEmployeeSuccess),
+      tap(() => {
+        this.router.navigate(['/employees']);
+      })
+    ),
+    { dispatch: false }
+  );
+
+  deleteRangeEmployee$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeDocActions.deleteRangeEmployee),
+      switchMap(({ ids }) =>
+        this.employeeService.deleteRange(ids).pipe(
+          map(() => EmployeeDocActions.deleteRangeEmployeeSuccess({ids})),
+          catchError(error => of(EmployeeDocActions.deleteEmployeeFailure({ error })))
+        )
+      )
+    )
+  );
+
+  deleteRangeEmployeeSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeDocActions.deleteRangeEmployeeFailure),
       tap(() => {
         this.router.navigate(['/employees']);
       })

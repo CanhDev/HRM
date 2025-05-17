@@ -35,7 +35,7 @@ export interface EmployeeWithNames extends Employee {
         opacity: '1'
       })),
       transition('collapsed <=> expanded', [
-        animate('600ms cubic-bezier(0.4, 0, 0.2, 1)')
+        animate('300ms cubic-bezier(0.4, 0, 0.2, 1)')
       ])
     ])
   ]
@@ -141,7 +141,6 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
           const department = departments.find(d => Number(d.form_value) === Number(emp.departmentId));
           const position = positions.find(p => Number(p.form_value) === Number(emp.positionId));
           const status = statusList.find(p => Number(p.form_value) === Number(emp.status));
-          console.log("test",emp);
           return {
             ...emp,
             departmentName: department ? department.form_name : '---',
@@ -172,6 +171,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
           status: '1'
         }
       };
+      this.store.dispatch(EmployeeDocActions.setSearchRequest({searchRequest: updatedRequest}));
       this.store.dispatch(EmployeeDocActions.loadEmployees({ searchRequest: updatedRequest }));
     });
   }
@@ -241,13 +241,14 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     }
     
     if (confirm(`Bạn có chắc chắn muốn xóa ${this.selectedEmployees.length} nhân viên đã chọn?`)) {
-      // In a real application, we would dispatch a batch delete action here
-      // For demonstration purposes, we'll just delete one by one
-      this.selectedEmployees.forEach(id => {
-        this.store.dispatch(EmployeeDocActions.deleteEmployee({ id }));
-      });
-      
-      this.selectedEmployees = []; // Clear selections after delete
+     
+      if(this.selectedEmployees.length === 1){
+        this.store.dispatch(EmployeeDocActions.deleteEmployee({ id: this.selectedEmployees[0]}));
+      }
+      else{
+        this.store.dispatch(EmployeeDocActions.deleteRangeEmployee({ ids: this.selectedEmployees }));
+      }
+      this.selectedEmployees = []; 
     }
   }
   // Action handlers
@@ -336,7 +337,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
 
   editEmployee(id: number, event: Event): void {
     event.stopPropagation();
-    this.router.navigate(['/employees/edit', id]);
+    this.router.navigate(['/employees/', id]);
   }
 
   // Advanced filters toggle

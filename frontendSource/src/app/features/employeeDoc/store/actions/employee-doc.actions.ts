@@ -75,7 +75,22 @@ export const deleteEmployeeSuccess = createAction(
 );
 
 export const deleteEmployeeFailure = createAction(
-  '[Employee] Delete Employee Failure',
+  '[Employee] Delete  Employee Failure',
+  props<{ error: any }>()
+);
+
+export const deleteRangeEmployee = createAction(
+  '[Employee] Delete range Employee',
+  props<{ ids: number[] }>()
+);
+
+export const deleteRangeEmployeeSuccess = createAction(
+  '[Employee] Delete range Employee Success',
+  props<{ ids: number[] }>()
+);
+
+export const deleteRangeEmployeeFailure = createAction(
+  '[Employee] Delete range Employee Failure',
   props<{ error: any }>()
 );
 

@@ -36,6 +36,7 @@ namespace ERP.APIs.Lookups
                 .Select(x => new
                 {
                     form_value = x.id,
+                    form_code = x.leaveTypeCode,
                     form_name = x.leaveTypeName
                 })
                 .ToListAsync();
@@ -49,8 +50,10 @@ namespace ERP.APIs.Lookups
                 .Where(x => x.status != -1)
                 .Select(x => new
                 {
-                    form_value = x.id,
-                    form_name = x.fullName
+                    form_value = x.employeeCode,
+                    form_name = x.employeeCode + " - " + x.fullName,
+                    name = x.fullName,
+                    id = x.id.ToString()
                 })
                 .ToListAsync();
             return Ok(data);

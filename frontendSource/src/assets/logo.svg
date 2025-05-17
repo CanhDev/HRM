@@ -1,0 +1,32 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background - Transparent -->
+            <rect width="400" height="300" fill="transparent" rx="20" ry="20" />
+            
+            <!-- Main Circle -->
+            <circle cx="200" cy="140" r="100" fill="#0056b3" />
+            
+            <!-- HRM Text -->
+            <text x="200" y="150" font-family="Arial, sans-serif" font-size="70" font-weight="bold" text-anchor="middle" fill="white">HRM</text>
+            
+            <!-- Human Icons -->
+            <circle cx="130" cy="140" r="15" fill="white" opacity="0.8" />
+            <path d="M130,170 L130,220" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M110,190 L150,190" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M115,215 L130,200" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M145,215 L130,200" stroke="white" stroke-width="8" stroke-linecap="round" />
+            
+            <circle cx="270" cy="140" r="15" fill="white" opacity="0.8" />
+            <path d="M270,170 L270,220" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M250,190 L290,190" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M255,215 L270,200" stroke="white" stroke-width="8" stroke-linecap="round" />
+            <path d="M285,215 L270,200" stroke="white" stroke-width="8" stroke-linecap="round" />
+            
+            <!-- Signature -->
+            <path d="M180,240 C190,235 195,245 200,242 C205,239 210,235 215,238 C220,241 225,245 230,242 C235,239 240,232 245,235" stroke="#0056b3" stroke-width="2" fill="none" />
+            <text x="250" y="245" font-family="Brush Script MT, cursive" font-size="20" text-anchor="middle" fill="#0056b3">Cảnh</text>
+            
+            <!-- Abstract HR Element -->
+            <path d="M75,90 L325,90" stroke="#0077e6" stroke-width="5" stroke-linecap="round" />
+            <circle cx="75" cy="90" r="10" fill="#0077e6" />
+            <circle cx="325" cy="90" r="10" fill="#0077e6" />
+        </svg>

@@ -46,6 +46,9 @@ namespace ERP.Entities
         public DbSet<LeaveBalanceHistory> leaveBalanceHistories { get; set; }
         //
         public DbSet<LeaveRequest_details> leaveRequest_Details { get; set; }
+        //documents
+        public DbSet<DocumentTag> documentTags { get; set; }
+        public DbSet<EmployeeDocumentFolder> employeeDocumentFolders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

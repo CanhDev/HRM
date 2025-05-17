@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+
+// 🎨 Tự định nghĩa màu của bạn
+$primary-color: #0056b3; // ví dụ: Bootstrap blue
+
+// 🎨 Tạo Material palette từ màu bạn chọn
+$my-primary: mat.define-palette(mat.$blue-palette, 600);
+$my-accent: mat.define-palette(mat.$grey-palette, 500);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+@include mat.core();
+@include mat.all-component-themes($my-theme);

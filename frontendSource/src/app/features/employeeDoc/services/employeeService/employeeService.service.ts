@@ -26,7 +26,7 @@ export class EmployeeServiceService {
     const formData = this.prepareFormData(employeeData);
     
     // Thêm log để debug
-    console.log('Sending form data to:', this.apiUrl);
+   // console.log('Sending form data to:', this.apiUrl);
     formData.forEach((value, key) => {
       if (typeof value === 'string' && value.length < 100) {
         console.log(`${key}: ${value}`);

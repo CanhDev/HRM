@@ -53,6 +53,66 @@
       "PackagePath": "staticwebassets\\resource\\files\\EmployeeDocument\\2025\\04\\Danh-mc-nh-cung-cp-1-20250413021133.xlsx"
     },
     {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\1_pantone_collab_dark-20250511184030.jpg",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\1_pantone_collab_dark-20250511184030.jpg"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\1_pantone_collab_dark-20250511184149.jpg",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\1_pantone_collab_dark-20250511184149.jpg"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\Canh-20250516202707.docx",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\Canh-20250516202707.docx"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\Danh mục Pallet-20250512135830.xlsx",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\Danh mục Pallet-20250512135830.xlsx"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\Danh mục công đoạn sản xuất-20250511194053.xlsx",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\Danh mục công đoạn sản xuất-20250511194053.xlsx"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\English_Grammar_in_Use_Intermediate_2019_5th-Ed{anhngumshoa}-20250511193546.pdf",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\English_Grammar_in_Use_Intermediate_2019_5th-Ed{anhngumshoa}-20250511193546.pdf"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\Khai báo kế hoạch doanh số theo nhân viên-20250511193501.xlsx",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\Khai báo kế hoạch doanh số theo nhân viên-20250511193501.xlsx"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\Khai báo kế hoạch doanh số theo nhân viên-20250511193529.xlsx",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\Khai báo kế hoạch doanh số theo nhân viên-20250511193529.xlsx"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\Khai báo kế hoạch doanh số theo nhân viên-20250512220023.xlsx",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\Khai báo kế hoạch doanh số theo nhân viên-20250512220023.xlsx"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\Mẫu phiếu đánh giá kết quả thử việc (1)-20250511194305.docx",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\Mẫu phiếu đánh giá kết quả thử việc (1)-20250511194305.docx"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\Phiếu đánh giá kết quả thử việc_Nguyễn Văn Cảnh-20250511194305.docx",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\Phiếu đánh giá kết quả thử việc_Nguyễn Văn Cảnh-20250511194305.docx"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\cv-20250511184213.doc",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\cv-20250511184213.doc"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\cv-20250511184421.doc",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\cv-20250511184421.doc"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\cv-20250511192255-20250512135341.doc",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\cv-20250511192255-20250512135341.doc"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\files\\employee-documents\\2025\\05\\cv-20250511192255.doc",
+      "PackagePath": "staticwebassets\\resource\\files\\employee-documents\\2025\\05\\cv-20250511192255.doc"
+    },
+    {
       "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\images\\Employee\\2025\\04\\05288872c0f14528ac54205451637c33.jpg",
       "PackagePath": "staticwebassets\\resource\\images\\Employee\\2025\\04\\05288872c0f14528ac54205451637c33.jpg"
     },
@@ -137,12 +197,36 @@
       "PackagePath": "staticwebassets\\resource\\images\\Employee\\2025\\05\\22ed78c3a3f24a7cac4dc641f06a0d7d.jpg"
     },
     {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\images\\Employee\\2025\\05\\4d2ebb50f9a9487496b8e0c3935a92be.jpg",
+      "PackagePath": "staticwebassets\\resource\\images\\Employee\\2025\\05\\4d2ebb50f9a9487496b8e0c3935a92be.jpg"
+    },
+    {
       "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\images\\Employee\\2025\\05\\9b9333fd95ab49d6aa304040cb567523.jpg",
       "PackagePath": "staticwebassets\\resource\\images\\Employee\\2025\\05\\9b9333fd95ab49d6aa304040cb567523.jpg"
     },
     {
       "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\images\\Employee\\2025\\05\\a32262dc982c4de39b8f5eb26e79b6e2.jpg",
       "PackagePath": "staticwebassets\\resource\\images\\Employee\\2025\\05\\a32262dc982c4de39b8f5eb26e79b6e2.jpg"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\images\\Employee\\2025\\05\\ca06e9242c914bea94f9cc64129cf649.jpg",
+      "PackagePath": "staticwebassets\\resource\\images\\Employee\\2025\\05\\ca06e9242c914bea94f9cc64129cf649.jpg"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\images\\Employee\\2025\\05\\d40cdd95949949e3a27a7fa0799ae938.jpg",
+      "PackagePath": "staticwebassets\\resource\\images\\Employee\\2025\\05\\d40cdd95949949e3a27a7fa0799ae938.jpg"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\images\\Employee\\2025\\05\\da5d556f2dbc40f189bf11deb48ea35e.jpg",
+      "PackagePath": "staticwebassets\\resource\\images\\Employee\\2025\\05\\da5d556f2dbc40f189bf11deb48ea35e.jpg"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\images\\Employee\\2025\\05\\e4cd32e46cf14c44a8c84d942b831707.jpg",
+      "PackagePath": "staticwebassets\\resource\\images\\Employee\\2025\\05\\e4cd32e46cf14c44a8c84d942b831707.jpg"
+    },
+    {
+      "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\images\\Employee\\2025\\05\\f758317fdea44823b7bf531460fc117f.png",
+      "PackagePath": "staticwebassets\\resource\\images\\Employee\\2025\\05\\f758317fdea44823b7bf531460fc117f.png"
     },
     {
       "Id": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\wwwroot\\resource\\images\\UserAccount\\2025\\04\\6e36e5b21da94e36a96dc19b3739bd4d.jpg",

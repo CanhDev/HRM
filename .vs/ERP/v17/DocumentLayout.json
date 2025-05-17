@@ -1,12 +1,213 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\apis\\leaves\\entity\\leaverequest_details.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:apis\\leaves\\entity\\leaverequest_details.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\apis\\leaves\\dtos_res\\dataresponse_leave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:apis\\leaves\\dtos_res\\dataresponse_leave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\apis\\leaves\\entity\\leaverequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:apis\\leaves\\entity\\leaverequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\apis\\leaves\\services\\leaveservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:apis\\leaves\\services\\leaveservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\apis\\leaves\\api\\leavecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:apis\\leaves\\api\\leavecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\apis\\leaves\\dtos_res\\dataset_leave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:apis\\leaves\\dtos_res\\dataset_leave.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\entities\\0_systems\\basevoucherentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:entities\\0_systems\\basevoucherentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\base_sys\\helpers\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:base_sys\\helpers\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\apis\\leaves\\entity\\leavetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:apis\\leaves\\entity\\leavetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\base_sys\\repos\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:base_sys\\repos\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\entities\\0_systems\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:entities\\0_systems\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|d:\\canh\\haui\\a_datn\\sourcecode\\erp\\migrations\\20250516115426_16_5v9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{223FDCAD-B377-4689-8DB5-391DF5C29925}|ERP.csproj|solutionrelative:migrations\\20250516115426_16_5v9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Mapper.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Base_sys\\Helpers\\Mapper.cs",
+              "RelativeDocumentMoniker": "Base_sys\\Helpers\\Mapper.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Base_sys\\Helpers\\Mapper.cs",
+              "RelativeToolTip": "Base_sys\\Helpers\\Mapper.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAADEAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T12:43:04.751Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LeaveRequest_details.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\entity\\LeaveRequest_details.cs",
+              "RelativeDocumentMoniker": "APIs\\Leaves\\entity\\LeaveRequest_details.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\entity\\LeaveRequest_details.cs",
+              "RelativeToolTip": "APIs\\Leaves\\entity\\LeaveRequest_details.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T12:24:09.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LeaveType.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\entity\\LeaveType.cs",
+              "RelativeDocumentMoniker": "APIs\\Leaves\\entity\\LeaveType.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\entity\\LeaveType.cs",
+              "RelativeToolTip": "APIs\\Leaves\\entity\\LeaveType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T12:23:07.214Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BaseVoucherEntity.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\0_Systems\\BaseVoucherEntity.cs",
+              "RelativeDocumentMoniker": "Entities\\0_Systems\\BaseVoucherEntity.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\0_Systems\\BaseVoucherEntity.cs",
+              "RelativeToolTip": "Entities\\0_Systems\\BaseVoucherEntity.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwBcAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T10:45:27.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Dataset_Leave.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\DTOs_Res\\Dataset_Leave.cs",
+              "RelativeDocumentMoniker": "APIs\\Leaves\\DTOs_Res\\Dataset_Leave.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\DTOs_Res\\Dataset_Leave.cs",
+              "RelativeToolTip": "APIs\\Leaves\\DTOs_Res\\Dataset_Leave.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T10:29:38.663Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DataResponse_Leave.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\DTOs_Res\\DataResponse_Leave.cs",
+              "RelativeDocumentMoniker": "APIs\\Leaves\\DTOs_Res\\DataResponse_Leave.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\DTOs_Res\\DataResponse_Leave.cs",
+              "RelativeToolTip": "APIs\\Leaves\\DTOs_Res\\DataResponse_Leave.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAqwDAAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T10:28:29.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LeaveController.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\API\\LeaveController.cs",
+              "RelativeDocumentMoniker": "APIs\\Leaves\\API\\LeaveController.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\API\\LeaveController.cs",
+              "RelativeToolTip": "APIs\\Leaves\\API\\LeaveController.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAACMAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T09:25:29.416Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LeaveRequest.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\entity\\LeaveRequest.cs",
+              "RelativeDocumentMoniker": "APIs\\Leaves\\entity\\LeaveRequest.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\entity\\LeaveRequest.cs",
+              "RelativeToolTip": "APIs\\Leaves\\entity\\LeaveRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T09:21:13.862Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LeaveService.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\Services\\LeaveService.cs",
+              "RelativeDocumentMoniker": "APIs\\Leaves\\Services\\LeaveService.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\APIs\\Leaves\\Services\\LeaveService.cs",
+              "RelativeToolTip": "APIs\\Leaves\\Services\\LeaveService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAGQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T09:22:19.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "20250516115426_16_5v9.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Migrations\\20250516115426_16_5v9.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250516115426_16_5v9.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Migrations\\20250516115426_16_5v9.cs",
+              "RelativeToolTip": "Migrations\\20250516115426_16_5v9.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T11:54:26.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\0_Systems\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "Entities\\0_Systems\\BaseEntity.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Entities\\0_Systems\\BaseEntity.cs",
+              "RelativeToolTip": "Entities\\0_Systems\\BaseEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T09:50:23.975Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BaseRepository.cs",
+              "DocumentMoniker": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Base_sys\\Repos\\BaseRepository.cs",
+              "RelativeDocumentMoniker": "Base_sys\\Repos\\BaseRepository.cs",
+              "ToolTip": "D:\\Canh\\haui\\a_datn\\sourcecode\\ERP\\Base_sys\\Repos\\BaseRepository.cs",
+              "RelativeToolTip": "Base_sys\\Repos\\BaseRepository.cs",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAtwLUAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T09:50:17.873Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

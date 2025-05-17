@@ -11,6 +11,8 @@ using ERP.Entities.Vouchers.Employee;
 using AutoMapper;
 using ERP.Base_sys.Helpers;
 using Microsoft.EntityFrameworkCore;
+using ERP.APIs.Leaves.entity;
+using ERP.APIs.Leaves.Services;
 
 namespace ERP.Services.Lists
 {
@@ -21,19 +23,19 @@ namespace ERP.Services.Lists
         private readonly EmergencyContactService _emergencyContactService;
         private readonly EducationService _educationService;
         private readonly WorkExperienceService _workExperienceService;
-        private readonly IEmployeeDocumentService _employeeDocumentService;
         private readonly FileHelper _fileHelper;
         private readonly IMapper _mapper;
         private readonly ImageHelper _imageHelper;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
+        private readonly EmployeeLeaveBalanceService _employeeLeaveBalanceService;
 
         public EmployeeService(IBaseRepository<Employee> repository,
+
             ApplicationDbContext context,
+            EmployeeLeaveBalanceService employeeLeaveBalanceService,
             EmergencyContactService emergencyContactService,
             EducationService educationService,
             WorkExperienceService workExperienceService,
-            IEmployeeDocumentService employeeDocumentService,
             IHttpContextAccessor httpContextAccessor,
              FileHelper fileHelper,
              ImageHelper imageHelper,
@@ -44,11 +46,11 @@ namespace ERP.Services.Lists
             _emergencyContactService = emergencyContactService;
             _educationService = educationService;
             _workExperienceService = workExperienceService;
-            _employeeDocumentService = employeeDocumentService;
             _fileHelper = fileHelper;
             _mapper = mapper;
             _imageHelper = imageHelper;
             _httpContextAccessor = httpContextAccessor;
+            _employeeLeaveBalanceService = employeeLeaveBalanceService;
         }
 
 
@@ -179,6 +181,18 @@ namespace ERP.Services.Lists
                 workExperiences.ForEach(w => w.employeeId = employeeId);
                 await _workExperienceService.AddRangeAsync(workExperiences);
 
+                var leaveBalance = new EmployeeLeaveBalance
+                {
+                    employeeId = employeeId,
+                    totalDays = 12,
+                    usedDays = 0,
+                    remainingDays = 12,
+                    usedDaysMonth = 0,
+                    remainingDaysMonth = 3,
+                    maxDayMonth = 3,
+                    status = 1
+                };
+                await _employeeLeaveBalanceService.AddAsync(leaveBalance);
                 
 
                 // ✅ Commit transaction nếu tất cả đều thành công

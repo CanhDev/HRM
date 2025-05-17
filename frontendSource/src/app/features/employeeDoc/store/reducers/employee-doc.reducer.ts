@@ -204,6 +204,22 @@ export const employeeReducer = createReducer(
     ...state,
     error,
     loading: false
+  })),
+  // Delete Employee
+  on(EmployeeDocActions.deleteRangeEmployee, (state) => ({
+    ...state,
+    loading: true,
+    error: null
+  })),
+  on(EmployeeDocActions.deleteRangeEmployeeSuccess, (state, { ids }) => ({
+    ...state,
+    employees: state.employees.filter(e => !ids.includes(e.id)),
+    loading: false
+  })),
+  on(EmployeeDocActions.deleteRangeEmployeeFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false
   }))
 );
 

@@ -25,7 +25,7 @@ namespace ERP.APIs.Leaves.Controllers
             return Ok(result);
         }
 
-        [HttpPost("GetPagedList")]
+        [HttpPost("GetData")]
         public async Task<IActionResult> GetPagedList([FromBody] SearchRequest<LeaveRequest> request)
         {
             var result = await _leaveService.GetPagedListAsync(request);
@@ -72,8 +72,8 @@ namespace ERP.APIs.Leaves.Controllers
             });
         }
 
-        [HttpDelete("DeleteRange{ids}")]
-        public async Task<IActionResult> DeleteRange(List<int> ids)
+        [HttpDelete("DeleteRange")]
+        public async Task<IActionResult> DeleteRange([FromBody]List<int> ids)
         {
             var response = await _leaveService.DeleteRangeAsync(ids);
             if (response == false)
@@ -90,24 +90,7 @@ namespace ERP.APIs.Leaves.Controllers
                 Success = true
             });
         }
-        [HttpDelete("DeleteAll{ids}")]
-        public async Task<IActionResult> DeleteAllAsync()
-        {
-            var response = await _leaveService.DeleteAllAsync();
-            if (response == false)
-            {
-                return Ok(new ApiRespone_basic
-                {
-                    Data = null,
-                    Success = false
-                });
-            }
-            return Ok(new ApiRespone_basic
-            {
-                Data = null,
-                Success = true
-            });
-        }
+        
 
         [HttpPost("Approve/{id}")]
         public async Task<IActionResult> Approve(int id, [FromQuery] int approverId)

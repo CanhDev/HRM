@@ -1,0 +1,85 @@
+<!-- components/employee-filter/employee-filter.component.html -->
+<div class="p-3 border bg-white">
+  <h6 class="mb-3 d-flex align-items-center">
+    <i class="bi bi-funnel-fill me-2"></i> Bộ lọc nâng cao
+  </h6>
+
+  <form *ngIf="filterForm" [formGroup]="filterForm" class="row gx-3 gy-3">
+    <!-- Mã hợp đồng -->
+    <div class="col-md-3">
+      <label for="contractCode" class="form-label small mb-1">Mã hợp đồng</label>
+      <div class="position-relative">
+        <i class="bi bi-person-badge position-absolute top-50 start-0 translate-middle-y ms-2 text-muted"></i>
+        <input type="text" id="contractCode" class="form-control ps-5" formControlName="contractCode" placeholder="Mã hợp đồng">
+      </div>
+    </div>
+       <div class="col-md-3">
+  <label for="employeeId" class="form-label small mb-1">Nhân viên</label>
+
+  <mat-form-field appearance="fill" class="w-100 input-uniform-height">
+    <input
+      type="text"
+      matInput
+      placeholder="Tìm nhân viên"
+      formControlName="employeeId"
+      
+      [matAutocomplete]="auto" />
+
+    <mat-autocomplete [displayWith]="displayFn" #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let emp of employeeList"
+        [value]="emp.id">
+        {{ emp.form_name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+
+
+    <!-- Trạng thái -->
+     <div class="col-md-3">
+      <label for="departmentId" class="form-label small mb-1">Phòng ban</label>
+      <select formControlName="departmentId" class="form-select" id="departmentId">
+        <option value="">Tất cả</option>
+        <option *ngFor="let item of departmentList" [value]="item.form_value">{{ item.form_name }}</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="status" class="form-label small mb-1">Trạng thái</label>
+      <select formControlName="status" class="form-select" id="status">
+        <option value="">Tất cả</option>
+        <option *ngFor="let item of statusList" [value]="item.form_value">{{ item.form_name }}</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label for="signedDateFrom" class="form-label small mb-1">Ngày ký từ</label>
+      <input type="date" class="form-control" formControlName="signedDateFrom">
+    </div>
+
+    <!-- Ngày sinh đến -->
+    <div class="col-md-3">
+      <label for="signedDateTo" class="form-label small mb-1">Ngày ký đến</label>
+      <input type="date" class="form-control" formControlName="signedDateTo">
+    </div>
+    <div class="col-md-3">
+      <label for="endDateFrom" class="form-label small mb-1">Ngày hết hạn từ</label>
+      <input type="date" class="form-control" formControlName="endDateFrom">
+    </div>
+
+    <!-- Ngày sinh đến -->
+    <div class="col-md-3">
+      <label for="endDateTo" class="form-label small mb-1">Ngày hết hạn đến</label>
+      <input type="date" class="form-control" formControlName="endDateTo">
+    </div>
+    
+    <!-- Buttons -->
+    <div class="col-12 d-flex justify-content-end gap-2 mt-3">
+      <button type="button" class="btn btn-sm btn-secondary" (click)="resetFilters()">
+        <i class="bi bi-x-circle"></i> Xóa
+      </button>
+      <button type="button" class="btn btn-sm btn-primary" (click)="applyFilters()">
+        <i class="bi bi-funnel"></i> Lọc
+      </button>
+    </div>
+  </form>
+</div>

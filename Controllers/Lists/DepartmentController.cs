@@ -103,5 +103,20 @@ namespace ERP.Controllers.Lists
             }
             return Ok(response);
         }
+        [HttpDelete("DeleteRange")]
+        public async Task<ActionResult> DeleteRange([FromBody] List<int> ids) 
+        {
+            var response = await _DepartmentService.DeleteRangeAsync(ids);
+            if (!response)
+            {
+                return StatusCode(500, new ApiResponse<Department>
+                {
+                    Success = false,
+                    Data = null
+                });
+            }
+            return Ok(response);
+        }
+
     }
 }

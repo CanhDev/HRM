@@ -15,7 +15,6 @@ namespace ERP.Entities._0_Systems
         public DateTime updateAt { get; set; }
         public string? createBy { get; set; }
         public string? updateBy { get; set; }
-        public int status { get; set; } = 1;
 
         
         public DateTime? voucher_date { get; set; }
@@ -23,7 +22,7 @@ namespace ERP.Entities._0_Systems
         public string voucher_code { get; set; }
         public string? detail_note { get; set; }
         public int approvalStatus { get; set; } // trạng thái duyệt join với bảng sys_dmtt
-        public int? departmentID { get; set; }
+        public int? departmentId { get; set; }
         public int? approvalUser { get; set; }
         public string? cancelReason { get; set; }
         public string? rejectReason { get; set; }

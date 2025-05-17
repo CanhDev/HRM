@@ -26,6 +26,13 @@ namespace ERP.APIs.Contracts
             var result = await _ContractService.GetNew();
             return Ok(result);
         }
+
+        [HttpGet("CheckStatus/{id}")]
+        public IActionResult CheckStatus(int id)
+        {
+            var result = _ContractService.isApproved(id);
+            return Ok(result);
+        }
         [HttpGet]
         public async Task<ActionResult<ApiResponse<List<EmploymentContract>>>> GetAll()
         {
@@ -123,8 +130,8 @@ namespace ERP.APIs.Contracts
             return Ok(response);
         }
 
-        [HttpDelete("DeleteRange{ids}")]
-        public async Task<IActionResult> DeleteRange(List<int> ids)
+        [HttpDelete("DeleteRange")]
+        public async Task<IActionResult> DeleteRange([FromBody]List<int> ids)
         {
             var response = await _ContractService.DeleteRangeAsync(ids);
             if (response == false)

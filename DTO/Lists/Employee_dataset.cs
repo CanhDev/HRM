@@ -123,25 +123,5 @@ namespace ERP.DTO.Lists
         public int status { get; set; } = 1;
     }
 
-    public class EmployeeDocumentDTO : IActionDto
-    {
-        public int id { get; set; }
-        public int employeeId { get; set; }
-
-        [StringLength(100)]
-        public string? documentName { get; set; }
-
-        [StringLength(50)]
-        public string? documentType { get; set; }
-
-        [StringLength(250)]
-        public string? filePath { get; set; }
-
-
-        [StringLength(250)]
-        public string? notes { get; set; }
-        public IFormFile? docfile { get; set; }
-        public int status { get; set; } = 1;
-        public string? actionType { get; set; }
-    }
+    
 }

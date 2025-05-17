@@ -1,0 +1,221 @@
+<div class="container-fluid py-3">
+  <div class="card shadow">
+    <div style="margin-bottom: 0;" class="card-header d-flex justify-content-between align-items-center">
+      <h3 style="color: white;">Thông tin chính</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="LeaveRequestForm" (ngSubmit)="saveLeaveRequest()" class="form-group-compact">
+        <div class="row g-2">
+          <!-- Basic Information -->
+          <div class="col-12 col-md-3 mb-3">
+            <label for="voucher_code" class="form-label">Mã đơn nghỉ phép</label>
+            <input id="voucher_code" type="text" class="form-control" formControlName="voucher_code" readonly />
+            <div *ngIf="LeaveRequestForm.get('vour')?.invalid && LeaveRequestForm.get('voucher_code')?.touched" class="text-danger small">
+              Trường này bắt buộc nhập
+            </div>
+          </div>
+          
+          <div class="col-12 col-md-3 mb-3">
+            <label for="employeeId" class="form-label">Nhân viên</label>
+            <mat-form-field appearance="fill" class="w-100 input-uniform-height">
+              <input
+                type="text"
+                matInput
+                placeholder="Tìm nhân viên"
+                formControlName="employeeId"
+                [matAutocomplete]="auto"
+                (blur)="validateSelection()" />
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" [panelWidth]="'auto'">
+                <mat-option
+                  *ngFor="let emp of filteredEmployees | async"
+                  [value]="emp.id">
+                  {{ emp.form_value }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div *ngIf="LeaveRequestForm.get('employeeId')?.invalid && LeaveRequestForm.get('employeeId')?.touched" class="text-danger small">
+              Trường này bắt buộc nhập
+            </div>
+          </div>
+          
+          <div class="col-12 col-md-3 mb-3">
+            <label for="createDate" class="form-label">Ngày tạo</label>
+            <input id="createDate" type="date" class="form-control" formControlName="createDate" />
+            <div *ngIf="LeaveRequestForm.get('createDate')?.invalid && LeaveRequestForm.get('createDate')?.touched" class="text-danger small">
+              Trường này bắt buộc nhập
+            </div>
+          </div>
+          
+          <div class="col-12 col-md-3 mb-3">
+            <label for="totalDays" class="form-label">Tổng số ngày</label>
+            <input id="totalDays" type="number" class="form-control" formControlName="totalDays" />
+            <div *ngIf="LeaveRequestForm.get('totalDays')?.invalid && LeaveRequestForm.get('totalDays')?.touched" class="text-danger small">
+              Trường này bắt buộc nhập
+            </div>
+          </div>
+          
+          <div class="col-12 col-md-6 mb-3">
+            <label for="approvalStatus" class="form-label">Trạng thái</label>
+            <select id="approvalStatus" class="form-select" formControlName="approvalStatus">
+              <option value="" disabled>Chọn trạng thái</option>
+              <option *ngFor="let status of statusList" [value]="status.form_value">{{ status.form_name }}</option>
+            </select>
+            <div *ngIf="LeaveRequestForm.get('approvalStatus')?.invalid && LeaveRequestForm.get('approvalStatus')?.touched" class="text-danger small">
+              Trường này bắt buộc nhập
+            </div>
+          </div>
+          
+          <div class="col-12 col-md-6 mb-3">
+            <label for="detail_note" class="form-label">Ghi chú</label>
+            <textarea id="detail_note" class="form-control" formControlName="detail_note" rows="1"></textarea>
+            <div *ngIf="LeaveRequestForm.get('detail_note')?.invalid && LeaveRequestForm.get('detail_note')?.touched" class="text-danger small">
+              Trường này bắt buộc nhập
+            </div>
+          </div>
+        </div>
+
+        <!-- Leave Request Details Section -->
+        <div class="row mt-3">
+          <div class="col-12">
+            <div class="addendum-header d-flex justify-content-between align-items-center">
+              <h5 class="pcolor mb-0">Chi tiết nghỉ phép</h5>
+              <button type="button" class="btn btn-sm btn-outline-primary" (click)="openDetailModal()">
+                <i class="bi bi-plus"></i> Thêm chi tiết
+              </button>
+            </div>
+          </div>
+          
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table table-sm table-striped table-hover">
+                <thead class="table-light">
+                  <tr>
+                    <th>Loại phép</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Số ngày</th>
+                    <th>Lý do</th>
+                    <th>Trạng thái</th>
+                    <th width="100">#</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let detail of filteredLeaveRequestDetais" [hidden]="detail['actionType'] === 'D'">
+                    <td>{{ detail.leaveType }}</td>
+                    <td>{{ detail.startDate | date }}</td>
+                    <td>{{ detail.endDate | date }}</td>
+                    <td>{{ detail.totalDays }}</td>
+                    <td>{{ detail.reason }}</td>
+                        <td>
+                          <span *ngIf="detail['actionType'] === 'A'" class="badge bg-success">Tạo mới</span>
+                          <span *ngIf="detail['actionType'] === 'E'" class="badge bg-warning">Sửa</span>
+                          <span *ngIf="detail['actionType'] === 'N' || !detail['actionType']" class="badge bg-info">Gốc</span>
+                        </td>
+
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-outline-primary" (click)="editLeaveReqestDetail(detail)">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" (click)="deleteAddendum(detail)">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr *ngIf="filteredLeaveRequestDetais.length === 0">
+                    <td colspan="6" class="text-center">Trống</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Form Actions -->
+        <div class="row mt-3">
+          <div class="col-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="cancel()">Hủy</button>
+            <button type="submit" class="btn btn-primary">Lưu</button>
+             <button [disabled]="!isEditMode" style="margin: 0 6px;" type="button" class="btn btn-primary">Duyệt</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Leave Request Detail Modal -->
+<div class="modal fade" id="leaveRequestDetailModal" tabindex="-1" aria-labelledby="leaveRequestDetailModalLabel" aria-hidden="true" [ngClass]="{'show': displayLeaveRequestDetaisModal}" [ngStyle]="{'display': displayLeaveRequestDetaisModal ? 'block' : 'none'}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="leaveRequestDetailModalLabel">Chi tiết nghỉ phép</h5>
+        <button type="button" class="btn-close" (click)="displayLeaveRequestDetaisModal = false" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="LeaveRequestDetaisForm" class="form-group-compact">
+          <div class="row g-2">
+            <div class="col-12 col-md-6 mb-3">
+              <label for="leaveType" class="form-label">Loại phép</label>
+              <select id="leaveType" class="form-select" formControlName="leaveType">
+                <option value="" disabled>Chọn loại phép</option>
+                <option *ngFor="let status of statusList" [value]="status.form_value">{{ status.form_name }}</option>
+              </select>
+              <div *ngIf="LeaveRequestDetaisForm.get('leaveType')?.invalid && LeaveRequestDetaisForm.get('leaveType')?.touched" class="text-danger small">
+                Trường này bắt buộc nhập
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 mb-3">
+              <label for="workCode" class="form-label">Mã công</label>
+              <input id="workCode" type="number" class="form-control" formControlName="workCode" />
+              <div *ngIf="LeaveRequestDetaisForm.get('workCode')?.invalid && LeaveRequestDetaisForm.get('workCode')?.touched" class="text-danger small">
+                Trường này bắt buộc nhập
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 mb-3">
+              <label for="startDate" class="form-label">Ngày bắt đầu</label>
+              <input id="startDate" type="date" class="form-control" formControlName="startDate" />
+              <div *ngIf="LeaveRequestDetaisForm.get('startDate')?.invalid && LeaveRequestDetaisForm.get('startDate')?.touched" class="text-danger small">
+                Trường này bắt buộc nhập
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 mb-3">
+              <label for="endDate" class="form-label">Ngày kết thúc</label>
+              <input id="endDate" type="date" class="form-control" formControlName="endDate" />
+              <div *ngIf="LeaveRequestDetaisForm.get('endDate')?.invalid && LeaveRequestDetaisForm.get('endDate')?.touched" class="text-danger small">
+                Trường này bắt buộc nhập
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 mb-3">
+              <label for="totalDays" class="form-label">Số ngày nghỉ</label>
+              <input id="totalDays" type="number" class="form-control" formControlName="totalDays" />
+              <div *ngIf="LeaveRequestDetaisForm.get('totalDays')?.invalid && LeaveRequestDetaisForm.get('totalDays')?.touched" class="text-danger small">
+                Trường này bắt buộc nhập
+              </div>
+            </div>
+            
+            <div class="col-12 mb-3">
+              <label for="reason" class="form-label">Lý do</label>
+              <textarea id="reason" class="form-control" formControlName="reason" rows="3"></textarea>
+              <div *ngIf="LeaveRequestDetaisForm.get('reason')?.invalid && LeaveRequestDetaisForm.get('reason')?.touched" class="text-danger small">
+                Trường này bắt buộc nhập
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="displayLeaveRequestDetaisModal = false">Hủy</button>
+        <button type="button" class="btn btn-primary" (click)="saveAddendum()">Lưu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal backdrop -->
+<div class="modal-backdrop fade show" *ngIf="displayLeaveRequestDetaisModal"></div>

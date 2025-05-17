@@ -1,0 +1,342 @@
+<div class="container-fluid py-3">
+    <div class="card shadow">
+      <div style="margin-bottom: 0;" class="card-header d-flex justify-content-between align-items-center">
+        <h3 style="color: white;">Chi tiết hợp đồng</h3>
+      </div>
+      <div class="card-body">
+        <!-- Tab navigation -->
+        <ul class="nav nav-tabs mb-3">
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': activeTab === 0}" (click)="changeTab(0)" href="javascript:void(0)">
+              Thông tin chính
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': activeTab === 1}" (click)="isEditMode && changeTab(1)" href="javascript:void(0)">
+              Lịch sử thay đổi
+            </a>
+          </li>
+        </ul>
+
+        <!-- Contract Details Tab -->
+        <div [hidden]="activeTab !== 0">
+          <form [formGroup]="contractForm" (ngSubmit)="saveContract()" class="form-group-compact">
+            <div class="row g-2">
+              <!-- Top Row - Key Information -->
+              <div class="col-12 col-md-3 ">
+                <label for="contractCode" class="form-label">Mã hợp đồng</label>
+                <input id="contractCode" type="text" class="form-control" formControlName="contractCode" />
+                <div *ngIf="contractForm.get('contractCode')?.invalid && contractForm.get('contractCode')?.touched" class="text-danger small">
+                  Trường này bắt buộc nhập
+                </div>
+              </div>
+              
+              <div class="col-12 col-md-3 ">
+                <label for="contractTypeId" class="form-label">Loại hợp đồng</label>
+                <select id="contractTypeId" class="form-select" formControlName="contractTypeId">
+                  <option value="" disabled>Select Contract Type</option>
+                  <option *ngFor="let type of contractTypeList" [value]="type.form_value">{{ type.form_name }}</option>
+                </select>
+                <div *ngIf="contractForm.get('contractTypeId')?.invalid && contractForm.get('contractTypeId')?.touched" class="text-danger small">
+                  Trường này bắt buộc nhập
+                </div>
+              </div>
+              
+              <div class="col-12 col-md-3 ">
+                <label for="employeeId" class="form-label">Nhân viên</label>
+                <mat-form-field appearance="fill" class="w-100 input-uniform-height">
+                  <input
+                  [readonly]="isEditMode"
+                    type="text"
+                    matInput
+                    placeholder="Tìm nhân viên"
+                    formControlName="employeeId"
+                    [matAutocomplete]="auto"
+                    (blur)="validateSelection()" />
+                  <!-- Sử dụng panelWidth để kiểm soát độ rộng và đảm bảo hiển thị đúng -->
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" [panelWidth]="'auto'">
+                    <mat-option
+                      *ngFor="let emp of filteredEmployees | async"
+                      [value]="emp.id">
+                      {{ emp.form_value }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <div *ngIf="contractForm?.get('employeeId')?.invalid && contractForm?.get('employeeId')?.touched" class="text-danger small">
+                  Trường này bắt buộc nhập
+                </div>
+              </div>
+              
+              <div class="col-12 col-md-3">
+                <label for="salary" class="form-label">Lương</label>
+                <div class="input-group">
+                  <input id="salary" type="number" class="form-control" formControlName="salary" />
+                </div>
+                <div *ngIf="contractForm.get('salary')?.invalid && contractForm.get('salary')?.touched" class="text-danger small">
+                  Trường này bắt buộc nhập
+                </div>
+              </div>
+              
+              <!-- Second Row - Department/Position/Dates -->
+              <div class="col-12 col-md-3 mb-3">
+                <label for="departmentId" class="form-label">Phòng ban</label>
+                <select id="departmentId" class="form-select" formControlName="departmentId">
+                  <option value="" disabled>Select Department</option>
+                  <option *ngFor="let department of departmentList" [value]="department.form_value">{{ department.form_name }}</option>
+                </select>
+                <div *ngIf="contractForm.get('departmentId')?.invalid && contractForm.get('departmentId')?.touched" class="text-danger small">
+                  Trường này bắt buộc nhập
+                </div>
+              </div>
+              
+              <div class="col-12 col-md-3 mb-3">
+                <label for="positionId" class="form-label">Chức vụ</label>
+                <select id="positionId" class="form-select" formControlName="positionId">
+                  <option value="" disabled>Select Position</option>
+                  <option *ngFor="let position of positionList" [value]="position.form_value">{{ position.form_name }}</option>
+                </select>
+                <div *ngIf="contractForm.get('positionId')?.invalid && contractForm.get('positionId')?.touched" class="text-danger small">
+                  Trường này bắt buộc nhập
+                </div>
+              </div>
+              
+              <div class="col-12 col-md-2 mb-3">
+                <label for="startDate" class="form-label">Ngày bắt đầu</label>
+                <input id="startDate" type="date" class="form-control" formControlName="startDate" />
+                <div *ngIf="contractForm.get('startDate')?.invalid && contractForm.get('startDate')?.touched" class="text-danger small">
+                  Trường này bắt buộc nhập
+                </div>
+              </div>
+              
+              <div class="col-12 col-md-2 mb-3">
+                <label for="endDate" class="form-label">Ngày kết thúc</label>
+                <input id="endDate" type="date" class="form-control" formControlName="endDate" />
+              </div>
+              
+              <div class="col-12 col-md-2 mb-3">
+                <label for="signedDate" class="form-label">Ngày ký</label>
+                <input id="signedDate" type="date" class="form-control" formControlName="signedDate" />
+              </div>
+              
+              <!-- Third Row - Details -->  
+              <div class="col-12 col-md-3 mb-3">
+                <label for="workingTime" class="form-label">Thời gian làm việc</label>
+                <input id="workingTime" type="text" class="form-control" formControlName="workingTime"  />
+              </div>
+              
+              <div class="col-12 col-md-3 mb-3">
+                <label for="jobDescription" class="form-label">Mô tả công việc</label>
+                <input class="form-control" type="text" formControlName="jobDescription" >
+              </div>
+              
+              <div class="col-12 col-md-6 mb-3">
+                <label for="benefits" class="form-label">Quyền lợi</label>
+                <textarea id="benefits" class="form-control" formControlName="benefits" rows="1" ></textarea>
+              </div>
+              
+              <!-- Fourth Row - Terms and Notes -->
+              <div class="col-12 col-md-8 mb-3">
+                <label for="terms" class="form-label">Điều khoản và điều kiện</label>
+                <textarea id="terms" class="form-control" formControlName="terms" rows="1"></textarea>
+              </div>
+              
+              <div class="col-12 col-md-4 mb-3">
+                <label for="status" class="form-label">Trạng thái</label>
+                <select id="status" class="form-select" formControlName="status">
+                  <option value="" disabled>Chọn trạng thái</option>
+                  <option *ngFor="let item of statusList" [value]="item.form_value">{{ item.form_name }}</option>
+                </select>
+                <div *ngIf="contractForm.get('status')?.invalid && contractForm.get('status')?.touched" class="text-danger small">
+                  Trường này bắt buộc nhập
+                </div>
+              </div>
+            </div>
+            
+            <!-- Contract Addendums Section -->
+            <div class="row mt-3">
+              <div class="col-12">
+                <div class="addendum-header d-flex justify-content-between align-items-center">
+                  <h5 class="pcolor mb-0">Phụ lục hợp đồng</h5>
+                  <button type="button" class="btn btn-sm btn-outline-primary" (click)="openAddendumModal()">
+                    <i class="bi bi-plus"></i> Tạo phụ lục hợp đồng
+                  </button>
+                </div>
+              </div>
+              
+              <div class="col-12">
+                <div class="table-responsive">
+                  <table class="table table-sm table-striped table-hover">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Tiêu đề</th>
+                        <th>Ngày có hiệu lực</th>
+                        <th>Trường thay đổi</th>
+                        <th>Trạng thái</th>
+                        <th width="100">#</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let addendum of contractAddendums" [hidden]="addendum['actionType'] === 'D'">
+                        <td>{{ addendum.title }}</td>
+                        <td>{{ addendum.effectiveDate | date }}</td>
+                        <td>{{ addendum.changeField }}</td>
+                        <td>
+                          <span *ngIf="addendum['actionType'] === 'A'" class="badge bg-success">Tạo mới</span>
+                          <span *ngIf="addendum['actionType'] === 'E'" class="badge bg-warning">Sửa</span>
+                          <span *ngIf="addendum['actionType'] === 'N' || !addendum['actionType']" class="badge bg-info">Gốc</span>
+                        </td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-outline-primary" (click)="editAddendum(addendum)">
+                              <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" (click)="deleteAddendum(addendum)">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr *ngIf="filteredAddendums.length === 0">
+                        <td colspan="5" class="text-center">Trống</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Form Actions -->
+            <div class="row mt-3">
+              <div class="col-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary me-2" (click)="cancel()">Hủy</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Contract History tab -->
+        <div [hidden]="activeTab !== 1">
+          <div class="row">
+            
+            
+            <div class="col-12">
+              <div class="table-responsive">
+                <table class="table table-sm table-striped table-hover">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Mã lịch sử</th>
+                      <th>Giá trị cũ</th>
+                      <th>Giá trị mới</th>
+                      <th>Ngày thay đổi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let history of contractHistory">
+                      <td>{{ history.id }}</td>
+                      <td>{{ history.oldValue }}</td>
+                      <td>{{ history.newValue }}</td>
+                      <td>{{ history.createdAt | date }}</td>
+                    </tr>
+                    <tr *ngIf="contractHistory.length === 0">
+                      <td colspan="4" class="text-center">Trống</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Addendum Modal -->
+<div class="modal fade" id="addendumModal" tabindex="-1" aria-labelledby="addendumModalLabel" aria-hidden="true" [ngClass]="{'show': displayAddendumModal}" [ngStyle]="{'display': displayAddendumModal ? 'block' : 'none'}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addendumModalLabel">Chi tiết phụ lục hợp đồng</h5>
+        <button type="button" class="btn-close" (click)="displayAddendumModal = false" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addendumForm" class="form-group-compact">
+          <div class="row g-2">
+            <div class="col-12 col-md-6 mb-3">
+              <label for="title" class="form-label">Tiêu đề</label>
+              <input id="title" type="text" class="form-control" formControlName="title" />
+              <div *ngIf="addendumForm.get('title')?.invalid && addendumForm.get('title')?.touched" class="text-danger small">
+                Trường này bắt buộc nhập
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 mb-3">
+              <label for="effectiveDate" class="form-label">Ngày có hiệu lực</label>
+              <input id="effectiveDate" type="date" class="form-control" formControlName="effectiveDate" />
+              <div *ngIf="addendumForm.get('effectiveDate')?.invalid && addendumForm.get('effectiveDate')?.touched" class="text-danger small">
+                Trường này bắt buộc nhập
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 mb-3">
+              <label for="changeField" class="form-label">Trường thay đổi</label>
+              <select id="changeField" class="form-select" formControlName="changeField" (change)="onChangeFieldSelected()">
+                <option value="" disabled>Chọn trường thay đổi</option>
+                <option value="department">Phòng ban</option>
+                <option value="position">Chức vụ</option>
+                <option value="salary">Lương</option>
+                <option value="endDate">Ngày hết hạn</option>
+              </select>
+            </div>
+            
+            <!-- Salary field - only shown when changeField is 'salary' -->
+            <div class="col-12 col-md-6 mb-3" *ngIf="addendumForm.get('changeField')?.value === 'salary'">
+              <label for="salary" class="form-label">Lương</label>
+              <div class="input-group">
+                <input id="addendumSalary" type="number" class="form-control" formControlName="salary" />
+              </div>
+            </div>
+            
+            <!-- End Date field - only shown when changeField is 'endDate' -->
+            <div class="col-12 col-md-6 mb-3" *ngIf="addendumForm.get('changeField')?.value === 'endDate'">
+              <label for="endDate" class="form-label">Ngày hết hạn</label>
+              <input id="addendumEndDate" type="date" class="form-control" formControlName="endDate" />
+            </div>
+            
+            <!-- Position field - only shown when changeField is 'position' -->
+            <div class="col-12 col-md-6 mb-3" *ngIf="addendumForm.get('changeField')?.value === 'position'">
+              <label for="positionId" class="form-label">Chức vụ</label>
+              <select id="addendumPositionId" class="form-select" formControlName="positionId">
+                <option value="" disabled>Select Position</option>
+                <option *ngFor="let position of positionList" [value]="position.form_value">{{ position.form_name }}</option>
+              </select>
+            </div>
+            
+            <!-- Department field - only shown when changeField is 'department' -->
+            <div class="col-12 col-md-6 mb-3" *ngIf="addendumForm.get('changeField')?.value === 'department'">
+              <label for="departmentId" class="form-label">Phòng ban</label>
+              <select id="addendumDepartmentId" class="form-select" formControlName="departmentId">
+                <option value="" disabled>Select Department</option>
+                <option *ngFor="let department of departmentList" [value]="department.form_value">{{ department.form_name }}</option>
+              </select>
+            </div>
+            
+            <div class="col-12 mb-3">
+              <label for="addendumContent" class="form-label">Nội dung thay đổi</label>
+              <textarea id="addendumContent" class="form-control" formControlName="addendumContent" rows="4"></textarea>
+              <div *ngIf="addendumForm.get('addendumContent')?.invalid && addendumForm.get('addendumContent')?.touched" class="text-danger small">
+                Trường này bắt buộc nhập
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="displayAddendumModal = false">Hủy</button>
+        <button type="button" class="btn btn-primary" (click)="saveAddendum()">Lưu</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal backdrop -->
+<div class="modal-backdrop fade show" *ngIf="displayAddendumModal"></div>

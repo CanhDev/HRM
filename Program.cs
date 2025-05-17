@@ -94,6 +94,7 @@ namespace ERP
             builder.Services.AddScoped<WorkExperienceService>();
             builder.Services.AddScoped<IEmployeeService,EmployeeService>();
             builder.Services.AddScoped<IEmployeeDocumentService, EmployeeDocumentService>();
+            builder.Services.AddScoped<IFileStorageService, FileStorageService>();
             builder.Services.AddScoped<ContractTypeService>();
             builder.Services.AddScoped<LeaveTypeService>();
             builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));

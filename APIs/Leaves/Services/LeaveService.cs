@@ -44,6 +44,8 @@ namespace ERP.APIs.Leaves.Services
         }
         public async Task<ApiRespone_basic> GetNew(int employeeId)
         {
+            var employee = await _context.Employees.FirstOrDefaultAsync(p => p.id == employeeId);
+
             var balanceLeave = await _context.employeeLeaveBalances
                 .Where(p => p.employeeId == employeeId & p.status != -1)
                 .Select(x => new
@@ -60,7 +62,9 @@ namespace ERP.APIs.Leaves.Services
                 Data = new
                 {
                     balanceLeave,
-                    default_phCode
+                    default_phCode,
+                    employee.departmentId,
+                    employeeId
                 }
             };
         }
@@ -79,6 +83,7 @@ namespace ERP.APIs.Leaves.Services
                 }
                 var LeaveRequest_detaisE = await _context.leaveRequest_Details
                     .Where(p => p.leaveRequestId == id & p.status != -1).ToListAsync();
+                var employee = await _context.Employees.FirstOrDefaultAsync(p => p.id == LeaveRequestE.employeeId);
                 var LeaveBalance = await _context.employeeLeaveBalances
                     .Where(p => p.employeeId == LeaveRequestE.employeeId & p.status != -1)
                     .Select(x => new
@@ -93,7 +98,6 @@ namespace ERP.APIs.Leaves.Services
                 {
                     ph = _mapper.Map<LeaveRequestRes>(LeaveRequestE),
                     ct = _mapper.Map<List<LeaveRequestDetailsRes>>(LeaveRequest_detaisE),
-                    ctBalance = _mapper.Map<List<LeaveBalanceResSub>>(LeaveBalance)
                 };
                 return new ApiRespone_basic
                 {

@@ -7,13 +7,7 @@ namespace ERP.APIs.Leaves.entity
     {
         public int employeeId { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime startDate { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime endDate { get; set; }
+        public DateTime createDate { get; set; }
 
         public double totalDays { get; set; }
     }

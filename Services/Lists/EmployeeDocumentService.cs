@@ -1,159 +1,253 @@
-﻿using ERP.Base_sys.Repos;
-using ERP.Base_sys.Services;
-using ERP.Base_sys;
-using ERP.Entities;
-using System.Linq.Expressions;
+﻿using ERP.DTO.Lists;
 using ERP.Entities.Vouchers.Employee;
+using ERP.Entities;
 using ERP.Services.Lists.interfaces;
-using ERP.DTO.Lists;
-using ERP.Base_sys.Helpers;
-using AutoMapper;
+using ERP.Base_sys;
+using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ERP.Services.Lists
 {
-
-    public class EmployeeDocumentService : BaseService<EmployeeDocument>, IEmployeeDocumentService
+    public class EmployeeDocumentService : IEmployeeDocumentService
     {
+        private readonly ApplicationDbContext _context;
+        private readonly IFileStorageService _fileService;
         private readonly ILogger<EmployeeDocumentService> _logger;
-        private readonly FileHelper _fileHelper;
-        private readonly IMapper _mapper;
-        public EmployeeDocumentService(IBaseRepository<EmployeeDocument> repository,
+
+        public EmployeeDocumentService(
             ApplicationDbContext context,
-            FileHelper fileHelper,
-            IMapper mapper,
-            ILogger<EmployeeDocumentService> logger) : base(repository, mapper, context)
+            IFileStorageService fileService,
+            ILogger<EmployeeDocumentService> logger)
         {
+            _context = context;
+            _fileService = fileService;
             _logger = logger;
-            _fileHelper = fileHelper;
-            _mapper = mapper;
         }
 
-
-        public override async Task<ApiResponse<List<EmployeeDocument>>> GetAllAsync(Expression<Func<EmployeeDocument, bool>>? predicate = null)
+        // Folder operations
+        public async Task<ApiRespone_basic> GetFoldersByEmployeeIdAsync(int employeeId)
         {
-            return await base.GetAllAsync(predicate);
-        }
-
-        public override async Task<ApiResponse<EmployeeDocument?>> GetByIdAsync(int id)
-        {
-            return await base.GetByIdAsync(id);
-        }
-        public override async Task<ApiResponse<PagedResult<EmployeeDocument>>> GetPagedListAsync(
-            SearchRequest<EmployeeDocument> searchRequest, params Expression<Func<EmployeeDocument, object>>[] includes)
-        {
-            var response = await base.GetPagedListAsync(searchRequest, includes);
-            return response;
-        }
-        public override async Task<ApiResponse<EmployeeDocument>> AddAsync(EmployeeDocument entity)
-        {
-            var res = await base.AddAsync(entity);
-            return res;
-        }
-        public override async Task<ApiResponse<EmployeeDocument>> UpdateAsync(EmployeeDocument entity)
-        {
-            var res = await base.UpdateAsync(entity);
-            return res;
-        }
-        public override async Task<ApiResponse<EmployeeDocument>> DeleteAsync(int id)
-        {
-            var res = await base.DeleteAsync(id);
-            return res;
-        }
-
-        public override async Task<bool> DeleteRangeAsync(IEnumerable<int> ids)
-        {
-            return await base.DeleteRangeAsync(ids);
-        }
-        public override async Task<bool> DeleteAllAsync()
-        {
-            return await base.DeleteAllAsync();
-        }
-
-        public async Task<ApiRespone_basic> AddAsync_full(List<EmployeeDocumentDTO> req)
-        {
-            try
+            var res =  await _context.employeeDocumentFolders
+                .Where(f => f.employeeId == employeeId)
+                .ToListAsync();
+            return new ApiRespone_basic
             {
+                Success = true,
+                Data = res
+            };
+        }
 
-                var EmployeeDocuments = new List<EmployeeDocument>();
-                foreach (var document in req)
+        public async Task<ApiRespone_basic> GetFolderByIdAsync(int folderId)
+        {
+            var res = await _context.employeeDocumentFolders
+                .Include(f => f.documents)
+                .FirstOrDefaultAsync(f => f.id == folderId);
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = res
+            };
+        }
+
+        public async Task<ApiRespone_basic> CreateFolderAsync(EmployeeDocumentFolderDTO folderDto)
+        {
+            var folder = new EmployeeDocumentFolder
+            {
+                employeeId = folderDto.employeeId,
+                folderName = folderDto.folderName,
+                description = folderDto.description,
+            };
+
+            _context.employeeDocumentFolders.Add(folder);
+            await _context.SaveChangesAsync();
+
+            folderDto.id = folder.id;
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = folderDto
+            };
+        }
+
+        public async Task<ApiRespone_basic> UpdateFolderAsync(EmployeeDocumentFolderDTO folderDto)
+        {
+            var folder = await _context.employeeDocumentFolders.FindAsync(folderDto.id);
+            if (folder == null)
+                throw new KeyNotFoundException($"Folder with ID {folderDto.id} not found");
+
+            folder.folderName = folderDto.folderName;
+            folder.description = folderDto.description;
+
+            await _context.SaveChangesAsync();
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = folderDto
+            };
+        }
+
+        public async Task<ApiRespone_basic> DeleteFolderAsync(int folderId)
+        {
+            var folder = await _context.employeeDocumentFolders
+                .Include(f => f.documents)
+                .FirstOrDefaultAsync(f => f.id == folderId);
+
+            if (folder == null)
+                return new ApiRespone_basic { Success = false};
+
+            // Delete all documents in the folder
+            if (folder.documents != null && folder.documents.Any())
+            {
+                foreach (var document in folder.documents)
                 {
-                    var employeeDocumentE = _mapper.Map<EmployeeDocument>(document);
-                    if (document.docfile != null)
+                    if (!string.IsNullOrEmpty(document.filePath))
                     {
-                        var uploadResult = await _fileHelper.SaveFileAsync(
-                            document.docfile,
-                            "",
-                            subFolder: "EmployeeDocument",
-                            preserveOriginalName: true);
-
-                        if (!uploadResult.Success)
-                        {
-                            return new ApiRespone_basic
-                            {
-                                Success = false,
-                                Message = $"Upload file failed for one of the items: {uploadResult.ErrorMessage}"
-                            };
-                        }
-
-                        employeeDocumentE.filePath = uploadResult.FileUrl;
-                    }
-                    EmployeeDocuments.Add(employeeDocumentE);
-                }
-                var res = await _repository.AddRangeAsync(EmployeeDocuments);
-                return new ApiRespone_basic
-                {
-                    Data = res,
-                    Success = true
-                };
-                
-            }
-            catch(Exception ex)
-            {
-                return new ApiRespone_basic
-                {
-                    Success = false,
-                    Message = ex.Message
-                };
-            }
-        }
-
-        public async Task<ApiRespone_basic> EditAsync_full(List<EmployeeDocumentDTO> req)
-        {
-            try
-            {
-                foreach (var document in req)
-                {
-                    if (document.docfile != null && document.actionType?.ToUpper() != "D")
-                    {
-                        var uploadResult = await _fileHelper.SaveFileAsync(
-                            document.docfile,
-                            "",
-                            subFolder: "EmployeeDocument",
-                            preserveOriginalName: true);
-
-                        if (!uploadResult.Success)
-                        {
-                            return new ApiRespone_basic
-                            {
-                                Success = false,
-                                Message = $"Upload file failed for item with ID = {document.id}: {uploadResult.ErrorMessage}"
-                            };
-                        }
-
-                        document.filePath = uploadResult.FileUrl;
+                        await _fileService.DeleteFileAsync(document.filePath);
                     }
                 }
+                _context.EmployeeDocuments.RemoveRange(folder.documents);
+            }
 
-                await ProcessActionTypeListAsync<EmployeeDocumentDTO>(req);
+            _context.employeeDocumentFolders.Remove(folder);
+            await _context.SaveChangesAsync();
+            return new ApiRespone_basic { Success = true};
+        }
 
+        // Document operations
+        public async Task<ApiRespone_basic> GetDocumentsByFolderIdAsync(int folderId)
+        {
+            var res = await _context.EmployeeDocuments
+                .Where(d => d.folderId == folderId)
+                .ToListAsync();
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = res
+            };
+        }
+
+        public async Task<ApiRespone_basic> GetDocumentsByEmployeeIdAsync(int employeeId)
+        {
+            var res =  await _context.EmployeeDocuments
+                .Where(d => d.employeeId == employeeId)
+                .ToListAsync();
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = res
+            };
+        }
+
+        public async Task<ApiRespone_basic> GetDocumentByIdAsync(int documentId)
+        {
+            var res =  await _context.EmployeeDocuments.FindAsync(documentId);
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = res
+            };
+        }
+
+        public async Task<ApiRespone_basic> CreateDocumentAsync(EmployeeDocumentDTO documentDto)
+        {
+            var document = new EmployeeDocument
+            {
+                employeeId = documentDto.employeeId,
+                folderId = documentDto.folderId,
+                documentName = documentDto.documentName,
+                documentType = documentDto.documentType,
+                filePath = documentDto.filePath,
+                notes = documentDto.notes,
+                tags = documentDto.tags,
+                expiryDate = documentDto.expiryDate,
+                isCompany = documentDto.isCompany ?? false,
+                status = documentDto.status,
+                documentUrl = documentDto.documentUrl,
+                createdAt = DateTime.Now,
+            };
+
+            _context.EmployeeDocuments.Add(document);
+            await _context.SaveChangesAsync();
+
+            documentDto.id = document.id;
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = documentDto
+            };
+
+        }
+
+        public async Task<ApiRespone_basic> UpdateDocumentAsync(EmployeeDocumentDTO documentDto)
+        {
+            var document = await _context.EmployeeDocuments.FindAsync(documentDto.id);
+            if (document == null)
+                throw new KeyNotFoundException($"Document with ID {documentDto.id} not found");
+
+            document.documentName = documentDto.documentName;
+            document.documentType = documentDto.documentType;
+            document.notes = documentDto.notes;
+            document.tags = documentDto.tags;
+            document.expiryDate = documentDto.expiryDate;
+            document.isCompany = documentDto.isCompany ?? document.isCompany;
+            document.status = documentDto.status;
+            document.updateAt = DateTime.Now;
+
+            // Update file path if new file was uploaded
+            if (!string.IsNullOrEmpty(documentDto.filePath))
+            {
+                document.filePath = documentDto.filePath;
+                document.documentUrl = documentDto.documentUrl;
+            }
+
+            await _context.SaveChangesAsync();
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = documentDto
+            };
+        }
+
+        public async Task<ApiRespone_basic> DeleteDocumentAsync(int documentId)
+        {
+            var document = await _context.EmployeeDocuments.FindAsync(documentId);
+            if (document == null)
+                return new ApiRespone_basic { Success = false};
+
+            _context.EmployeeDocuments.Remove(document);
+            await _context.SaveChangesAsync();
+            return new ApiRespone_basic { Success = true };
+        }
+
+        // Combined operations
+        public async Task<ApiRespone_basic> CreateFolderWithDocumentsAsync(EmployeeDocFolderWithDocs model)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                // Create folder first
+                var folderResult = await CreateFolderAsync(model.folder);
+                var folder = folderResult.Data as EmployeeDocumentFolderDTO;
+                // Create documents with the new folder ID
+                if (model.documents != null && model.documents.Any())
+                {
+                    foreach (var doc in model.documents)
+                    {
+                        doc.folderId = folder.id;
+                        await CreateDocumentAsync(doc);
+                    }
+                }
+
+                await transaction.CommitAsync();
                 return new ApiRespone_basic
                 {
                     Success = true,
-                    Message = "Operations completed successfully"
+                    Data = model
                 };
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
+                await transaction.RollbackAsync();
                 return new ApiRespone_basic
                 {
                     Success = false,
@@ -162,6 +256,72 @@ namespace ERP.Services.Lists
             }
         }
 
+        // Tag operations
+        public async Task<ApiRespone_basic> GetAllTagsAsync()
+        {
+            // Get all unique tags from documents
+            var allTags = await _context.EmployeeDocuments
+                .Where(d => !string.IsNullOrEmpty(d.tags))
+                .Select(d => d.tags)
+                .Distinct()
+                .ToListAsync();
 
+            var tagsList = new List<DocumentTag>();
+            foreach (var tagString in allTags)
+            {
+                var res = await ParseTagsAsync(tagString);
+                var parsedTags = res.Data as List<DocumentTag>;
+                tagsList.AddRange(parsedTags);
+            }
+
+            // Return distinct tags
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = tagsList
+                .GroupBy(t => t.name)
+                .Select(g => g.First())
+                .ToList()
+            };
+        }
+
+        public async Task<ApiRespone_basic> ParseTagsAsync(string tagsString)
+        {
+            if (string.IsNullOrEmpty(tagsString))
+                return new ApiRespone_basic
+                {
+                    Success = true,
+                    Data = new List<DocumentTag>()
+                };
+
+            // Split by comma and trim each tag
+            var tags = tagsString.Split(',')
+                .Select(t => t.Trim())
+                .Where(t => !string.IsNullOrEmpty(t))
+                .Select(tag => new DocumentTag
+                {
+                    name = tag,
+                    color = GetColorForTag(tag) // Helper method to assign a color based on tag name
+                })
+                .ToList();
+
+            var res = await Task.FromResult(tags);
+            return new ApiRespone_basic
+            {
+                Success = true,
+                Data = res
+            };
+        }
+
+        // Helper method to generate consistent colors for tags
+        private string GetColorForTag(string tag)
+        {
+            // Generate a color based on the hash of the tag name
+            // This ensures the same tag always gets the same color
+            var hash = tag.GetHashCode();
+            var colors = new[] { "#4CAF50", "#2196F3", "#FFC107", "#E91E63", "#9C27B0", "#FF5722", "#607D8B" };
+            var index = Math.Abs(hash) % colors.Length;
+            return colors[index];
+        }
     }
 }

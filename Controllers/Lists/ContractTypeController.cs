@@ -1,5 +1,6 @@
 ﻿using ERP.Base_sys;
 using ERP.Entities.Lists.Contract;
+using ERP.Entities.Lists.Employee;
 using ERP.Services.Lists;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -94,6 +95,20 @@ namespace ERP.Controllers.Lists
         {
             var response = await _ContractTypeService.DeleteAsync(id);
             if (response.Success == false)
+            {
+                return StatusCode(500, new ApiResponse<ContractType>
+                {
+                    Success = false,
+                    Data = null
+                });
+            }
+            return Ok(response);
+        }
+        [HttpDelete("DeleteRange")]
+        public async Task<ActionResult> DeleteRange([FromBody] List<int> ids)
+        {
+            var response = await _ContractTypeService.DeleteRangeAsync(ids);
+            if (!response)
             {
                 return StatusCode(500, new ApiResponse<ContractType>
                 {

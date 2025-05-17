@@ -1,0 +1,368 @@
+<!-- Main layout -->
+<div class="container-fluid p-0">
+  <div class="row m-0">
+    <!-- Left sidebar - Folders -->
+    <div class="col-md-3 col-lg-2 p-0 bg-white border-right vh-100 overflow-auto sidebar">
+      <div class="p-3">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="mb-0">Tài liệu</h4>
+          <button class="btn btn-sm btn-outline-primary" (click)="openNewFolderModal()">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+        
+        <!-- Folders list -->
+        <div class="mb-4">
+          <h3 class="text-muted mb-2">Thư mục</h3>
+          <div class="list-group">
+            <a *ngFor="let folder of folders" 
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+               [class.active]="selectedFolder?.id === folder.id"
+               (click)="selectFolder(folder)"
+               [class.disabled]="isMovingDocuments && folder.id === selectedFolder?.id">
+              <div>
+                <i class="fas fa-folder mr-2"></i> {{ folder.folderName }}
+              </div>
+              <ng-container *ngIf="isMovingDocuments && folder.id !== selectedFolder?.id">
+                <button class="btn btn-sm btn-primary" (click)="targetFolderId = folder.id; $event.stopPropagation();">
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+              </ng-container>
+              <ng-container *ngIf="!isMovingDocuments">
+                <span class="badge badge-light badge-pill">{{ folder.documents?.length || 0 }}</span>
+              </ng-container>
+            </a>
+          </div>
+          <div *ngIf="isMovingDocuments" class="mt-3 text-center">
+            <button class="btn btn-sm btn-success mr-2" [disabled]="!targetFolderId" (click)="moveDocuments()">
+              <i class="fas fa-check mr-1"></i> Xác nhận
+            </button>
+            <button class="btn btn-sm btn-secondary" (click)="cancelMove()">
+              <i class="fas fa-times mr-1"></i> Hủy
+            </button>
+          </div>
+        </div>
+        
+        <!-- Tags filter -->
+        <!-- <div>
+          <h4 class="text-muted mb-2">Lọc theo thẻ</h4>
+          <div class="d-flex flex-wrap gap-1">
+            <span *ngFor="let tag of allTags"
+                 class="badge mr-1 mb-1 p-2 cursor-pointer"
+                 [ngClass]="selectedTags.includes(tag.name) ? 'badge-primary' : 'badge-light'"
+                 (click)="toggleTagSelection(tag.name)">
+              {{ tag.name }}
+            </span>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    
+    <!-- Main content area -->
+    <div class="col-md-9 col-lg-10 p-0">
+      <!-- Header with actions -->
+      <div class="bg-white border-bottom p-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="d-flex align-items-center">
+            <h4 class="mb-0">
+              <i class="fas fa-folder mr-2 text-primary"></i> {{ selectedFolder?.folderName || 'Chọn thư mục' }}
+            </h4>
+            <button *ngIf="selectedFolder" class="btn btn-sm btn-link text-muted ml-2" (click)="openEditFolderModal()">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button *ngIf="selectedFolder" class="btn btn-sm btn-danger  ml-2" (click)="deleteSelectedFolder()">
+              <i class="fas fa-trash mr-1"></i>
+            </button>
+          </div>
+          
+          <div>
+            <button style="margin: 0 6px;" *ngIf="!isMovingDocuments && selectedFolder" class="btn btn-sm btn-primary mr-2" (click)="openUploadModal()">
+              <i class="fas fa-upload mr-1"></i> Tải lên
+            </button>
+            <!-- <button style="margin: 0 6px;" *ngIf="!isMovingDocuments && selectedFolder && selectedDocuments.length > 0" class="btn btn-sm btn-info mr-2" (click)="startMoveDocuments()">
+              <i class="fas fa-exchange-alt mr-1"></i> Di chuyển
+            </button> -->
+            <button *ngIf="!isMovingDocuments && selectedFolder && selectedDocuments.length > 0" class="btn btn-sm btn-danger" (click)="deleteSelectedDocuments()">
+              <i class="fas fa-trash mr-1"></i> Xóa
+            </button>
+          </div>
+        </div>
+        
+        <!-- Search and filters -->
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+          <div class="flex-grow-1 mr-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span style="height: 100%; border-radius: 0;" class="input-group-text bg-white border-right-0">
+                  <i class="fas fa-search text-muted"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control border-left-0" placeholder="Tìm kiếm tài liệu..." [(ngModel)]="searchTerm">
+            </div>
+          </div>
+
+          <div style="margin: 0 4px;" class="mt-2 mt-md-0">
+            <button class="btn btn-sm btn-outline-secondary" (click)="selectAllDocuments()">
+              {{ selectedDocuments.length === getFilteredDocuments().length && getFilteredDocuments().length > 0 ? 'Bỏ chọn tất cả' : 'Chọn tất cả' }}
+            </button>
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- Documents list -->
+      <div class="p-3">
+        <div *ngIf="loading" class="text-center py-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Đang tải...</span>
+          </div>
+        </div>
+        
+        <div *ngIf="!loading && (!selectedFolder || getFilteredDocuments().length === 0)" class="text-center py-5">
+          <div class="text-muted">
+            <i class="fas fa-folder-open fa-3x mb-3"></i>
+            <p class="mb-1">{{ !selectedFolder ? 'Vui lòng chọn thư mục' : 'Không có tài liệu nào' }}</p>
+            <button *ngIf="selectedFolder" class="btn btn-sm btn-primary mt-2" (click)="openUploadModal()">
+              <i class="fas fa-upload mr-1"></i> Tải lên tài liệu
+            </button>
+          </div>
+        </div>
+        
+        <div *ngIf="!loading && selectedFolder && getFilteredDocuments().length > 0" class="table-responsive">
+          <table class="table table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th style="width: 50px">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="selectAll"
+                           [checked]="selectedDocuments.length === getFilteredDocuments().length && getFilteredDocuments().length > 0"
+                           (change)="selectAllDocuments()">
+                    <label class="custom-control-label" for="selectAll"></label>
+                  </div>
+                </th>
+                <th>Tên tài liệu</th>
+                <th>Thẻ</th>
+                <th>Ngày tạo</th>
+                <th>Ngày hết hạn</th>
+                <th class="text-right">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of getFilteredDocuments()">
+                <td>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" [id]="'doc-' + doc.id"
+                           [checked]="selectedDocuments.includes(doc.id)"
+                           (change)="toggleDocumentSelection(doc.id)">
+                    <label class="custom-control-label" [for]="'doc-' + doc.id"></label>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <i [class]="'fas ' + getFileIcon(doc.documentType) + ' text-muted mr-2'"></i>
+                    <div>
+                      <div>{{ doc.documentName }}</div>
+                      <small class="text-muted">{{ doc.notes }}</small>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span *ngFor="let tag of formatTags(doc.tags)"
+                        >
+                    {{ tag }}
+                  </span>
+                </td>
+                <td>{{ doc.createdAt | date:'dd/MM/yyyy' }}</td>
+                <td>{{ doc.expiryDate | date:'dd/MM/yyyy' }}</td>
+                <td class="text-right">
+                  <button class="btn btn-sm btn-outline-primary mr-1" (click)="openDocumentModal(doc)">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <a [href]="doc.documentUrl" target="_blank" class="btn btn-sm btn-outline-info">
+                    <i class="fas fa-download"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Upload Modal -->
+<div class="modal fade" [class.show]="showUploadModal" 
+     [style.display]="showUploadModal ? 'block' : 'none'" 
+     [class.fade-in]="isOpeningUploadModal"
+     tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Tải lên tài liệu</h3>
+        <button type="button" class="close" (click)="closeUploadModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="uploadForm">
+          <div class="form-group">
+            <div class="custom-file">
+              <input
+              type="file"
+              class="custom-file-input"
+              id="documentFiles"
+              multiple
+              accept=".pdf,.doc,.docx,.xls,.xlsx,.txt"
+              (change)="onFileSelected($event)">
+
+              <label class="custom-file-label" for="documentFiles">
+                {{ selectedFiles.length > 0 ? ('Đã chọn ' + selectedFiles.length + ' tập tin') : 'Chọn tập tin...' }}
+              </label>
+            </div>
+            <small class="form-text text-muted">
+              Hỗ trợ các định dạng: {{ allowedFileTypes.join(', ') }}. Dung lượng tối đa: 10MB.
+            </small>
+          </div>
+          
+          <div *ngIf="selectedFiles.length > 0" class="mt-3">
+            <h6>Tập tin đã chọn:</h6>
+            <ul class="list-group">
+              <li *ngFor="let file of selectedFiles" class="list-group-item d-flex justify-content-between align-items-center py-2">
+                <div class="text-truncate">
+                  <i [class]="'fas ' + getFileIcon(file.name.split('.').pop()) + ' mr-2'"></i>
+                  {{ file.name }}
+                </div>
+                <small>{{ (file.size / 1024).toFixed(0) }} KB</small>
+              </li>
+            </ul>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeUploadModal()">Hủy</button>
+        <button type="button" class="btn btn-primary" [disabled]="selectedFiles.length === 0 || loading" (click)="uploadFiles()">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"></span>
+          Tải lên
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Folder Modal -->
+
+
+<div class="modal fade" [class.show]="showFolderModal" 
+     [style.display]="showFolderModal ? 'block' : 'none'" 
+     [class.fade-in]="isOpeningFolderModal"
+     tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">{{ editMode ? 'Cập nhật thư mục' : 'Tạo thư mục mới' }}</h3>
+        <button type="button" class="close" (click)="closeFolderModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="folderForm">
+          <div class="form-group">
+            <label for="folderName">Tên thư mục</label>
+            <input type="text" class="form-control" id="folderName" formControlName="folderName" placeholder="Nhập tên thư mục...">
+            <div *ngIf="folderForm.get('folderName')?.invalid && folderForm.get('folderName')?.touched" class="text-danger">
+              Vui lòng nhập tên thư mục
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" id="description" rows="3" formControlName="description" placeholder="Nhập mô tả cho thư mục..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeFolderModal()">Hủy</button>
+        <button type="button" class="btn btn-primary" [disabled]="folderForm.invalid || loading" (click)="saveFolder()">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          {{ editMode ? 'Cập nhật' : 'Tạo mới' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Document Edit Modal -->
+<div class="modal fade" [class.show]="showDocumentModal" 
+     [style.display]="showDocumentModal ? 'block' : 'none'" 
+     [class.fade-in]="isOpeningDocumentModal"
+     tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Cập nhật thông tin tài liệu</h3>
+        <button type="button" class="close" (click)="closeDocumentModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="documentForm">
+          <div class="form-group">
+            <label for="documentName">Tên tài liệu</label>
+            <input type="text" class="form-control" id="documentName" formControlName="documentName">
+            <div *ngIf="documentForm.get('documentName')?.invalid && documentForm.get('documentName')?.touched" class="text-danger">
+              Vui lòng nhập tên tài liệu
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="notes">Ghi chú</label>
+            <textarea class="form-control" id="notes" rows="3" formControlName="notes"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="tags">Thẻ (phân cách bằng dấu phẩy)</label>
+            <input type="text" class="form-control" id="tags" formControlName="tags" placeholder="hợp đồng, quan trọng, cá nhân,...">
+            <small class="form-text text-muted">Các thẻ hiện có: {{ getAvailableTags() }}</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="expiryDate">Ngày hết hạn</label>
+            <input type="date" class="form-control" id="expiryDate" formControlName="expiryDate">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDocumentModal()">Hủy</button>
+        <button type="button" class="btn btn-primary" [disabled]="documentForm.invalid || loading" (click)="saveDocument()">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"></span>
+          Cập nhật
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal backdrop -->
+<div class="modal-backdrop fade" 
+     [class.show]="showUploadModal || showFolderModal || showDocumentModal" 
+     [style.display]="showUploadModal || showFolderModal || showDocumentModal ? 'block' : 'none'">
+</div>
+
+<!-- Toast notifications container -->
+
+<!-- Confirmation Dialog -->
+
+
+
+<!-- Empty State for no Folders -->
+<div *ngIf="!loading && folders.length === 0" class="empty-state-container">
+  <div class="text-center">
+    <i class="fas fa-folder-open fa-4x text-muted mb-3"></i>
+    <h4 class="mb-3">Chưa có thư mục nào</h4>
+    <p class="text-muted mb-4">Vui lòng tạo thư mục đầu tiên để bắt đầu quản lý tài liệu</p>
+    <button class="btn btn-primary" (click)="openNewFolderModal()">
+      <i class="fas fa-plus mr-2"></i> Tạo thư mục mới
+    </button>
+  </div>
+</div>
